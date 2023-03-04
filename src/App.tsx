@@ -4,6 +4,10 @@ import LandingPage from './pages/landing-page';
 import Login from './pages/login';
 import './styles/App.css';
 
+// PrimeFaces css
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";      
+
 function App() {
   return (
     <BrowserRouter>
