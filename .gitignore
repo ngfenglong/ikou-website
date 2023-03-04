@@ -43,4 +43,4 @@ yarn-error.log*
 .npm/
 dist
 
-/dummy_data/
+*/dummy_data/
