@@ -3,6 +3,7 @@ import Container from '../../components/container/Container';
 import SubHeader from '../../components/heading/SubHeading';
 import Header from '../../components/header/header';
 import { CATEGORIES } from '../../dummy_data/codestable';
+import Footer from '../../components/footer/Footer';
 
 const CategoryMenu = (props: {
   categoriesList: string[];
@@ -11,7 +12,7 @@ const CategoryMenu = (props: {
   return (
     <ul
       // role="list"
-      className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm py-10 sm:grid-cols-3 md:gap-y-6 lg:max-w-none lg:grid-cols-6"
+      className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mb-10 sm:grid-cols-3 md:gap-y-6 lg:max-w-none lg:grid-cols-6"
     >
       {props.categoriesList.map((category, key) => (
         <CategoryButton
@@ -39,7 +40,7 @@ const LandingPage = () => {
           categoriesList={placeCategories}
           onSelect={onSelectCategory}
         />
-       
+
         <div className="flex flex-col space-y-16">
           <SubHeader subHeader="Top Location for Sports Activites"></SubHeader>
 
@@ -48,6 +49,7 @@ const LandingPage = () => {
           </div>
         </div>
       </Container>
+      <Footer />
     </div>
   );
 };
