@@ -1,139 +1,230 @@
 import { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react';
-import clsx from 'clsx';
-
-import  Button from '../button/Button';
-
-import NavLink from '../nav-link/NavLink';
-import Container from '../container/Container';
-import Logo from '../logo/Logo';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { LogoNoWording } from '../logo/Logo';
+import SearchBar from '../searchbar/Searchbar';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
-function MobileNavLink({ href, children }: MobileNavLinkPropsType) {
+const Header2 = () => {
   return (
-    <Popover.Button as={Link} to={href} className="block w-full p-2">
-      {children}
-    </Popover.Button>
-  );
-}
+    <Disclosure as="nav" className="bg-white shadow">
+      {({ open }) => (
+        <>
+          <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+            <div className="flex h-16 justify-between">
+              <div className="flex px-2 lg:px-0">
+                <div className="flex flex-shrink-0 items-center">
+                  <Link to={ROUTES.LANDING_PAGE} aria-label="Ikou logo">
+                    <LogoNoWording className="h-8 w-auto" />
+                  </Link>
+                </div>
+                <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
+                  {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
+                  <a
+                    href="/#"
+                    className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
+                  >
+                    Explore
+                  </a>
+                  <a
+                    href="/#"
+                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  >
+                    Trips
+                  </a>
+                  <a
+                    href="/#"
+                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  >
+                    Activities
+                  </a>
+                  <a
+                    href="/#"
+                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  >
+                    Places
+                  </a>
+                </div>
+              </div>
+              <SearchBar />
+              <div className="flex items-center lg:hidden">
+                {/* Mobile menu button */}
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="hidden lg:ml-4 lg:flex lg:items-center">
+                <button
+                  type="button"
+                  className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  <span className="sr-only">View notifications</span>
+                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
 
-function MobileNavIcon({ open }: MobileNavigationPropsType) {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-3.5 w-3.5 overflow-visible stroke-slate-700"
-      fill="none"
-      strokeWidth={2}
-      strokeLinecap="round"
-    >
-      <path
-        d="M0 1H14M0 7H14M0 13H14"
-        className={clsx(
-          'origin-center transition',
-          open && 'scale-90 opacity-0'
-        )}
-      />
-      <path
-        d="M2 2L12 12M12 2L2 12"
-        className={clsx(
-          'origin-center transition',
-          !open && 'scale-90 opacity-0'
-        )}
-      />
-    </svg>
-  );
-}
-
-function MobileNavigation() {
-  return (
-    <Popover>
-      <Popover.Button
-        className="relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none"
-        aria-label="Toggle Navigation"
-      >
-        {({ open }) => <MobileNavIcon open={open} />}
-      </Popover.Button>
-      <Transition.Root>
-        <Transition.Child
-          as={Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Popover.Overlay className="fixed inset-0 bg-slate-300/50" />
-        </Transition.Child>
-        <Transition.Child
-          as={Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-100 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <Popover.Panel
-            as="div"
-            className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5"
-          >
-            <MobileNavLink href="#features">Features</MobileNavLink>
-            <MobileNavLink href="#testimonials">Testimonials</MobileNavLink>
-            <MobileNavLink href="#pricing">Pricing</MobileNavLink>
-            <hr className="m-2 border-slate-300/40" />
-            <MobileNavLink href="/login">Sign in</MobileNavLink>
-          </Popover.Panel>
-        </Transition.Child>
-      </Transition.Root>
-    </Popover>
-  );
-}
-
-const Header = () => {
-  return (
-    <header className="py-10">
-      <Container>
-        <nav className="relative z-50 flex justify-between">
-          <div className="flex items-center md:gap-x-12">
-            <Link to={ROUTES.LANDING_PAGE} aria-label="Ikou logo">
-              <Logo className="h-10 w-auto" />
-            </Link>
-            <div className="hidden md:flex md:gap-x-5">
-            <NavLink href="#features">Explore</NavLink>
-              <NavLink href="#features">Trips</NavLink>
-              <NavLink href="#testimonials">Activities</NavLink>
-              <NavLink href="#pricing">Placce</NavLink>
+                {/* Profile dropdown */}
+                <Menu as="div" className="relative ml-4 flex-shrink-0">
+                  <div>
+                    <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      <span className="sr-only">Open user menu</span>
+                      <img
+                        className="h-8 w-8 rounded-full"
+                        src="/images/profile.jpeg"
+                        alt=""
+                      />
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="/#"
+                            className={
+                              active
+                                ? 'bg-gray-100'
+                                : 'block px-4 py-2 text-sm text-gray-700'
+                            }
+                          >
+                            Your Profile
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="/#"
+                            className={
+                              active
+                                ? 'bg-gray-100'
+                                : 'block px-4 py-2 text-sm text-gray-700'
+                            }
+                          >
+                            Settings
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="/#"
+                            className={
+                              active
+                                ? 'bg-gray-100'
+                                : 'block px-4 py-2 text-sm text-gray-700'
+                            }
+                          >
+                            Sign out
+                          </a>
+                        )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-x-5 md:gap-x-8">
-            <div className="hidden md:block">
-              <NavLink href="/login">Sign in</NavLink>
+
+          <Disclosure.Panel className="lg:hidden">
+            <div className="space-y-1 pt-2 pb-3">
+              {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
+              <Disclosure.Button
+                as="a"
+                href="#"
+                className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700"
+              >
+                Explore
+              </Disclosure.Button>
+              <Disclosure.Button
+                as="a"
+                href="#"
+                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+              >
+                Trips
+              </Disclosure.Button>
+              <Disclosure.Button
+                as="a"
+                href="#"
+                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+              >
+                Activities
+              </Disclosure.Button>
+              <Disclosure.Button
+                as="a"
+                href="#"
+                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+              >
+                Places
+              </Disclosure.Button>
             </div>
-            <Button href="/register" color="blue">
-              <span>
-                Get started <span className="hidden lg:inline">today</span>
-              </span>
-            </Button>
-            <div className="-mr-1 md:hidden">
-              <MobileNavigation />
+            <div className="border-t border-gray-200 pt-4 pb-3">
+              <div className="flex items-center px-4">
+                <div className="flex-shrink-0">
+                  <img
+                    className="h-10 w-10 rounded-full"
+                    src="/images/profile.jpeg"
+                    alt=""
+                  />
+                </div>
+                <div className="ml-3">
+                  <div className="text-base font-medium text-gray-800">
+                    Zell
+                  </div>
+                  <div className="text-sm font-medium text-gray-500">
+                    User1@Testing.com
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  <span className="sr-only">View notifications</span>
+                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              </div>
+              <div className="mt-3 space-y-1">
+                <Disclosure.Button
+                  as="a"
+                  href="#"
+                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                >
+                  Your Profile
+                </Disclosure.Button>
+                <Disclosure.Button
+                  as="a"
+                  href="#"
+                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                >
+                  Settings
+                </Disclosure.Button>
+                <Disclosure.Button
+                  as="a"
+                  href="#"
+                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                >
+                  Sign out
+                </Disclosure.Button>
+              </div>
             </div>
-          </div>
-        </nav>
-      </Container>
-    </header>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
   );
-}
-
-type MobileNavigationPropsType = {
-  open: boolean;
 };
 
-type MobileNavLinkPropsType = {
-  href: string;
-  children: any;
-};
-
-
-export default Header;
+export default Header2;
