@@ -4,6 +4,7 @@ import SubHeader from '../../components/heading/SubHeading';
 import Header from '../../components/header/header';
 import { CATEGORIES } from '../../dummy_data/codestable';
 import Footer from '../../components/footer/Footer';
+import PlaceCard from '../../components/card/PlaceCard';
 
 const CategoryMenu = (props: {
   categoriesList: string[];
@@ -33,7 +34,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="bg-gray-background">
+    <div className="bg-gray-background space-y-8">
       <Header />
       <Container>
         <CategoryMenu
@@ -42,10 +43,39 @@ const LandingPage = () => {
         />
 
         <div className="flex flex-col space-y-16">
-          <SubHeader subHeader="Top Location for Sports Activites"></SubHeader>
-
-          <div>
+          <div className="flex flex-col space-y-4">
+            <SubHeader subHeader="Top Location for Sports Activites"></SubHeader>
+            <section
+              aria-labelledby="products-heading"
+              className="mx-auto max-w-2xl lg:max-w-7xl "
+            >
+              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                {[1, 2, 3, 4, 5, 6].map((num) => (
+                  <PlaceCard
+                    key={num + ''}
+                    name={`Place Name - ${num}`}
+                    description={`Description for place - ${num}`}
+                  ></PlaceCard>
+                ))}
+              </div>
+            </section>
+          </div>
+          <div className="flex flex-col space-y-4">
             <SubHeader subHeader="Top Location for Cafes"></SubHeader>
+            <section
+              aria-labelledby="products-heading"
+              className="mx-auto max-w-2xl lg:max-w-7xl "
+            >
+              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                {[1, 2, 3, 4, 5, 6].map((num) => (
+                  <PlaceCard
+                    key={num + ''}
+                    name={`Place Name - ${num}`}
+                    description={`Description for place - ${num}`}
+                  ></PlaceCard>
+                ))}
+              </div>
+            </section>
           </div>
         </div>
       </Container>
