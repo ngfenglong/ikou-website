@@ -43,7 +43,7 @@ const LandingPage = () => {
         />
 
         <div className="flex flex-col space-y-16">
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-8">
             <SubHeader subHeader="Top Location for Sports Activites"></SubHeader>
             <section
               aria-labelledby="products-heading"
@@ -60,7 +60,7 @@ const LandingPage = () => {
               </div>
             </section>
           </div>
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-8">
             <SubHeader subHeader="Top Location for Cafes"></SubHeader>
             <section
               aria-labelledby="products-heading"

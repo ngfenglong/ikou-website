@@ -6,7 +6,7 @@ import SearchBar from '../searchbar/Searchbar';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
-const Header2 = () => {
+const Header = () => {
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -227,4 +227,4 @@ const Header2 = () => {
   );
 };
 
-export default Header2;
+export default Header;
