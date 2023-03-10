@@ -1,7 +1,7 @@
 import CategoryButton from '../../components/button/CategoryButton';
 import Container from '../../components/container/Container';
 import SubHeader from '../../components/heading/SubHeading';
-import Header from '../../components/header/header';
+import Header from '../../components/header/Header';
 import { CATEGORIES } from '../../dummy_data/codestable';
 import Footer from '../../components/footer/Footer';
 import PlaceCard from '../../components/card/PlaceCard';
@@ -12,7 +12,6 @@ const CategoryMenu = (props: {
 }) => {
   return (
     <ul
-      // role="list"
       className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mb-10 sm:grid-cols-3 md:gap-y-6 lg:max-w-none lg:grid-cols-6"
     >
       {props.categoriesList.map((category, key) => (
