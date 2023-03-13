@@ -8,15 +8,17 @@ import './styles/App.css';
 // PrimeFaces css
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import SignUp from './pages/signup';
 
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen flex flex-col justify-between bg-slate-50">
         <Routes>
           <Route path={ROUTES.LANDING_PAGE} element={<LandingPage />} />
           <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
         </Routes>
         <Footer />
       </div>

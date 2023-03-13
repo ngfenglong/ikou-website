@@ -27,7 +27,7 @@ const loggedOutMenu: MenuItemType[] = [
   },
 ];
 
-// Create a mapping to store the details of the menu with keys to identify the active key
+
 const ProfileMenu = ({
   isLoggedIn,
   profileImage = '/images/profile.jpeg',
@@ -55,11 +55,9 @@ const ProfileMenu = ({
               {({ active }) => (
                 <a
                   href={menuItem.redirectUrl}
-                  className={
-                    active
-                      ? 'bg-gray-100'
-                      : 'block px-4 py-2 text-sm text-gray-700'
-                  }
+                  className={`block px-4 py-2 text-sm text-gray-700 ${
+                    active ? 'bg-gray-100' : ''
+                  }`}
                 >
                   {menuItem.menuItemName}
                 </a>
