@@ -1,9 +1,18 @@
 import CategoryButton from '../../components/button/CategoryButton';
 import Container from '../../components/container/Container';
 import SubHeader from '../../components/heading/SubHeading';
-import { CATEGORIES } from '../../dummy_data/codestable';
 import PlaceCard from '../../components/card/PlaceCard';
 import Header from '../../components/header/Header';
+
+const CATEGORIES: string[] = [
+  'FOR DATES',
+  'FRIENDS GATHERING',
+  'HOT SPOTS',
+  'CAFE',
+  'GETAWAY TRIP',
+  'OTHERS',
+];
+
 
 const CategoryMenu = (props: {
   categoriesList: string[];
