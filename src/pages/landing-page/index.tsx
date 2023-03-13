@@ -3,7 +3,6 @@ import Container from '../../components/container/Container';
 import SubHeader from '../../components/heading/SubHeading';
 import Header from '../../components/header/Header';
 import { CATEGORIES } from '../../dummy_data/codestable';
-import Footer from '../../components/footer/Footer';
 import PlaceCard from '../../components/card/PlaceCard';
 
 const CategoryMenu = (props: {
@@ -78,7 +77,7 @@ const LandingPage = () => {
           </div>
         </div>
       </Container>
-      <Footer />
+      
     </div>
   );
 };
