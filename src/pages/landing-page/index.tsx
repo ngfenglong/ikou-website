@@ -3,16 +3,13 @@ import Container from '../../components/container/Container';
 import SubHeader from '../../components/heading/SubHeading';
 import { CATEGORIES } from '../../dummy_data/codestable';
 import PlaceCard from '../../components/card/PlaceCard';
-import Header from '../../components/header/Header';
 
 const CategoryMenu = (props: {
   categoriesList: string[];
   onSelect: (category: string) => void;
 }) => {
   return (
-    <ul
-      className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mb-10 sm:grid-cols-3 md:gap-y-6 lg:max-w-none lg:grid-cols-6"
-    >
+    <ul className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mb-10 sm:grid-cols-3 md:gap-y-6 lg:max-w-none lg:grid-cols-6">
       {props.categoriesList.map((category, key) => (
         <CategoryButton
           key={key}
@@ -32,8 +29,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="bg-gray-background space-y-8">
-      <Header />
+    <div className="bg-gray-background space-y-8 mt-8">
       <Container>
         <CategoryMenu
           categoriesList={placeCategories}
@@ -77,7 +73,6 @@ const LandingPage = () => {
           </div>
         </div>
       </Container>
-      
     </div>
   );
 };
