@@ -20,11 +20,11 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path={ROUTES.LANDING_PAGE} element={<LandingPage />} />
-          <Route path={ROUTES.TRIPS} element={<PageNotFound />} />
-          <Route path={ROUTES.ACTIVITIES} element={<PageNotFound />} />
-          <Route path={ROUTES.PLACES} element={<PageNotFound />} />
-          <Route path={ROUTES.SETTING} element={<PageNotFound />} />
-          <Route path={ROUTES.ALL} element={<ComingSoonPage />} />
+          <Route path={ROUTES.TRIPS} element={<ComingSoonPage />} />
+          <Route path={ROUTES.ACTIVITIES} element={<ComingSoonPage />} />
+          <Route path={ROUTES.PLACES} element={<ComingSoonPage />} />
+          <Route path={ROUTES.SETTING} element={<ComingSoonPage />} />
+          <Route path={ROUTES.ALL} element={<PageNotFound />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
