@@ -1,29 +1,30 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import * as ROUTES from './../../constants/routes';
 
 const loggedInMenu: MenuItemType[] = [
   {
     menuItemName: 'Your Profile',
-    redirectUrl: '/profile',
+    redirectUrl: ROUTES.PROFILE,
   },
   {
     menuItemName: 'Setting',
-    redirectUrl: '/setting',
+    redirectUrl: ROUTES.SETTING,
   },
   {
     menuItemName: 'Sign out',
-    redirectUrl: '/logout',
+    redirectUrl: ROUTES.LOGIN,
   },
 ];
 
 const loggedOutMenu: MenuItemType[] = [
   {
     menuItemName: 'Sign up',
-    redirectUrl: '/signup',
+    redirectUrl: ROUTES.SIGN_UP,
   },
   {
     menuItemName: 'Log in',
-    redirectUrl: '/login',
+    redirectUrl: ROUTES.LOGIN,
   },
 ];
 
