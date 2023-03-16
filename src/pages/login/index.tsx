@@ -1,10 +1,19 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Logo } from '../../components/logo/Logo';
+import * as ROUTES from './../../constants/routes';
 
 const Login = () => {
+  const navigate = useNavigate();  
+
   useEffect(() => {
     document.title = 'Login Page';
   });
+
+  const onLogin = () => {
+    // Do validation
+    navigate(ROUTES.LANDING_PAGE);
+  }
 
   return (
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg">
@@ -89,7 +98,7 @@ const Login = () => {
                 </span>
               </div>
             </div>
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={onLogin}>
               <div>
                 <label
                   htmlFor="email"

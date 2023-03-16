@@ -13,6 +13,7 @@ import Login from './pages/login';
 import PageNotFound from './pages/error-page/PageNotFound';
 import Layout from './pages/root/Layout';
 import ComingSoonPage from './pages/error-page/ComingSoon';
+import ViewPlacePage from './pages/places/ViewPlace';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path={ROUTES.LANDING_PAGE} element={<LandingPage />} />
           <Route path={ROUTES.TRIPS} element={<ComingSoonPage />} />
           <Route path={ROUTES.ACTIVITIES} element={<ComingSoonPage />} />
+          <Route path={ROUTES.VIEW_PLACES} element={<ViewPlacePage />} />
           <Route path={ROUTES.PLACES} element={<ComingSoonPage />} />
           <Route path={ROUTES.SETTING} element={<ComingSoonPage />} />
           <Route path={ROUTES.ALL} element={<PageNotFound />} />

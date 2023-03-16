@@ -1,3 +1,5 @@
+
+
 const PlaceCard = ({
   imageUrl = '/images/no-image.jpg',
   name,
@@ -8,7 +10,7 @@ const PlaceCard = ({
   key,
 }: PropsType) => {
   return (
-    <a key={key} href={'/#'} className="group">
+    <a key={key} href={`/places/${name}`} className="group">
       <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
         <img
           src={imageUrl}
