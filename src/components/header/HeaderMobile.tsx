@@ -1,5 +1,6 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import * as ROUTES from './../../constants/routes';
 
 const HeaderMobile = ({ open }: { open: boolean }) => {
   return (
@@ -20,28 +21,28 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
           {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
           <Disclosure.Button
             as="a"
-            href="#"
+            href={ROUTES.LANDING_PAGE}
             className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700"
           >
             Explore
           </Disclosure.Button>
           <Disclosure.Button
             as="a"
-            href="#"
+            href={ROUTES.TRIPS}
             className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
           >
             Trips
           </Disclosure.Button>
           <Disclosure.Button
             as="a"
-            href="#"
+            href={ROUTES.ACTIVITIES}
             className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
           >
             Activities
           </Disclosure.Button>
           <Disclosure.Button
             as="a"
-            href="#"
+            href={ROUTES.PLACES}
             className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
           >
             Places
@@ -73,21 +74,28 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
           <div className="mt-3 space-y-1">
             <Disclosure.Button
               as="a"
-              href="#"
+              href={ROUTES.ADD_PLACES}
+              className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+            >
+              Add New Place
+            </Disclosure.Button>
+            <Disclosure.Button
+              as="a"
+              href={ROUTES.PROFILE}
               className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
             >
               Your Profile
             </Disclosure.Button>
             <Disclosure.Button
               as="a"
-              href="#"
+              href={ROUTES.SETTING}
               className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
             >
               Settings
             </Disclosure.Button>
             <Disclosure.Button
               as="a"
-              href="#"
+              href={ROUTES.LOGIN}
               className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
             >
               Sign out

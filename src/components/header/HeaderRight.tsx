@@ -2,7 +2,7 @@ import { BellIcon } from '@heroicons/react/24/outline';
 import ProfileMenu from './ProfileMenu';
 
 const HeaderRight = () => {
-  const loggedIn = false;
+  const loggedIn = true;
   return (
     <div className="hidden lg:ml-4 lg:flex lg:items-center">
       <button
