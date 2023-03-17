@@ -11,11 +11,18 @@ export interface Place {
   features: Array<string>;
   placeType: string;
 
-  ratings: number;
+  averageRatings: number;
   reviews: Array<Review>;
 }
 
 export interface Review {
-  reviewId: string;
+  reviewerName:string;
+  reviewerImageURL: string;
   reviewDescription: string;
+  reviewDate: Date;
+  rating: number;
 }
+
+
+
+              
