@@ -4,7 +4,7 @@ import { Logo } from '../../components/logo/Logo';
 import * as ROUTES from './../../constants/routes';
 
 const Login = () => {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Login Page';
@@ -13,7 +13,7 @@ const Login = () => {
   const onLogin = () => {
     // Do validation
     navigate(ROUTES.LANDING_PAGE);
-  }
+  };
 
   return (
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg">
@@ -25,7 +25,7 @@ const Login = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-slate py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="mt-6 grid grid-cols-3 gap-3">
             <div>
               <a
@@ -155,7 +155,7 @@ const Login = () => {
 
                 <div className="text-sm">
                   <a
-                    href="/#"
+                    href="/forget-password"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot your password?
