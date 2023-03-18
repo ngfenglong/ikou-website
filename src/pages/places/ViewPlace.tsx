@@ -1,3 +1,4 @@
+import RoundedBadge from '../../components/badges/RoundedBadge';
 import ReviewContainer from '../../components/reviews/ReviewContainer';
 import { Place, Review } from '../../model/place';
 
@@ -54,8 +55,7 @@ const DUMMY_PLACE: Place = {
 
 const onAddReview = () => {
   console.log('Review Added!');
-}
-
+};
 
 const ViewPlacePage = () => {
   return (
@@ -79,9 +79,14 @@ const ViewPlacePage = () => {
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                   {DUMMY_PLACE.placeName}
                 </h1>
-                <p className="mt-2 text-sm text-gray-500">
+
+                <RoundedBadge classNames="mt-2 text-gray-500" color="gray">
                   {DUMMY_PLACE.placeType}
-                </p>
+                </RoundedBadge>
+
+                {/* <p className="mt-2 text-sm text-gray-500">
+                  {DUMMY_PLACE.placeType}
+                </p> */}
               </div>
             </div>
 
@@ -111,7 +116,10 @@ const ViewPlacePage = () => {
               </div>
             </div>
           </div>
-          <ReviewContainer reviews={DUMMY_PLACE.reviews} addReviewClick={onAddReview}></ReviewContainer>
+          <ReviewContainer
+            reviews={DUMMY_PLACE.reviews}
+            addReviewClick={onAddReview}
+          ></ReviewContainer>
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@ const ReviewSummary = ({ reviews }: ReviewSummaryPropsType) => {
   return (
     <>
       <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-        Customer Reviews
+        Ratings
       </h2>
 
       <div className="mt-3 flex items-center">

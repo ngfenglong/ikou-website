@@ -43,7 +43,7 @@ const ReviewSection = ({ reviews }: ReviewSectionPropsType) => {
   return (
     <>
       <div className="border-b border-gray-200">
-        <SubHeading> Customer Reviews ({reviews.length.toString()})</SubHeading>
+        <SubHeading> Reviews ({reviews.length.toString()})</SubHeading>
       </div>
       {reviews.map((review, reviewIdx) => (
         <IndividualReview review={review} id={reviewIdx} />
