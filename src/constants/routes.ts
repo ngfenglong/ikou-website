@@ -5,6 +5,7 @@ export const TRIPS = '/trips';
 export const ACTIVITIES = '/activities';
 
 export const VIEW_PLACES = '/places/:id';
+export const ADD_PLACES = '/add-place';
 export const PLACES = '/places';
 
 export const PROFILE = '/profile';
