@@ -15,6 +15,7 @@ import Layout from './pages/root/Layout';
 import ComingSoonPage from './pages/error-page/ComingSoon';
 import ViewPlacePage from './pages/places/ViewPlace';
 import AddPlace from './pages/places/AddPlace';
+import ForgetPassword from './pages/forget-password-page';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+        <Route path={ROUTES.FORGET_PASSWORD} element={<ForgetPassword />} />
       </Routes>
     </BrowserRouter>
   );
