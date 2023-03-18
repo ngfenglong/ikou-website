@@ -1,5 +1,7 @@
 export const LOGIN = '/login';
 export const SIGN_UP = '/signup';
+export const FORGET_PASSWORD = '/forget-password';
+
 export const LANDING_PAGE = '/';
 export const TRIPS = '/trips';
 export const ACTIVITIES = '/activities';
