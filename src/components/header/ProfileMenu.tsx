@@ -4,6 +4,10 @@ import * as ROUTES from './../../constants/routes';
 
 const loggedInMenu: MenuItemType[] = [
   {
+    menuItemName: 'Add New Place',
+    redirectUrl: ROUTES.ADD_PLACES,
+  },
+  {
     menuItemName: 'Your Profile',
     redirectUrl: ROUTES.PROFILE,
   },
@@ -27,7 +31,6 @@ const loggedOutMenu: MenuItemType[] = [
     redirectUrl: ROUTES.LOGIN,
   },
 ];
-
 
 const ProfileMenu = ({
   isLoggedIn,

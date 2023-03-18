@@ -1,8 +1,16 @@
 import CategoryButton from '../../components/button/CategoryButton';
 import Container from '../../components/container/Container';
-import SubHeader from '../../components/heading/SubHeading';
-import { CATEGORIES } from '../../dummy_data/codestable';
+import SubHeading from '../../components/heading/SubHeading';
 import PlaceCard from '../../components/card/PlaceCard';
+
+const CATEGORIES: string[] = [
+  'FOR DATES',
+  'FRIENDS GATHERING',
+  'HOT SPOTS',
+  'CAFE',
+  'GETAWAY TRIP',
+  'OTHERS',
+];
 
 const CategoryMenu = (props: {
   categoriesList: string[];
@@ -38,7 +46,7 @@ const LandingPage = () => {
 
         <div className="flex flex-col space-y-16">
           <div className="flex flex-col space-y-8">
-            <SubHeader subHeader="Top Location for Sports Activites"></SubHeader>
+            <SubHeading>Top Location for Sports Activites</SubHeading>
             <section
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-7xl "
@@ -55,7 +63,7 @@ const LandingPage = () => {
             </section>
           </div>
           <div className="flex flex-col space-y-8">
-            <SubHeader subHeader="Top Location for Cafes"></SubHeader>
+            <SubHeading>Top Location for Cafes</SubHeading>
             <section
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-7xl "

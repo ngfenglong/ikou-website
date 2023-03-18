@@ -14,6 +14,7 @@ import PageNotFound from './pages/error-page/PageNotFound';
 import Layout from './pages/root/Layout';
 import ComingSoonPage from './pages/error-page/ComingSoon';
 import ViewPlacePage from './pages/places/ViewPlace';
+import AddPlace from './pages/places/AddPlace';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path={ROUTES.LANDING_PAGE} element={<LandingPage />} />
           <Route path={ROUTES.TRIPS} element={<ComingSoonPage />} />
           <Route path={ROUTES.ACTIVITIES} element={<ComingSoonPage />} />
+          <Route path={ROUTES.ADD_PLACES} element={<AddPlace />} />
           <Route path={ROUTES.VIEW_PLACES} element={<ViewPlacePage />} />
           <Route path={ROUTES.PLACES} element={<ComingSoonPage />} />
           <Route path={ROUTES.SETTING} element={<ComingSoonPage />} />
