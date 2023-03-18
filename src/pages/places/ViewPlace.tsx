@@ -1,6 +1,5 @@
-import { StarIcon } from '@heroicons/react/20/solid';
+import ReviewContainer from '../../components/reviews/ReviewContainer';
 import { Place, Review } from '../../model/place';
-import { formatDistanceToNowStrict } from 'date-fns';
 
 const DUMMY_REVIEWS: Review[] = [
   {
@@ -21,7 +20,7 @@ const DUMMY_REVIEWS: Review[] = [
     reviewerName: 'Ben Russel',
     reviewerImageURL: '/images/profile.jpeg',
     reviewDate: new Date(2022, 7, 12, 11, 24, 0),
-    rating: 5,
+    rating: 3,
     reviewDescription:
       'The coffee there is exactly something I am looking for.',
   },
@@ -53,31 +52,14 @@ const DUMMY_PLACE: Place = {
   reviews: DUMMY_REVIEWS,
 };
 
-const formattedDate: (date: Date) => string = (date) => {
-  return new Date().getTime() - date.getTime() < 1209600000 // 2 weeks in milliseconds
-    ? `${formatDistanceToNowStrict(date)} ago`
-    : new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      }).format(date);
-};
+const onAddReview = () => {
+  console.log('Review Added!');
+}
+
 
 const ViewPlacePage = () => {
-  const ratingCounts: {
-    rating: number;
-    reviews: Review[];
-  }[] = [5,4,3,2,1].map((r) => {
-    return {
-      rating: r,
-      reviews: DUMMY_PLACE.reviews.filter((review) => {
-        return review.rating >= r && review.rating < r + 1;
-      }),
-    };
-  });
-  console.log('ratingCounts', ratingCounts)
   return (
-    <div className="bg-slate-50">
+    <div className="bg-slate">
       <div className="mx-auto py-8 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
           <div className="lg:col-span-4 lg:row-end-1">
@@ -129,138 +111,7 @@ const ViewPlacePage = () => {
               </div>
             </div>
           </div>
-
-          <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-              Customer Reviews
-            </h2>
-
-            <div className="mt-3 flex items-center">
-              <div>
-                <div className="flex items-center">
-                  {[0, 1, 2, 3, 4].map((rating) => (
-                    <StarIcon
-                      key={rating}
-                      className={`h-5 w-5 flex-shrink-0 ${
-                        DUMMY_PLACE.averageRatings > rating
-                          ? 'text-yellow-400'
-                          : 'text-gray-300'
-                      }`}
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-              </div>
-              <p className="ml-2 text-sm text-gray-900">
-                Based on {DUMMY_REVIEWS.length} reviews
-              </p>
-            </div>
-
-            <div className="mt-6">
-              <dl className="space-y-3">
-                {ratingCounts.map((count) => (
-                  <div key={count.rating} className="flex items-center text-sm">
-                    <dt className="flex flex-1 items-center">
-                      <p className="w-3 font-medium text-gray-900">
-                        {count.rating}
-                      </p>
-                      <div
-                        aria-hidden="true"
-                        className="ml-1 flex flex-1 items-center"
-                      >
-                        <StarIcon
-                          className={`h-5 w-5 flex-shrink-0 ${
-                            count.rating > 0
-                              ? 'text-yellow-400'
-                              : 'text-gray-300'
-                          }`}
-                          aria-hidden="true"
-                        />
-
-                        <div className="relative ml-3 flex-1">
-                          <div className="h-3 rounded-full border border-gray-200 bg-gray-100" />
-                          {count.rating > 0 ? (
-                            <div
-                              className="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"
-                              style={{
-                                width: `calc(${count.reviews.length} / ${DUMMY_PLACE.reviews.length} * 100%)`,
-                              }}
-                            />
-                          ) : null}
-                        </div>
-                      </div>
-                    </dt>
-                    <dd className="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">
-                      {Math.round(
-                        (count.reviews.length / DUMMY_REVIEWS.length) * 100
-                      )}
-                      %
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div className="mt-10">
-              <a
-                href="./"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white py-2 px-8 text-sm font-medium text-gray-900 hover:bg-gray-50 sm:w-auto lg:w-full"
-              >
-                Write a review
-              </a>
-            </div>
-
-            <div className="border-b border-gray-200">
-              <p className="whitespace-nowrap border-b-2 py-6 text-sm font-medium">
-                Customer Reviews ({DUMMY_REVIEWS.length})
-              </p>
-            </div>
-
-            {DUMMY_PLACE.reviews.map((review, reviewIdx) => (
-              <div
-                key={reviewIdx}
-                className="flex space-x-4 text-sm text-gray-500"
-              >
-                <div className="flex-none py-10">
-                  <img
-                    src={review.reviewerImageURL}
-                    alt=""
-                    className="h-10 w-10 rounded-full bg-gray-100"
-                  />
-                </div>
-                <div
-                  className={`py-10 ${
-                    reviewIdx === 0 ? '' : 'border-t border-gray-200'
-                  }`}
-                >
-                  <h3 className="font-medium text-gray-900">
-                    {review.reviewerName}
-                  </h3>
-                  <p>{formattedDate(review.reviewDate)}</p>
-
-                  <div className="mt-4 flex items-center">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        className={`'h-5 w-5 flex-shrink-0' ${
-                          review.rating > rating
-                            ? 'text-yellow-400'
-                            : 'text-gray-300'
-                        }`}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </div>
-                  <div
-                    className="prose prose-sm mt-4 max-w-none text-gray-500"
-                    dangerouslySetInnerHTML={{
-                      __html: review.reviewDescription,
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReviewContainer reviews={DUMMY_PLACE.reviews} addReviewClick={onAddReview}></ReviewContainer>
         </div>
       </div>
     </div>

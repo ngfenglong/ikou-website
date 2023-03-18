@@ -9,7 +9,7 @@ const SubHeading = (props: PropsType) => {
 };
 
 type PropsType = {
-  children: string | JSX.Element | JSX.Element[];
+  children: React.ReactNode;
   id?: string;
   callBackAction?: () => {};
 };
