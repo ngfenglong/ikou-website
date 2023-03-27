@@ -47,7 +47,7 @@ const ReviewSection = ({ reviews }: ReviewSectionPropsType) => {
         <SubHeading> Reviews ({reviews.length.toString()})</SubHeading>
       </div>
       {reviews.map((review, reviewIdx) => (
-        <IndividualReview review={review} id={reviewIdx} />
+        <IndividualReview key={reviewIdx} review={review} id={reviewIdx} />
       ))}
     </>
   );
