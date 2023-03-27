@@ -1,25 +1,26 @@
 export interface Place {
   placeId: string;
   placeName: string;
-  imageUrl: string;
-  shortDescription: string;
-  longDescription: string;
-  operatingHours: string;
-  cuisine: string;
-  avgSpending: number;
+  description: string;
+  lat: string;
+  lon: string;
+  average_spending: number;
+  image_url: string;
+  category: string;
+  sub_category: string;
 
-  features: Array<string>;
-  placeType: string;
+  operating_hours: string;
+  features: string[];
 
   averageRatings: number;
-  reviews: Array<Review>;
+  reviews: Review[];
 }
 
 export interface Review {
-  reviewerName:string;
-  reviewerImageURL: string;
-  reviewDescription: string;
-  reviewDate: Date;
+  reviewer_name: string;
+  reviewer_profile_image: string;
+  review_description: string;
+  updated_at: Date;
   rating: number;
 }
 
