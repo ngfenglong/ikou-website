@@ -3,9 +3,9 @@ import { Review } from '../../model/place';
 
 const ReviewSummary = ({ reviews }: ReviewSummaryPropsType) => {
   const averageRatings: number =
-    reviews.reduce((acc, curr) => {
+    reviews?.reduce((acc, curr) => {
       return acc + curr.rating;
-    }, 0) / reviews.length;
+    }, 0) / reviews?.length;
 
   const ratingCounts: {
     rating: number;
@@ -67,7 +67,7 @@ const ReviewSummary = ({ reviews }: ReviewSummaryPropsType) => {
                       <div
                         className="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"
                         style={{
-                          width: `calc(${count.reviews.length} / ${reviews.length} * 100%)`,
+                          width: `calc(${count.reviews.length} / ${reviews.length > 0 ? reviews.length : 1  } * 100%)`,
                         }}
                       />
                     ) : null}
@@ -75,7 +75,7 @@ const ReviewSummary = ({ reviews }: ReviewSummaryPropsType) => {
                 </div>
               </dt>
               <dd className="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">
-                {Math.round((count.reviews.length / reviews.length) * 100)}%
+                {Math.round((count.reviews.length / (reviews.length > 0 ? reviews.length : 1)) * 100)}%
               </dd>
             </div>
           ))}
