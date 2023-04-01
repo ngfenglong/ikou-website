@@ -1,5 +1,5 @@
 export interface Place {
-  placeId: string;
+  id: string;
   placeName: string;
   description: string;
   lat: string;
@@ -23,7 +23,3 @@ export interface Review {
   updated_at: Date;
   rating: number;
 }
-
-
-
-              

@@ -14,7 +14,7 @@ const ViewPlacePage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/getPlaceById/${id}`)
+    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlaceById/${id}`)
       .then((response) => {
         if (response.status !== 200) {
           // let err = Error;
