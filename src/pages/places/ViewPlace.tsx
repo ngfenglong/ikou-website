@@ -1,63 +1,40 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import RoundedBadge from '../../components/badges/RoundedBadge';
 import ReviewContainer from '../../components/reviews/ReviewContainer';
-import { Place, Review } from '../../model/place';
-
-const DUMMY_REVIEWS: Review[] = [
-  {
-    reviewerName: 'Hector Gibbons',
-    reviewerImageURL: '/images/profile.jpeg',
-    reviewDate: new Date(2023, 3, 1, 14, 32, 0),
-    rating: 5,
-    reviewDescription: 'The food is very nice',
-  },
-  {
-    reviewerName: 'Blake Reid',
-    reviewerImageURL: '/images/profile.jpeg',
-    reviewDate: new Date(2022, 8, 2, 15, 4, 0),
-    rating: 4.5,
-    reviewDescription: 'The ambience is good, nice music.',
-  },
-  {
-    reviewerName: 'Ben Russel',
-    reviewerImageURL: '/images/profile.jpeg',
-    reviewDate: new Date(2022, 7, 12, 11, 24, 0),
-    rating: 3,
-    reviewDescription:
-      'The coffee there is exactly something I am looking for.',
-  },
-  {
-    reviewerName: 'Mark Edwards',
-    reviewerImageURL: '/images/profile.jpeg',
-    reviewDate: new Date(2022, 5, 15, 10, 30, 0),
-    rating: 4,
-    reviewDescription: 'Chill location',
-  },
-];
-
-const DUMMY_PLACE: Place = {
-  placeId: '123',
-  placeName: 'Happy Cafe 123',
-  imageUrl: 'https://media.timeout.com/images/105892082/1920/1080/image.jpg',
-  shortDescription: 'Enjoy Delicious Western Cuisine at Our Cafe!',
-  longDescription:
-    'Welcome to our cozy Western cafe where we serve up mouth-watering dishes with a home-cooked feel. Our menu includes a wide variety of dishes such as juicy burgers, crispy fries, fresh salads, and hearty sandwiches. Our chefs use only the freshest ingredients to create delicious meals that will satisfy your cravings. Our cafe has a warm and inviting atmosphere, perfect for a casual lunch with friends or a romantic dinner with your loved one. Come in and experience our friendly service and delicious food today!',
-  operatingHours:
-    'We are open from Monday to Friday, from 8 am to 9 pm, and on weekends from 9 am to 10 pm. We also offer takeout and delivery services for your convenience.',
-  cuisine: 'Western',
-  avgSpending: 12,
-
-  features: [],
-  placeType: 'Food',
-
-  averageRatings: 4,
-  reviews: DUMMY_REVIEWS,
-};
+import { Place } from '../../model/place';
 
 const onAddReview = () => {
   console.log('Review Added!');
 };
 
 const ViewPlacePage = () => {
+  const { id } = useParams();
+  const [place, setPlace] = useState<Place | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlaceById/${id}`)
+      .then((response) => {
+        if (response.status !== 200) {
+          // let err = Error;
+          // err.message = 'Invalid response code: ' + response.status;
+          // setState({ error: err });
+          return null;
+        }
+        return response.json();
+      })
+      .then((place) => {
+        setPlace(place);
+        setIsLoaded(true);
+        console.log('place', place);
+      });
+  }, [id]);
+
+  if (!place) {
+    console.log(place);
+    return <div>No place</div>;
+  }
   return (
     <div className="bg-slate">
       <div className="mx-auto py-8 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -65,8 +42,8 @@ const ViewPlacePage = () => {
           <div className="lg:col-span-4 lg:row-end-1">
             <div className="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg bg-gray-100">
               <img
-                src={DUMMY_PLACE.imageUrl}
-                alt={DUMMY_PLACE.placeName}
+                src={place.image_url}
+                alt={place.placeName}
                 className="object-cover object-center"
               />
             </div>
@@ -77,20 +54,15 @@ const ViewPlacePage = () => {
               <div className="mt-4"></div>
               <div className="mt-4">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                  {DUMMY_PLACE.placeName}
+                  {place.placeName}
                 </h1>
-
                 <RoundedBadge classNames="mt-2 text-gray-500" color="gray">
-                  {DUMMY_PLACE.placeType}
+                  {place.category}
                 </RoundedBadge>
-
-                {/* <p className="mt-2 text-sm text-gray-500">
-                  {DUMMY_PLACE.placeType}
-                </p> */}
               </div>
             </div>
 
-            <p className="mt-6 text-gray-500">{DUMMY_PLACE.longDescription}</p>
+            <p className="mt-6 text-gray-500">{place.description}</p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
               <button
@@ -112,12 +84,12 @@ const ViewPlacePage = () => {
                 Operating Hours
               </h3>
               <div className="prose prose-sm mt-4 text-gray-500">
-                {DUMMY_PLACE.operatingHours}
+                {place.operating_hours}
               </div>
             </div>
           </div>
           <ReviewContainer
-            reviews={DUMMY_PLACE.reviews}
+            reviews={place.reviews}
             addReviewClick={onAddReview}
           ></ReviewContainer>
         </div>
