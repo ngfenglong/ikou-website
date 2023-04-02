@@ -11,7 +11,7 @@ const onAddReview = () => {
 const ViewPlacePage = () => {
   const { id } = useParams();
   const [place, setPlace] = useState<Place | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlaceById/${id}`)
@@ -26,7 +26,7 @@ const ViewPlacePage = () => {
       })
       .then((place) => {
         setPlace(place);
-        setIsLoaded(true);
+        // setIsLoaded(true);
         console.log('place', place);
       });
   }, [id]);
