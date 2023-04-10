@@ -1,18 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../../components/logo/Logo';
 import * as ROUTES from './../../constants/routes';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     document.title = 'Login Page';
   });
 
-  const onLogin = () => {
+  const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     // Do validation
-    navigate(ROUTES.LANDING_PAGE);
+    e.preventDefault();
+    try {
+      await login(username, password);
+      console.log('logged in');
+      navigate(ROUTES.LANDING_PAGE);
+    } catch (error) {
+      // Handle error
+      console.log(error);
+    }
   };
 
   return (
@@ -94,24 +106,26 @@ const Login = () => {
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="bg-white px-2 text-gray-500">
-                  or Sign in with Email
+                  or Sign in with Username
                 </span>
               </div>
             </div>
             <form className="space-y-6" onSubmit={onLogin}>
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="username"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Email address
+                  Username
                 </label>
                 <div className="mt-2">
                   <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
+                    id="username"
+                    name="username"
+                    type="text"
+                    autoComplete="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                     className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -131,6 +145,8 @@ const Login = () => {
                     name="password"
                     type="password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
