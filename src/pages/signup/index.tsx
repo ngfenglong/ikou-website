@@ -1,6 +1,45 @@
+import { useState } from 'react';
 import { Logo } from '../../components/logo/Logo';
+import useAuth from '../../hooks/useAuth';
+import { RegisterFormInputDto } from '../../dto/auth';
+import { useNavigate } from 'react-router-dom';
+import * as ROUTES from './../../constants/routes';
 
 const SignUp = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [country, setCountry] = useState('Singapore');
+
+  const { register } = useAuth();
+  const navigate = useNavigate();
+
+  const onSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // validation & handling
+
+    // if no error
+    const newRegistrant = {
+      username: username,
+      first_name: firstname,
+      last_name: lastname,
+      email: email,
+      password: password,
+      country: country,
+    } as RegisterFormInputDto;
+
+    try {
+      await register(newRegistrant);
+      navigate(ROUTES.LOGIN);
+    } catch (err) {
+      // Handle error
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -13,7 +52,7 @@ const SignUp = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-4 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="mt-6">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" action="#" method="POST" onSubmit={onSignup}>
               <div>
                 <label
                   htmlFor="username"
@@ -26,6 +65,52 @@ const SignUp = () => {
                     id="username"
                     type="text"
                     name="username"
+                    value={username}
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
+                    required
+                    className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="firstname"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  First Name
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="firstname"
+                    type="text"
+                    name="firstname"
+                    value={firstname}
+                    onChange={(e) => {
+                      setFirstname(e.target.value);
+                    }}
+                    required
+                    className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="lastname"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Last Name
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="lastname"
+                    type="text"
+                    name="lastname"
+                    value={lastname}
+                    onChange={(e) => {
+                      setLastname(e.target.value);
+                    }}
                     required
                     className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -45,6 +130,10 @@ const SignUp = () => {
                     name="email"
                     type="email"
                     autoComplete="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                     required
                     className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -63,6 +152,10 @@ const SignUp = () => {
                     id="password"
                     name="password"
                     type="password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                     autoComplete="current-password"
                     required
                     className="block w-full rounded-md border-0 py-2 px-3.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -81,7 +174,11 @@ const SignUp = () => {
                   <input
                     id="confirm-password"
                     name="confirm-password"
-                    type="confirm-password"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                    }}
                     autoComplete="current-confirm-password"
                     required
                     className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -101,11 +198,15 @@ const SignUp = () => {
                     id="country"
                     name="country"
                     autoComplete="country-name"
+                    value={country}
+                    onChange={(e) => {
+                      setCountry(e.target.value);
+                    }}
                     className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   >
-                    <option>Singapore</option>
-                    <option>United States</option>
-                    <option>Canada</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="United States">United States</option>
+                    <option value="Others">Others</option>
                   </select>
                 </div>
               </div>
