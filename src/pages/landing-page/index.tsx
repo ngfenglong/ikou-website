@@ -11,7 +11,7 @@ const CategoryMenu = (props: {
   onSelect: (category: string) => void;
 }) => {
   return (
-    <ul className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mb-10 sm:grid-cols-3 md:gap-y-6 lg:max-w-none lg:grid-cols-6">
+    <ul className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mt-5 mb-5 sm:grid-cols-4 md:gap-y-8 lg:max-w-none lg:grid-cols-8">
       {props.categoriesList.map((category, key) => (
         <CategoryButton
           key={key}
