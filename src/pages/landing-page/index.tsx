@@ -5,6 +5,7 @@ import PlaceCard from '../../components/card/PlaceCard';
 import { useEffect, useState } from 'react';
 import { Place } from '../../model/place';
 import { CodeDecodeCategory } from '../../model/code-decode-models';
+import { useNavigate } from 'react-router-dom';
 
 const CategoryMenu = (props: {
   categoriesList: string[];
@@ -27,8 +28,12 @@ const LandingPage = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [recommendedCafes, setRecommededCafes] = useState<Place[]>([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`)
+    fetch(
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`
+    )
       .then((response) => {
         if (response.status !== 200) {
           // error handling
@@ -50,13 +55,13 @@ const LandingPage = () => {
         }
         return response.json();
       })
-      .then((categories) => {
-        setRecommededCafes(categories);
+      .then((places) => {
+        setRecommededCafes(places);
       });
   }, []);
 
-  const onSelectCategory = (id: string) => {
-    console.log('Selected ' + id);
+  const onSelectCategory = (categoryName: string) => {
+    navigate(`/category/${categoryName}`);
   };
 
   return (
