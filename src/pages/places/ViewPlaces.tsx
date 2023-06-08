@@ -22,23 +22,16 @@ const ViewPlacesPage = () => {
       if (!selectedCategory) {
         // throw error
       }
-      // Get category -> pathStrArr[1]
-      // throw error if category doesnt exists
-      // Change into API that retrieve places by category
-      fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`)
+      fetch(
+        `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlacesByCategory/${selectedCategory}`
+      )
         .then((response) => {
           if (response.status !== 200) {
           }
           return response.json();
         })
         .then((places: Place[]) => {
-          console.log(places.map((place) => place.category));
-          setPlaces(
-            places.filter(
-              (place) =>
-                place.category.toLowerCase() === selectedCategory.toLowerCase()
-            )
-          );
+          setPlaces(places ?? []);
         });
     } else {
       fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`)
@@ -55,9 +48,21 @@ const ViewPlacesPage = () => {
   }, [pathName]);
 
   if (!places) {
-    // Create skeleton
+    return (
+      <Container>
+        <div className="flex flex-col space-y-16">
+          <div className="flex flex-col space-y-8">It is null</div>
+        </div>
+      </Container>
+    );
   } else if (places.length === 0) {
-    // Display text
+    return (
+      <Container>
+        <div className="flex flex-col space-y-16">
+          <div className="flex flex-col space-y-8">No place</div>
+        </div>
+      </Container>
+    );
   }
   return (
     <div className="bg-gray-background space-y-8 mt-8">
