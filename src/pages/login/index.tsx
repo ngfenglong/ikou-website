@@ -3,12 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { Logo } from '../../components/logo/Logo';
 import * as ROUTES from './../../constants/routes';
 import useAuth from '../../hooks/useAuth';
+import useAlert from '../../hooks/useAlert';
+import Alert, { ALERT_TYPE } from '../../components/alert/Alert';
 
 const Login = () => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const { alertType, alertHeader, alertDescription, displayAlert, resetAlert } =
+    useAlert();
 
   useEffect(() => {
     document.title = 'Login Page';
@@ -19,10 +24,11 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(username, password);
-      console.log('logged in');
+      resetAlert();
       navigate(ROUTES.LANDING_PAGE);
     } catch (error) {
       // Handle error
+      displayAlert(ALERT_TYPE.ERROR, 'Login Failed!', `${error}`);
       console.log(error);
     }
   };
@@ -187,6 +193,13 @@ const Login = () => {
                   Sign in
                 </button>
               </div>
+              {alertType && (
+                <Alert
+                  alertType={alertType}
+                  alertHeader={alertHeader ?? ''}
+                  alertDescription={alertDescription ?? ''}
+                />
+              )}
 
               <div className="text-sm">
                 Not registered yet?&nbsp;

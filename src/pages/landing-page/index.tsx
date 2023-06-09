@@ -26,8 +26,7 @@ const CategoryMenu = (props: {
 
 const LandingPage = () => {
   const [categories, setCategories] = useState<string[]>([]);
-  const [recommendedCafes, setRecommededCafes] = useState<Place[]>([]);
-
+  const [recommendedCafes, setRecommededCafes] = useState<Place[]>([]);  
   const navigate = useNavigate();
 
   useEffect(() => {
