@@ -104,7 +104,6 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
       setIsAuthenticated(true);
       setUser({
         ...jwtDecode(token),
-        profile_image: '/images/no_profile.jpeg',
       } as User);
     } else {
       setIsAuthenticated(false);
