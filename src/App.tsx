@@ -13,11 +13,12 @@ import Login from './pages/login';
 import PageNotFound from './pages/error-page/PageNotFound';
 import Layout from './pages/root/Layout';
 import ComingSoonPage from './pages/error-page/ComingSoon';
-import ViewPlacePage from './pages/places/ViewPlace';
+import ViewPlaceDetailPage from './pages/places/ViewPlaceDetail';
 import AddPlace from './pages/places/AddPlace';
 import ForgetPassword from './pages/forget-password-page';
 import { AuthProvider } from './context/AuthContext';
 import { AlertProvider } from './context/AlertContext';
+import ViewPlacesPage from './pages/places/ViewPlaces';
 
 function App() {
   return (
@@ -30,9 +31,16 @@ function App() {
               <Route path={ROUTES.TRIPS} element={<ComingSoonPage />} />
               <Route path={ROUTES.ACTIVITIES} element={<ComingSoonPage />} />
               <Route path={ROUTES.ADD_PLACES} element={<AddPlace />} />
-              <Route path={ROUTES.VIEW_PLACES} element={<ViewPlacePage />} />
-              <Route path={ROUTES.PLACES} element={<ComingSoonPage />} />
+              <Route
+                path={ROUTES.VIEW_PLACES_DETAIL}
+                element={<ViewPlaceDetailPage />}
+              />
+              <Route path={ROUTES.PLACES} element={<ViewPlacesPage />} />
               <Route path={ROUTES.SETTING} element={<ComingSoonPage />} />
+              <Route
+                path={ROUTES.VIEW_PLACES_BY_CATEGORY}
+                element={<ViewPlacesPage />}
+              />
               <Route path={ROUTES.ALL} element={<PageNotFound />} />
             </Route>
             <Route path={ROUTES.LOGIN} element={<Login />} />

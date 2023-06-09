@@ -1,6 +1,7 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { AuthContextData, User } from '../model/auth';
 import { RegisterFormInputDto } from '../dto/auth';
+import jwtDecode from 'jwt-decode';
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
@@ -14,7 +15,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!user);
 
-  const register = async (registerFormInput: RegisterFormInputDto) => {
+  const register = (registerFormInput: RegisterFormInputDto) => {
     const options = {
       method: 'POST',
       headers: {
@@ -22,17 +23,18 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
       },
       body: JSON.stringify(registerFormInput),
     };
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/auth/register`, options)
+    return fetch(
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/register`,
+      options
+    )
       .then((response) => response.json())
-      .then((data) => {
-        
-      })
+      .then((data) => {})
       .catch((err) => {
         throw Error(err);
       });
   };
 
-  const login = async (username: string, password: string) => {
+  const login = (username: string, password: string) => {
     const options = {
       method: 'POST',
       headers: {
@@ -43,9 +45,15 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
         password,
       }),
     };
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/auth/login`, options)
+    return fetch(
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/login`,
+      options
+    )
       .then((response) => response.json())
       .then((data) => {
+        if (data?.error) {
+          throw new Error(data.message);
+        }
         const loggedInUser = {
           username: data.user.username,
           first_name: data.user.first_name,
@@ -89,6 +97,19 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      setIsAuthenticated(true);
+      setUser({
+        ...jwtDecode(token),
+        profile_image: '/images/no_profile.jpeg',
+      } as User);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider

@@ -8,7 +8,7 @@ const onAddReview = () => {
   console.log('Review Added!');
 };
 
-const ViewPlacePage = () => {
+const ViewPlaceDetailPage = () => {
   const { id } = useParams();
   const [place, setPlace] = useState<Place | null>(null);
   // const [isLoaded, setIsLoaded] = useState(false);
@@ -98,4 +98,4 @@ const ViewPlacePage = () => {
   );
 };
 
-export default ViewPlacePage;
+export default ViewPlaceDetailPage;
