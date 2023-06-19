@@ -41,7 +41,6 @@ const ViewPlacesPage = () => {
           return response.json();
         })
         .then((places) => {
-          console.log(places);
           setPlaces(places);
         });
     }
