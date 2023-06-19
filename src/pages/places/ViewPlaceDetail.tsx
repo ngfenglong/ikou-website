@@ -27,7 +27,6 @@ const ViewPlaceDetailPage = () => {
       .then((place) => {
         setPlace(place);
         // setIsLoaded(true);
-        console.log('place', place);
       });
   }, [id]);
 

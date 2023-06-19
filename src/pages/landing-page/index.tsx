@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Place } from '../../model/place';
 import { CodeDecodeCategory } from '../../model/code-decode-models';
 import { useNavigate } from 'react-router-dom';
+import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 
 const CategoryMenu = (props: {
   categoriesList: string[];
@@ -25,8 +26,9 @@ const CategoryMenu = (props: {
 };
 
 const LandingPage = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [categories, setCategories] = useState<string[]>([]);
-  const [recommendedCafes, setRecommededCafes] = useState<Place[]>([]);  
+  const [recommendedCafes, setRecommededCafes] = useState<Place[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,11 +53,13 @@ const LandingPage = () => {
       .then((response) => {
         if (response.status !== 200) {
           // error handling
+          setIsLoading(false);
         }
         return response.json();
       })
       .then((places) => {
         setRecommededCafes(places);
+        setIsLoading(false);
       });
   }, []);
 
@@ -75,17 +79,21 @@ const LandingPage = () => {
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-7xl "
             >
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                {recommendedCafes.map((place) => (
-                  <PlaceCard
-                    id={place.id}
-                    key={place.id}
-                    name={place.placeName}
-                    description={place.description.substring(0, 30) + '...'}
-                    category={place.category}
-                    imageUrl={place.image_url}
-                  ></PlaceCard>
-                ))}
+              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
+                {isLoading
+                  ? Array(12)
+                      .fill(0)
+                      .map((_, index) => <PlaceCardSkeleton key={index} />)
+                  : recommendedCafes.map((place) => (
+                      <PlaceCard
+                        id={place.id}
+                        key={place.id}
+                        name={place.placeName}
+                        description={place.description.substring(0, 30) + '...'}
+                        category={place.category}
+                        imageUrl={place.image_url}
+                      ></PlaceCard>
+                    ))}
               </div>
             </section>
           </div>
@@ -96,14 +104,16 @@ const LandingPage = () => {
               className="mx-auto max-w-2xl lg:max-w-7xl "
             >
               <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <PlaceCard
-                    id={num + ''}
-                    key={num + ''}
-                    name={`Place Name - ${num}`}
-                    description={`Description for place - ${num}`}
-                  ></PlaceCard>
-                ))}
+                {isLoading
+                  ? new Array(12).fill(0).map((_, i) => <PlaceCardSkeleton />)
+                  : [1, 2, 3, 4, 5, 6].map((num) => (
+                      <PlaceCard
+                        id={num + ''}
+                        key={num + ''}
+                        name={`Place Name - ${num}`}
+                        description={`Description for place - ${num}`}
+                      ></PlaceCard>
+                    ))}
               </div>
             </section>
           </div>
@@ -112,4 +122,5 @@ const LandingPage = () => {
     </div>
   );
 };
+
 export default LandingPage;
