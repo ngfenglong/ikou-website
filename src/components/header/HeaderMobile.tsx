@@ -1,8 +1,25 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import * as ROUTES from './../../constants/routes';
+import useAuth from '../../hooks/useAuth';
+import { Link, useNavigate } from 'react-router-dom';
+import useAlert from '../../hooks/useAlert';
+import { ALERT_TYPE } from '../alert/Alert';
 
 const HeaderMobile = ({ open }: { open: boolean }) => {
+  const { user, isAuthenticated, logout } = useAuth();
+  const { displayAlert } = useAlert();
+  const navigate = useNavigate();
+
+  const onLogoutClick = () => {
+    try {
+      logout();
+      navigate(ROUTES.LOGIN);
+    } catch (err) {
+      displayAlert(ALERT_TYPE.ERROR, 'Logout Fail', 'Login Fail');
+    }
+  };
+
   return (
     <>
       <div className="flex items-center lg:hidden">
@@ -48,60 +65,73 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
             Places
           </Disclosure.Button>
         </div>
-        <div className="border-t border-gray-200 pt-4 pb-3">
-          <div className="flex items-center px-4">
-            <div className="flex-shrink-0">
-              <img
-                className="h-10 w-10 rounded-full"
-                src="/images/profile.jpeg"
-                alt=""
-              />
+        {(!user || !isAuthenticated) && (
+          <div className="border-t border-gray-200 pt-4 pb-3">
+            <div className="flex items-center px-4">
+              <Link
+                to={ROUTES.LOGIN}
+                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Login
+              </Link>
             </div>
-            <div className="ml-3">
-              <div className="text-base font-medium text-gray-800">Zell</div>
-              <div className="text-sm font-medium text-gray-500">
-                User1@Testing.com
+          </div>
+        )}
+        {user && isAuthenticated && (
+          <div className="border-t border-gray-200 pt-4 pb-3">
+            <div className="flex items-center px-4">
+              <div className="flex-shrink-0">
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src="/images/no_profile.jpeg"
+                  alt=""
+                />
               </div>
+              <div className="ml-3">
+                <div className="text-base font-medium text-gray-800">Zell</div>
+                <div className="text-sm font-medium text-gray-500">
+                  User1@Testing.com
+                </div>
+              </div>
+              <button
+                type="button"
+                className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-primary focus:ring-offset-2"
+              >
+                <span className="sr-only">View notifications</span>
+                <BellIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
             </div>
-            <button
-              type="button"
-              className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-primary focus:ring-offset-2"
-            >
-              <span className="sr-only">View notifications</span>
-              <BellIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
+            <div className="mt-3 space-y-1">
+              <Disclosure.Button
+                as="a"
+                href={ROUTES.ADD_PLACES}
+                className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+              >
+                Add New Place
+              </Disclosure.Button>
+              <Disclosure.Button
+                as="a"
+                href={ROUTES.PROFILE}
+                className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+              >
+                Your Profile
+              </Disclosure.Button>
+              <Disclosure.Button
+                as="a"
+                href={ROUTES.SETTING}
+                className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+              >
+                Settings
+              </Disclosure.Button>
+              <button
+                onClick={onLogoutClick}
+                className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+              >
+                Sign out
+              </button>
+            </div>
           </div>
-          <div className="mt-3 space-y-1">
-            <Disclosure.Button
-              as="a"
-              href={ROUTES.ADD_PLACES}
-              className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-            >
-              Add New Place
-            </Disclosure.Button>
-            <Disclosure.Button
-              as="a"
-              href={ROUTES.PROFILE}
-              className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-            >
-              Your Profile
-            </Disclosure.Button>
-            <Disclosure.Button
-              as="a"
-              href={ROUTES.SETTING}
-              className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-            >
-              Settings
-            </Disclosure.Button>
-            <Disclosure.Button
-              as="a"
-              href={ROUTES.LOGIN}
-              className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-            >
-              Sign out
-            </Disclosure.Button>
-          </div>
-        </div>
+        )}
       </Disclosure.Panel>
     </>
   );
