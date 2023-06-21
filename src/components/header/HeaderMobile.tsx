@@ -2,7 +2,7 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import * as ROUTES from './../../constants/routes';
 import useAuth from '../../hooks/useAuth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAlert from '../../hooks/useAlert';
 import { ALERT_TYPE } from '../alert/Alert';
 
@@ -10,7 +10,7 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
   const { user, isAuthenticated, logout } = useAuth();
   const { displayAlert } = useAlert();
   const navigate = useNavigate();
-
+  const location = useLocation();
   const onLogoutClick = () => {
     try {
       logout();
@@ -39,28 +39,44 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
           <Disclosure.Button
             as="a"
             href={ROUTES.LANDING_PAGE}
-            className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700"
+            className={`block border-l-4 py-2 pl-3 pr-4 text-base font-medium${
+              location.pathname === ROUTES.LANDING_PAGE
+                ? ' border-indigo-500 bg-indigo-50 text-indigo-700 '
+                : ' border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 '
+            }`}
           >
             Explore
           </Disclosure.Button>
           <Disclosure.Button
             as="a"
             href={ROUTES.TRIPS}
-            className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+            className={`block border-l-4  py-2 pl-3 pr-4 text-base font-medium ${
+              location.pathname === ROUTES.TRIPS
+                ? ' border-indigo-500 bg-indigo-50 text-indigo-700 '
+                : ' border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 '
+            }`}
           >
             Trips
           </Disclosure.Button>
           <Disclosure.Button
             as="a"
             href={ROUTES.ACTIVITIES}
-            className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+            className={`block border-l-4 py-2 pl-3 pr-4 text-base font-medium ${
+              location.pathname === ROUTES.ACTIVITIES
+                ? ' border-indigo-500 bg-indigo-50 text-indigo-700 '
+                : ' border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 '
+            }`}
           >
             Activities
           </Disclosure.Button>
           <Disclosure.Button
             as="a"
             href={ROUTES.PLACES}
-            className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+            className={`block border-l-4 py-2 pl-3 pr-4 text-base font-medium ${
+              location.pathname === ROUTES.PLACES
+                ? ' border-indigo-500 bg-indigo-50 text-indigo-700 '
+                : ' border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 '
+            }`}
           >
             Places
           </Disclosure.Button>
