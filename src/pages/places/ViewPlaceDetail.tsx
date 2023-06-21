@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import RoundedBadge from '../../components/badges/RoundedBadge';
 import ReviewContainer from '../../components/reviews/ReviewContainer';
 import { Place } from '../../model/place';
+import { getPlaceById } from '../../services/place-service';
+import Container from '../../components/container/Container';
 
 const onAddReview = () => {
   console.log('Review Added!');
@@ -14,30 +16,54 @@ const ViewPlaceDetailPage = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [hasError, setHasError] = useState<Boolean>(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlaceById/${id}`)
-      .then((response) => {
-        if (response.status !== 200) {
-          // let err = Error;
-          // err.message = 'Invalid response code: ' + response.status;
-          // setState({ error: err });
-          return null;
-        }
-        return response.json();
-      })
-      .then((place) => {
-        setPlace(place);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setHasError(true);
-        setIsLoading(false);
-      });
+    if (!!id) {
+      getPlaceById(id)
+        .then((data) => {
+          setPlace(data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setHasError(true);
+          setIsLoading(false);
+        });
+    } else {
+      setHasError(true);
+      setIsLoading(false);
+    }
   }, [id]);
+
+  const onBackClick = () => {
+    navigate(-1);
+  };
 
   if (hasError) {
     console.log(place);
-    return <div>No place</div>;
+    return (
+      <Container>
+        <main className="mx-auto flex w-full max-w-7xl flex-auto flex-col justify-center px-6 py-24 sm:py-64 lg:px-8">
+          <p className="text-base font-semibold leading-8 text-indigo-600">
+            404
+          </p>
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            Place not found
+          </h1>
+          <p className="mt-6 text-base leading-7 text-gray-600">
+            Sorry, we couldn't find the palce you're looking for.
+          </p>
+          <div className="mt-10">
+            <button
+              className="text-sm font-semibold leading-7 text-indigo-600"
+              onClick={onBackClick}
+            >
+              <span aria-hidden="true">&larr;</span> Back to home
+            </button>
+          </div>
+        </main>
+      </Container>
+    );
   }
 
   return (
