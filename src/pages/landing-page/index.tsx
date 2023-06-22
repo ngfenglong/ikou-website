@@ -26,39 +26,39 @@ const CategoryMenu = (props: {
 };
 
 const LandingPage = () => {
+  const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [categories, setCategories] = useState<string[]>([]);
   const [recommendedCafes, setRecommededCafes] = useState<Place[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`
-    )
-      .then((response) => {
-        if (response.status !== 200) {
-          // error handling
+    Promise.all([
+      fetch(
+        `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`
+      ),
+      fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`),
+    ])
+      .then(async ([categoriesResponse, placesResponse]) => {
+        if (categoriesResponse.status !== 200 || placesResponse.status !== 200) {
+          //redirect to error page
         }
-        return response.json();
+        const categories = await categoriesResponse.json();
+        const places = await placesResponse.json();
+        return [categories, places];
       })
-      .then((categories) => {
+      .then(([categories, places]) => {
         setCategories(
           (categories as CodeDecodeCategory[]).map(
             (category) => category.decode
           )
         );
-      });
-
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`)
-      .then((response) => {
-        if (response.status !== 200) {
-          // error handling
-          setIsLoading(false);
-        }
-        return response.json();
-      })
-      .then((places) => {
         setRecommededCafes(places);
+      })
+      .catch((err) => {
+        setHasError(true);
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   }, []);
