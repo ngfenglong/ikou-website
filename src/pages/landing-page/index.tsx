@@ -40,7 +40,10 @@ const LandingPage = () => {
       fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`),
     ])
       .then(async ([categoriesResponse, placesResponse]) => {
-        if (categoriesResponse.status !== 200 || placesResponse.status !== 200) {
+        if (
+          categoriesResponse.status !== 200 ||
+          placesResponse.status !== 200
+        ) {
           //redirect to error page
         }
         const categories = await categoriesResponse.json();
@@ -67,10 +70,36 @@ const LandingPage = () => {
     navigate(`/category/${categoryName}`);
   };
 
+  if (hasError) {
+    return (
+      <Container>
+        <div className="text-center">
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            Oops!
+          </h1>
+          <p className="mt-6 text-base leading-7 text-gray-600">
+            There seems to be a problem with our server. We're working hard to
+            fix it. In the meantime, please try again later.
+          </p>
+        </div>
+      </Container>
+    );
+  }
   return (
     <div className="bg-gray-background space-y-8 mt-8">
       <Container>
-        <CategoryMenu categoriesList={categories} onSelect={onSelectCategory} />
+        {isLoading ? (
+          <ul className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mt-5 mb-5 sm:grid-cols-4 md:gap-y-8 lg:max-w-none lg:grid-cols-8">
+            {new Array(8).fill(0).map((_, i) => (
+              <div className="animate-pulse h-12 w-24 shadow bg-gray-300"></div>
+            ))}
+          </ul>
+        ) : (
+          <CategoryMenu
+            categoriesList={categories}
+            onSelect={onSelectCategory}
+          />
+        )}
 
         <div className="flex flex-col space-y-16">
           <div className="flex flex-col space-y-8">
