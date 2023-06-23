@@ -69,7 +69,7 @@ const ViewPlaceDetailPage = () => {
   return (
     <div className="bg-slate">
       <div className="mx-auto py-4 px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="mb-12">
+        <div className="lg:mb-12 md:mb-8 mb-4">
           <button
             className="flex flex-row gap-2 items-center text-gray-500 hover:text-indigo-600"
             onClick={onBackClick}
