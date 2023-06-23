@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Logo } from '../../components/logo/Logo';
 import useAuth from '../../hooks/useAuth';
 import { RegisterFormInputDto } from '../../dto/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as ROUTES from './../../constants/routes';
 
 const SignUp = () => {
@@ -222,12 +222,12 @@ const SignUp = () => {
 
               <div className="text-sm">
                 Already have an account?&nbsp;
-                <a
-                  href="/login"
+                <Link
+                  to="/login"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Sign in
-                </a>
+                </Link>
               </div>
             </form>
           </div>

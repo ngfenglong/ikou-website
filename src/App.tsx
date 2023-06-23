@@ -19,12 +19,14 @@ import ForgetPassword from './pages/forget-password-page';
 import { AuthProvider } from './context/AuthContext';
 import { AlertProvider } from './context/AlertContext';
 import ViewPlacesPage from './pages/places/ViewPlaces';
+import { ScrollToTop } from './utils/scroll-to-top';
 
 function App() {
   return (
     <AuthProvider>
       <AlertProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route element={<Layout />}>
               <Route path={ROUTES.LANDING_PAGE} element={<LandingPage />} />

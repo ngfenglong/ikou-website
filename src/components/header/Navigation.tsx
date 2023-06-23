@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import * as ROUTES from './../../constants/routes';
 
 const Navigation = () => {
@@ -7,8 +7,8 @@ const Navigation = () => {
   return (
     <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
       {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-      <a
-        href={ROUTES.LANDING_PAGE}
+      <Link
+        to={ROUTES.LANDING_PAGE}
         className={`inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium text-gray-900 ${
           location.pathname === ROUTES.LANDING_PAGE
             ? ' border-blue-primary'
@@ -16,9 +16,9 @@ const Navigation = () => {
         }`}
       >
         Explore
-      </a>
-      <a
-        href={ROUTES.TRIPS}
+      </Link>
+      <Link
+        to={ROUTES.TRIPS}
         className={`inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 ${
           location.pathname === ROUTES.TRIPS
             ? ' border-blue-primary'
@@ -26,9 +26,9 @@ const Navigation = () => {
         }`}
       >
         Trips
-      </a>
-      <a
-        href={ROUTES.ACTIVITIES}
+      </Link>
+      <Link
+        to={ROUTES.ACTIVITIES}
         className={`inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 ${
           location.pathname === ROUTES.ACTIVITIES
             ? ' border-blue-primary'
@@ -36,9 +36,9 @@ const Navigation = () => {
         }`}
       >
         Activities
-      </a>
-      <a
-        href={ROUTES.PLACES}
+      </Link>
+      <Link
+        to={ROUTES.PLACES}
         className={`inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 ${
           location.pathname === ROUTES.PLACES
             ? ' border-blue-primary'
@@ -46,7 +46,7 @@ const Navigation = () => {
         }`}
       >
         Places
-      </a>
+      </Link>
     </div>
   );
 };
