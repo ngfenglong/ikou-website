@@ -5,6 +5,7 @@ import ReviewContainer from '../../components/reviews/ReviewContainer';
 import { Place } from '../../model/place';
 import { getPlaceById } from '../../services/place-service';
 import Container from '../../components/container/Container';
+import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 
 const onAddReview = () => {
   console.log('Review Added!');
@@ -67,7 +68,19 @@ const ViewPlaceDetailPage = () => {
 
   return (
     <div className="bg-slate">
-      <div className="mx-auto py-8 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto py-4 px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="mb-12">
+          <button
+            className="flex flex-row gap-2 items-center text-gray-500 hover:text-indigo-600"
+            onClick={onBackClick}
+          >
+            <ArrowLeftIcon
+              className="h-5 w-5 flex-shrink-0 hover:text-indigo-600"
+              aria-hidden="true"
+            />
+            <span className="align-text-top">Back</span>
+          </button>
+        </div>
         <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
           <div className="lg:col-span-4 lg:row-end-1">
             <div className="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg bg-gray-100">
