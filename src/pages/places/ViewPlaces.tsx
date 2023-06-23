@@ -4,15 +4,14 @@ import Container from '../../components/container/Container';
 import SubHeading from '../../components/heading/SubHeading';
 import { Place } from '../../model/place';
 import MainHeading from '../../components/heading/Heading';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 const ViewPlacesPage = () => {
-  const [places, setPlaces] = useState<Place[] | null>(null);
+  const [searchParams] = useSearchParams();
   const location = useLocation();
   const pathName: string = location.pathname;
 
-  // Subheader for view by category "Welcome to 'CategoryName': Your Adventure Starts Here"
-  // When filters are applied: "Showing 'filtered' Places"
+  const [places, setPlaces] = useState<Place[] | null>(null);
 
   useEffect(() => {
     const pathStrArr = pathName.split('/');
@@ -33,6 +32,8 @@ const ViewPlacesPage = () => {
         .then((places: Place[]) => {
           setPlaces(places ?? []);
         });
+    } else if (!!searchParams.get('Search')) {
+      console.log('Searching');
     } else {
       fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`)
         .then((response) => {
@@ -44,7 +45,7 @@ const ViewPlacesPage = () => {
           setPlaces(places);
         });
     }
-  }, [pathName]);
+  }, [pathName, searchParams]);
 
   if (!places) {
     return (

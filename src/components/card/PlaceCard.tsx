@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const PlaceCard = ({
   imageUrl = '/images/no-image.jpg',
   name,
@@ -8,7 +10,7 @@ const PlaceCard = ({
   id,
 }: PropsType) => {
   return (
-    <a href={`/places/${id}`} className="group">
+    <Link to={`/places/${id}`} className="group">
       <div key={id}>
         <div className="relative">
           <div className="relative h-72 w-full overflow-hidden rounded-lg">
@@ -29,15 +31,15 @@ const PlaceCard = ({
    
         </div>
         <div className="mt-6">
-          <a
-            href={`/activity/${id}`}
+          <Link
+            to={`/activity/${id}`}
             className="relative flex items-center justify-center rounded-md border border-transparent bg-gray-100 py-2 px-8 text-sm font-medium text-gray-900 hover:bg-gray-200"
           >
             Create Activitiy
-          </a>
+          </Link>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

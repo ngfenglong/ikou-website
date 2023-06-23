@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Review } from '../../model/place';
 import ReviewSection from './ReviewSection';
 import ReviewSummary from './ReviewSummary';
@@ -11,12 +12,12 @@ const ReviewContainer = ({ reviews }: PropsType) => {
             Else create a modal for review
         */}
       <div className="mt-4 mb-8">
-        <a
-          href="./"
+        <Link
+          to="./"
           className="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white py-2 px-8 text-sm font-medium text-gray-900 hover:bg-gray-50 sm:w-auto lg:w-full"
         >
           Write a review
-        </a>
+        </Link>
       </div>
 
       <ReviewSection reviews={reviews} />
