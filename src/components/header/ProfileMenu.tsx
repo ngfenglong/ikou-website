@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import * as ROUTES from './../../constants/routes';
 import useAuth from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const loggedInMenu: MenuItemType[] = [
   {
@@ -66,14 +66,14 @@ const ProfileMenu = () => {
           {loggedInMenu.map((menuItem, idx) => (
             <Menu.Item key={idx}>
               {({ active }) => (
-                <a
-                  href={menuItem.redirectUrl}
+                <Link
+                  to={menuItem.redirectUrl}
                   className={`block px-4 py-2 text-sm text-gray-700 ${
                     active ? 'bg-gray-100' : ''
                   }`}
                 >
                   {menuItem.menuItemName}
-                </a>
+                </Link>
               )}
             </Menu.Item>
           ))}
@@ -117,14 +117,14 @@ const ProfileMenu = () => {
           {loggedOutMenu.map((menuItem, idx) => (
             <Menu.Item key={idx}>
               {({ active }) => (
-                <a
-                  href={menuItem.redirectUrl}
+                <Link
+                  to={menuItem.redirectUrl}
                   className={`block px-4 py-2 text-sm text-gray-700 ${
                     active ? 'bg-gray-100' : ''
                   }`}
                 >
                   {menuItem.menuItemName}
-                </a>
+                </Link>
               )}
             </Menu.Item>
           ))}
