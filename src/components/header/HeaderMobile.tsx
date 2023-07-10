@@ -1,10 +1,11 @@
-import { Disclosure } from '@headlessui/react';
+import { Dialog, Disclosure, Popover } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import * as ROUTES from './../../constants/routes';
 import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAlert from '../../hooks/useAlert';
 import { ALERT_TYPE } from '../alert/Alert';
+import { LogoNoWording } from '../logo/Logo';
 
 const HeaderMobile = ({ open }: { open: boolean }) => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -33,7 +34,15 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
           )}
         </Disclosure.Button>
       </div>
-      <Disclosure.Panel className="lg:hidden">
+      <Disclosure.Panel className="lg:hidden fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div className="flex justify-between items-center mb-4">
+          <LogoNoWording className="h-8 w-auto" />
+          <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span className="sr-only">Close menu</span>
+            <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+          </Disclosure.Button>
+        </div>
+
         <div className="space-y-1 pt-2 pb-3">
           {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
           <Disclosure.Button

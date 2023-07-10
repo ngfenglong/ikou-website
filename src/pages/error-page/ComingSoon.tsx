@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ComingSoonPage = () => {
   return (
     // <main className="relative isolate min-h-full">
@@ -13,9 +15,9 @@ const ComingSoonPage = () => {
         className="inset-0 -z-10 w-64 h-64 mx-auto object-cover object-top"
       />
       <div className="mt-10 flex justify-center">
-        <a href="/#" className="text-sm font-semibold leading-7 text-gray-700">
+        <Link to="/#" className="text-sm font-semibold leading-7 text-gray-700">
           <span aria-hidden="true">&larr;</span> Back to home
-        </a>
+        </Link>
       </div>
     </main>
   );
