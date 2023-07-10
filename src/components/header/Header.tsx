@@ -14,10 +14,10 @@ const Header = () => {
               <HeaderLeft />
               <SearchBar />
               <HeaderRight />
+              <HeaderMobile open={open} />
             </div>
           </div>
 
-          <HeaderMobile open={open} />
         </>
       )}
     </Disclosure>
