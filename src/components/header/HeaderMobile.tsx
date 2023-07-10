@@ -1,4 +1,4 @@
-import { Dialog, Disclosure, Popover } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import * as ROUTES from './../../constants/routes';
 import useAuth from '../../hooks/useAuth';
