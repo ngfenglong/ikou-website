@@ -8,7 +8,6 @@ import Container from '../../components/container/Container';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 
 const onAddReview = () => {
-  console.log('Review Added!');
 };
 
 const ViewPlaceDetailPage = () => {

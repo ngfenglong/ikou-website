@@ -36,7 +36,6 @@ const SignUp = () => {
       navigate(ROUTES.LOGIN);
     } catch (err) {
       // Handle error
-      console.log(err);
     }
   };
 
