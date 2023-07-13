@@ -38,7 +38,7 @@ const CategoryButton = ({
         onClick={() => onSelectCategory(categoryName)}
         icon={iconMap[categoryName]}
       />
-      <span className="mx-auto my-2">{categoryName}</span>
+      <span className="mx-auto my-2 text-xs  font-helvetica">{categoryName}</span>
     </div>
   );
 };

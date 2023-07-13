@@ -17,11 +17,9 @@ const ViewSearchPlaceResultPage = () => {
   const [keyword, setKeyword] = useState<string>('');
 
   useEffect(() => {
-    console.log('searchParams.get()', searchParams.get('keyword'));
     const searchKeyword = searchParams.get('keyword');
     if (searchKeyword !== null) {
       setKeyword(searchKeyword);
-      console.log('keyword', keyword);
       axios
         .post(
           `${process.env.REACT_APP_IKOU_API_BASEURL}/places/searchPlaceByKeyword`,
