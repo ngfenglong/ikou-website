@@ -86,12 +86,15 @@ const LandingPage = () => {
     );
   }
   return (
-    <div className="bg-gray-background space-y-8 mt-8">
+    <div className="bg-gray-background space-y-8 mt-4">
       <Container>
         {isLoading ? (
           <ul className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mt-5 mb-5 sm:grid-cols-4 md:gap-y-8 lg:max-w-none lg:grid-cols-8">
             {new Array(8).fill(0).map((_, i) => (
-              <div className="animate-pulse h-12 w-24 shadow bg-gray-300"></div>
+              <div
+                key={i}
+                className="animate-pulse h-12 w-24 shadow bg-gray-300"
+              ></div>
             ))}
           </ul>
         ) : (
@@ -134,7 +137,9 @@ const LandingPage = () => {
             >
               <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                 {isLoading
-                  ? new Array(12).fill(0).map((_, i) => <PlaceCardSkeleton />)
+                  ? new Array(12)
+                      .fill(0)
+                      .map((_, i) => <PlaceCardSkeleton key={i} />)
                   : [1, 2, 3, 4, 5, 6].map((num) => (
                       <PlaceCard
                         id={num + ''}
