@@ -18,8 +18,10 @@ import AddPlace from './pages/places/AddPlace';
 import ForgetPassword from './pages/forget-password-page';
 import { AuthProvider } from './context/AuthContext';
 import { AlertProvider } from './context/AlertContext';
-import ViewPlacesPage from './pages/places/ViewPlaces';
+import ViewPlacesPage from './pages/places/ViewAllPlaces';
 import { ScrollToTop } from './utils/scroll-to-top';
+import ViewPlacesByCategoryPage from './pages/places/ViewPlacesByCategory';
+import ViewSearchPlaceResultPage from './pages/places/ViewSearchPlaceResult';
 
 function App() {
   return (
@@ -38,10 +40,14 @@ function App() {
                 element={<ViewPlaceDetailPage />}
               />
               <Route path={ROUTES.PLACES} element={<ViewPlacesPage />} />
+              <Route
+                path={ROUTES.SEARCH}
+                element={<ViewSearchPlaceResultPage />}
+              />
               <Route path={ROUTES.SETTING} element={<ComingSoonPage />} />
               <Route
                 path={ROUTES.VIEW_PLACES_BY_CATEGORY}
-                element={<ViewPlacesPage />}
+                element={<ViewPlacesByCategoryPage />}
               />
               <Route path={ROUTES.ALL} element={<PageNotFound />} />
             </Route>

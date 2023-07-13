@@ -6,6 +6,7 @@ export const LANDING_PAGE = '/';
 export const TRIPS = '/trips';
 export const ACTIVITIES = '/activities';
 
+export const SEARCH = '/search';
 export const VIEW_PLACES_DETAIL = '/places/:id';
 export const VIEW_PLACES_BY_CATEGORY = '/category/:category';
 export const ADD_PLACES = '/add-place';

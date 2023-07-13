@@ -29,7 +29,6 @@ const Login = () => {
     } catch (error) {
       // Handle error
       displayAlert(ALERT_TYPE.ERROR, 'Login Failed!', `${error}`);
-      console.log(error);
     }
   };
 
