@@ -121,9 +121,12 @@ const LandingPage = () => {
                         id={place.id}
                         key={place.id}
                         name={place.placeName}
-                        description={place.description.substring(0, 30) + '...'}
+                        description={place.description}
                         category={place.category}
                         imageUrl={place.image_url}
+                        reviews={place.reviews}
+                        average_spending={place.average_spending}
+                        area="Ang Mo Kio"
                       ></PlaceCard>
                     ))}
               </div>
@@ -146,6 +149,9 @@ const LandingPage = () => {
                         key={num + ''}
                         name={`Place Name - ${num}`}
                         description={`Description for place - ${num}`}
+                        reviews={[]}
+                        average_spending={0}
+                        area=""
                       ></PlaceCard>
                     ))}
               </div>

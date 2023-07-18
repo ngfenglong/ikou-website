@@ -17,9 +17,10 @@ export interface Place {
 }
 
 export interface Review {
-  reviewer_name: string;
-  reviewer_profile_image: string;
-  review_description: string;
-  updated_at: Date;
+  id: string;
   rating: number;
+  review_description: string;
+  reviewer_profile_image: string;
+  updated_at: Date;
+  reviewer_name: string;
 }

@@ -77,6 +77,9 @@ const ViewPlacesByCategoryPage = () => {
                         description={place.description.substring(0, 30) + '...'}
                         category={place.category}
                         imageUrl={place.image_url}
+                        reviews={place.reviews}
+                        average_spending={place.average_spending}
+                        area=""
                       ></PlaceCard>
                     ))}
               </div>
