@@ -6,12 +6,10 @@ const PlaceCard = ({
   imageUrl = '/images/no-image.jpg',
   name,
   description = '',
-  category,
-  rating = 4,
+  rating,
   like,
   id,
   area,
-  average_spending,
   reviews,
 }: PropsType) => {
   return (
@@ -46,8 +44,11 @@ const PlaceCard = ({
                 : description}
             </p>
             <div className="mt-2 flex flex-row items-center">
-              <MapPinIcon className="h-4 w-4" aria-hidden="true" />
-              <span className="text-sm text-gray-500 ml-1">{area}</span>
+              <MapPinIcon
+                className="h-4 w-4 text-indigo-300"
+                aria-hidden="true"
+              />
+              <span className="text-sm text-gray-400 ml-1">{area}</span>
             </div>
           </div>
         </div>
@@ -69,11 +70,9 @@ type PropsType = {
   imageUrl?: string;
   name: string;
   description?: string;
-  category?: string;
   rating?: number;
   like?: boolean;
   area: string;
-  average_spending?: number;
   reviews: Review[];
 };
 
