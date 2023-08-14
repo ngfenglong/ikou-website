@@ -9,7 +9,7 @@ const Header = () => {
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+          <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 md:px-8 lg:px-12">
             <div className="flex h-16 justify-between">
               <HeaderLeft />
               <SearchBar />
@@ -17,7 +17,6 @@ const Header = () => {
               <HeaderMobile open={open} />
             </div>
           </div>
-
         </>
       )}
     </Disclosure>
