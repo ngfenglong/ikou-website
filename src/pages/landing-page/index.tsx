@@ -69,7 +69,7 @@ const LandingPage = () => {
     );
   }
   return (
-    <div className="bg-gray-background space-y-8 mt-4">
+    <div className="bg-gray-background space-y-8 mt-1">
       <Container>
         {isLoading ? (
           <ul className="mx-auto max-w-screen-2xl pt-4 flex flex-row items-center justify-between overflow-x-auto">
@@ -87,8 +87,8 @@ const LandingPage = () => {
           />
         )}
 
-        <div className="flex flex-col space-y-16 mt-8">
-          <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-16 mt-4">
+          <div className="flex flex-col space-y-2">
             <SubHeading>Top Location for Cafes</SubHeading>
             <section
               aria-labelledby="products-heading"
@@ -113,13 +113,13 @@ const LandingPage = () => {
               </div>
             </section>
           </div>
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-2">
             <SubHeading>Top Location for Sports Activites</SubHeading>
             <section
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-screen-2xl "
             >
-              <div className="mx-auto grid max-w-screen-2xl gap-6 text-sm mt-5 mb-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              <div className="mx-auto grid max-w-screen-2xl gap-16 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? new Array(12)
                       .fill(0)
