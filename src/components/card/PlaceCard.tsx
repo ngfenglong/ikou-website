@@ -13,22 +13,22 @@ const PlaceCard = ({
   reviews,
 }: PropsType) => {
   return (
-    <div key={id}>
+    <div className="col-span-1 cursor-pointer group" key={id}>
       <Link to={`/places/${id}`} className="group">
-        <div className="relative">
-          <div className="relative h-64 w-full overflow-hidden rounded-lg">
+        <div className="flex flex-col gap-2 w-full">
+          <div className="relative h-80 w-80 lg:h-64 lg:w-64 md:h-56 md:w-56 overflow-hidden rounded-lg group-hover:scale-110 ">
             <img
               src={imageUrl}
               alt={name}
               className="h-full w-full object-cover object-center"
             />
           </div>
-          <div className="relative mt-4">
+          <div>
             <div className="flex flex-row justify-between">
               <h3 className="text-base font-semibold text-gray-900">
                 {name.length > 30 ? name.substring(0, 27) + '...' : name}
               </h3>
-              {reviews.length > 0 && (
+              {reviews && reviews.length > 0 && (
                 <div className="flex flex-row items-center">
                   <StarIcon
                     className={`h-4 w-4 flex-shrink-0 text-indigo-300`}

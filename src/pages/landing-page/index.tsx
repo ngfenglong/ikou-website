@@ -87,14 +87,14 @@ const LandingPage = () => {
           />
         )}
 
-        <div className="flex flex-col space-y-16">
-          <div className="flex flex-col space-y-8">
+        <div className="flex flex-col space-y-16 mt-8">
+          <div className="flex flex-col space-y-4">
             <SubHeading>Top Location for Cafes</SubHeading>
             <section
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-screen-2xl "
             >
-              <div className="mx-auto grid max-w-screen-2xl gap-6 text-sm mt-5 mb-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              <div className="mx-auto grid max-w-screen-2xl gap-16 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? Array(12)
                       .fill(0)
@@ -113,7 +113,7 @@ const LandingPage = () => {
               </div>
             </section>
           </div>
-          <div className="flex flex-col space-y-8">
+          <div className="flex flex-col space-y-4">
             <SubHeading>Top Location for Sports Activites</SubHeading>
             <section
               aria-labelledby="products-heading"
