@@ -16,7 +16,7 @@ const PlaceCard = ({
     <div className="col-span-1 cursor-pointer group" key={id}>
       <Link to={`/places/${id}`} className="group">
         <div className="flex flex-col gap-2 w-full">
-          <div className="relative h-80 w-80 lg:h-64 lg:w-64 md:h-56 md:w-56 overflow-hidden rounded-lg group-hover:scale-110 ">
+          <div className="relative h-80 w-80 lg:h-64 lg:w-64 md:h-56 md:w-56 overflow-hidden rounded-lg group-hover:scale-105 ">
             <img
               src={imageUrl}
               alt={name}
