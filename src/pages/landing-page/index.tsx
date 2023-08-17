@@ -1,4 +1,3 @@
-import CategoryButton from '../../components/button/CategoryButton';
 import Container from '../../components/container/Container';
 import SubHeading from '../../components/heading/SubHeading';
 import PlaceCard from '../../components/card/PlaceCard';
@@ -7,23 +6,7 @@ import { Place } from '../../model/place';
 import { CodeDecodeCategory } from '../../model/code-decode-models';
 import { useNavigate } from 'react-router-dom';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
-
-const CategoryMenu = (props: {
-  categoriesList: string[];
-  onSelect: (category: string) => void;
-}) => {
-  return (
-    <ul className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mt-5 mb-5 sm:grid-cols-4 md:gap-y-8 lg:max-w-none lg:grid-cols-8">
-      {props.categoriesList.map((category, key) => (
-        <CategoryButton
-          key={key}
-          categoryName={category}
-          onSelectCategory={() => props.onSelect(category)}
-        />
-      ))}
-    </ul>
-  );
-};
+import CategoryMenu from '../../components/category/CategoryMenu';
 
 const LandingPage = () => {
   const [hasError, setHasError] = useState<boolean>(false);
@@ -52,9 +35,9 @@ const LandingPage = () => {
       })
       .then(([categories, places]) => {
         setCategories(
-          (categories as CodeDecodeCategory[]).map(
-            (category) => category.decode
-          )
+          (categories as CodeDecodeCategory[])
+            .map((category) => category.decode)
+            .sort()
         );
         setRecommededCafes(places);
       })
@@ -89,11 +72,11 @@ const LandingPage = () => {
     <div className="bg-gray-background space-y-8 mt-4">
       <Container>
         {isLoading ? (
-          <ul className="mx-auto grid max-w-2xl grid-cols-3 gap-6 text-sm mt-5 mb-5 sm:grid-cols-4 md:gap-y-8 lg:max-w-none lg:grid-cols-8">
-            {new Array(8).fill(0).map((_, i) => (
+          <ul className="mx-auto max-w-screen-2xl pt-4 flex flex-row items-center justify-between overflow-x-auto">
+            {new Array(16).fill(0).map((_, i) => (
               <div
                 key={i}
-                className="animate-pulse h-12 w-24 shadow bg-gray-300"
+                className="animate-pulse h-12 w-12 shadow bg-gray-300"
               ></div>
             ))}
           </ul>
@@ -104,14 +87,14 @@ const LandingPage = () => {
           />
         )}
 
-        <div className="flex flex-col space-y-16">
-          <div className="flex flex-col space-y-8">
+        <div className="flex flex-col space-y-16 mt-8">
+          <div className="flex flex-col space-y-4">
             <SubHeading>Top Location for Cafes</SubHeading>
             <section
               aria-labelledby="products-heading"
-              className="mx-auto max-w-2xl lg:max-w-7xl "
+              className="mx-auto max-w-2xl lg:max-w-screen-2xl "
             >
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
+              <div className="mx-auto grid max-w-screen-2xl gap-16 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? Array(12)
                       .fill(0)
@@ -121,21 +104,22 @@ const LandingPage = () => {
                         id={place.id}
                         key={place.id}
                         name={place.placeName}
-                        description={place.description.substring(0, 30) + '...'}
-                        category={place.category}
+                        description={place.description}
                         imageUrl={place.image_url}
+                        reviews={place.reviews}
+                        area="Ang Mo Kio"
                       ></PlaceCard>
                     ))}
               </div>
             </section>
           </div>
-          <div className="flex flex-col space-y-8">
+          <div className="flex flex-col space-y-4">
             <SubHeading>Top Location for Sports Activites</SubHeading>
             <section
               aria-labelledby="products-heading"
-              className="mx-auto max-w-2xl lg:max-w-7xl "
+              className="mx-auto max-w-2xl lg:max-w-screen-2xl "
             >
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+              <div className="mx-auto grid max-w-screen-2xl gap-6 text-sm mt-5 mb-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? new Array(12)
                       .fill(0)
@@ -146,6 +130,8 @@ const LandingPage = () => {
                         key={num + ''}
                         name={`Place Name - ${num}`}
                         description={`Description for place - ${num}`}
+                        reviews={[]}
+                        area=""
                       ></PlaceCard>
                     ))}
               </div>

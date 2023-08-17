@@ -6,7 +6,6 @@ import MainHeading from '../../components/heading/Heading';
 const AddPlace = () => {
   const navigate = useNavigate();
   const onSubmitClick = () => {
-    console.log('Place Added');
     navigate(ROUTES.LANDING_PAGE);
   };
 

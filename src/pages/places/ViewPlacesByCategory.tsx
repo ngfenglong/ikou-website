@@ -75,8 +75,9 @@ const ViewPlacesByCategoryPage = () => {
                         key={place.id}
                         name={place.placeName}
                         description={place.description.substring(0, 30) + '...'}
-                        category={place.category}
                         imageUrl={place.image_url}
+                        reviews={place.reviews}
+                        area=""
                       ></PlaceCard>
                     ))}
               </div>
