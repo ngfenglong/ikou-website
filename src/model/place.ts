@@ -8,6 +8,7 @@ export interface Place {
   image_url: string;
   category: string;
   sub_category: string;
+  area:string;
 
   operating_hours: string;
   features: string[];

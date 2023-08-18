@@ -107,7 +107,7 @@ const LandingPage = () => {
                         description={place.description}
                         imageUrl={place.image_url}
                         reviews={place.reviews}
-                        area="Ang Mo Kio"
+                        area={place.area}
                       ></PlaceCard>
                     ))}
               </div>
