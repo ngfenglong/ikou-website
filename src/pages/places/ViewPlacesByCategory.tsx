@@ -62,9 +62,9 @@ const ViewPlacesByCategoryPage = () => {
             <SubHeading>Discover places in your chosen category.</SubHeading>
             <section
               aria-labelledby="products-heading"
-              className="mx-auto max-w-2xl lg:max-w-7xl "
+              className="mx-auto max-w-2xl lg:max-w-screen-2xl"
             >
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+              <div className="mx-auto grid max-w-screen-2xl gap-16 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? Array(12)
                       .fill(0)
