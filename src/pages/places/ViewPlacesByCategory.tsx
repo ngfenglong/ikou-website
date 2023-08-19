@@ -9,6 +9,7 @@ import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import PlaceCard from '../../components/card/PlaceCard';
 import NotFoundContainer from '../../components/container/NotFoundContainer';
 import * as ROUTES from '../../constants/routes';
+import axios from 'axios';
 
 const ViewPlacesByCategoryPage = () => {
   const location = useLocation();
@@ -23,13 +24,14 @@ const ViewPlacesByCategoryPage = () => {
 
     if (pathStrArr[1].toLowerCase() === 'category') {
       setCategory(pathStrArr[2]);
-      fetch(
-        `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlacesByCategory/${category}`
-      )
+      axios
+        .get(
+          `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlacesByCategory/${category}`
+        )
         .then((response) => {
           if (response.status !== 200) {
           }
-          return response.json();
+          return response.data;
         })
         .then((places: Place[]) => {
           setPlaces(places ?? []);

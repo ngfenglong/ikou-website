@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { AuthContextData, User } from '../model/auth';
 import { RegisterFormInputDto } from '../dto/auth';
 import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
@@ -16,18 +17,17 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!user);
 
   const register = (registerFormInput: RegisterFormInputDto) => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(registerFormInput),
-    };
-    return fetch(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/register`,
-      options
-    )
-      .then((response) => response.json())
+    return axios
+      .post(
+        `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/register`,
+        JSON.stringify(registerFormInput),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then((response) => response.data)
       .then((data) => {})
       .catch((err) => {
         throw Error(err);
@@ -36,20 +36,22 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
 
   const login = (username: string, password: string) => {
     const options = {
-      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
     };
-    return fetch(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/login`,
-      options
-    )
-      .then((response) => response.json())
+    const body = JSON.stringify({
+      username,
+      password,
+    });
+
+    return axios
+      .post(
+        `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/login`,
+        body,
+        options
+      )
+      .then((response) => response.data)
       .then((data) => {
         if (data?.error) {
           throw new Error(data.message);
@@ -77,14 +79,18 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
     }
 
     const options = {
-      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ refresh_token: refreshToken }),
     };
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/auth/logout`, options)
-      .then((response) => response.json())
+    const body = JSON.stringify({ refresh_token: refreshToken });
+    axios
+      .post(
+        `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/logout`,
+        body,
+        options
+      )
+      .then((response) => response.data)
       .then((data) => {
         if (data.error) {
           throw Error(data.message);

@@ -6,17 +6,19 @@ import { Place } from '../../model/place';
 import MainHeading from '../../components/heading/Heading';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
+import axios from 'axios';
 
 const ViewAllPlacesPage = () => {
   const [places, setPlaces] = useState<Place[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`)
+    axios
+      .get(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`)
       .then((response) => {
         if (response.status !== 200) {
         }
-        return response.json();
+        return response.data;
       })
       .then((places) => {
         setPlaces(places);
@@ -66,7 +68,7 @@ const ViewAllPlacesPage = () => {
                         imageUrl={place.image_url}
                         reviews={place.reviews}
                         rating={place.average_rating}
-                        area=''
+                        area=""
                       ></PlaceCard>
                     ))}
               </div>
