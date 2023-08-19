@@ -40,7 +40,6 @@ const LandingPage = () => {
             .sort()
         );
         setRecommededCafes(places);
-        console.log(places);
       })
       .catch((err) => {
         setHasError(true);

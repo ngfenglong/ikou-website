@@ -4,10 +4,11 @@ import Container from '../../components/container/Container';
 import SubHeading from '../../components/heading/SubHeading';
 import { Place } from '../../model/place';
 import MainHeading from '../../components/heading/Heading';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import axios from 'axios';
+import NotFoundContainer from '../../components/container/NotFoundContainer';
 
 const ViewSearchPlaceResultPage = () => {
   const [searchParams] = useSearchParams();
@@ -44,11 +45,23 @@ const ViewSearchPlaceResultPage = () => {
 
   if (isLoading === false && places.length === 0) {
     return (
-      <Container>
-        <div className="flex flex-col space-y-16">
-          <div className="flex flex-col space-y-8">No place</div>
+      <NotFoundContainer>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-700 sm:text-5xl">
+          No Result Found
+        </h1>
+        <p className="mt-6 text-base leading-7 text-gray-600">
+          Please try again with different keywords or consider using a more
+          generic term.
+        </p>
+        <div className="mt-10 flex items-center justify-center gap-x-6">
+          <Link
+            to="/#"
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Go back home
+          </Link>
         </div>
-      </Container>
+      </NotFoundContainer>
     );
   }
   return (

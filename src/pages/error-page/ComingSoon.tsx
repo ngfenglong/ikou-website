@@ -1,14 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import NotFoundContainer from '../../components/container/NotFoundContainer';
 
 const ComingSoonPage = () => {
   return (
-    // <main className="relative isolate min-h-full">
-    <main className="place-items-center text-center bg-slate-50">
-      <div className="mx-auto mt-20 max-w-2xl text-center sm:mt-24">
-        <h1 className="mb-16 text-3xl font-bold tracking-tight text-gray-700 sm:text-5xl">
-          Under Construction
-        </h1>
-      </div>
+    <NotFoundContainer>
+      <h1 className="mb-16 text-3xl font-bold tracking-tight text-gray-700 sm:text-5xl">
+        Under Construction
+      </h1>
       <img
         src="/images/background/coming-soon-2.jpg"
         alt="Coming Soon"
@@ -19,7 +17,7 @@ const ComingSoonPage = () => {
           <span aria-hidden="true">&larr;</span> Back to home
         </Link>
       </div>
-    </main>
+    </NotFoundContainer>
   );
 };
 

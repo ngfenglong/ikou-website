@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Place } from '../../model/place';
 import Container from '../../components/container/Container';
 import MainHeading from '../../components/heading/Heading';
@@ -7,6 +7,8 @@ import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import SubHeading from '../../components/heading/SubHeading';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import PlaceCard from '../../components/card/PlaceCard';
+import NotFoundContainer from '../../components/container/NotFoundContainer';
+import * as ROUTES from '../../constants/routes';
 
 const ViewPlacesByCategoryPage = () => {
   const location = useLocation();
@@ -38,13 +40,28 @@ const ViewPlacesByCategoryPage = () => {
 
   if (isLoading === false && places.length === 0) {
     return (
-      <Container>
-        <div className="flex flex-col space-y-16">
-          <div className="flex flex-col space-y-8">No place</div>
+      <NotFoundContainer>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-700 sm:text-5xl">
+          No Places Found
+        </h1>
+        <p className="mt-6 text-base leading-7 text-gray-600">
+          We currently don't have any places listed under this category.
+          <br />
+          Help us build our list! Suggest a spot, and after review by our admin,
+          it might be added here.
+        </p>
+        <div className="mt-10 flex items-center justify-center gap-x-6">
+          <Link
+            to={ROUTES.ADD_PLACES}
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Add a New Place
+          </Link>
         </div>
-      </Container>
+      </NotFoundContainer>
     );
   }
+
   return (
     <div className="bg-gray-background space-y-8 mt-8">
       <Container>

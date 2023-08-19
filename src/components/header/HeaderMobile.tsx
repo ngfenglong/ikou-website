@@ -1,5 +1,5 @@
 import { Disclosure } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import * as ROUTES from './../../constants/routes';
 import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -118,13 +118,6 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
                   User1@Testing.com
                 </div>
               </div>
-              <button
-                type="button"
-                className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-primary focus:ring-offset-2"
-              >
-                <span className="sr-only">View notifications</span>
-                <BellIcon className="h-6 w-6" aria-hidden="true" />
-              </button>
             </div>
             <div className="mt-3 space-y-1">
               <Disclosure.Button

@@ -12,7 +12,6 @@ const PlaceCard = ({
   area,
   reviews,
 }: PropsType) => {
-  console.log(name, rating, reviews);
   return (
     <div className="col-span-1 cursor-pointer group" key={id}>
       <Link to={`/places/${id}`} className="group">
