@@ -70,7 +70,7 @@ const ViewSearchPlaceResultPage = () => {
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-screen-2xl"
             >
-              <div className="mx-auto grid max-w-screen-2xl gap-16 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              <div className="mx-auto grid max-w-screen-2xl gap-12 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? Array(12)
                       .fill(0)
@@ -84,6 +84,7 @@ const ViewSearchPlaceResultPage = () => {
                         imageUrl={place.image_url}
                         reviews={place.reviews}
                         area={place.area}
+                        rating={place.average_rating}
                       ></PlaceCard>
                     ))}
               </div>
