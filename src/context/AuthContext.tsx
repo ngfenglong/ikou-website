@@ -3,6 +3,7 @@ import { AuthContextData, User } from '../model/auth';
 import { RegisterFormInputDto } from '../dto/auth';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import { GENERIC_ERROR_MESSAGE } from '../constants/error-messages';
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
@@ -16,9 +17,9 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!user);
 
-  const register = (registerFormInput: RegisterFormInputDto) => {
-    return axios
-      .post(
+  const register = async (registerFormInput: RegisterFormInputDto) => {
+    try {
+      const response = await axios.post(
         `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/register`,
         JSON.stringify(registerFormInput),
         {
@@ -26,12 +27,13 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
             'Content-Type': 'application/json',
           },
         }
-      )
-      .then((response) => response.data)
-      .then((data) => {})
-      .catch((err) => {
-        throw Error(err);
-      });
+      );
+
+      return response.data;
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.message;
+      throw new Error(errorMessage ?? GENERIC_ERROR_MESSAGE);
+    }
   };
 
   const login = (username: string, password: string) => {
