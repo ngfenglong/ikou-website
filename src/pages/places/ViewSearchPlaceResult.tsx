@@ -7,8 +7,8 @@ import MainHeading from '../../components/heading/Heading';
 import { Link, useSearchParams } from 'react-router-dom';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
-import axios from 'axios';
 import NotFoundContainer from '../../components/container/NotFoundContainer';
+import { getPlacesKeyword } from '../../services/place-service';
 
 const ViewSearchPlaceResultPage = () => {
   const [searchParams] = useSearchParams();
@@ -21,27 +21,15 @@ const ViewSearchPlaceResultPage = () => {
     const searchKeyword = searchParams.get('keyword');
     if (searchKeyword !== null) {
       setKeyword(searchKeyword);
-      axios
-        .post(
-          `${process.env.REACT_APP_IKOU_API_BASEURL}/places/searchPlaceByKeyword`,
-          {
-            keyword: searchKeyword,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        )
-        .then((response) => {
-          setPlaces(response.data);
-          setIsLoading(false);
-        });
+      getPlacesKeyword(searchKeyword).then((data) => {
+        setPlaces(data);
+        setIsLoading(false);
+      });
     } else {
       setPlaces([]);
       setIsLoading(false);
     }
-  }, [searchParams, keyword]);
+  }, [searchParams]);
 
   if (isLoading === false && places.length === 0) {
     return (

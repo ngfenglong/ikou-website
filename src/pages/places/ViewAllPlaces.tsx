@@ -6,24 +6,24 @@ import { Place } from '../../model/place';
 import MainHeading from '../../components/heading/Heading';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
-import axios from 'axios';
+import { getAllPlaces } from '../../services/place-service';
 
 const ViewAllPlacesPage = () => {
   const [places, setPlaces] = useState<Place[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`)
-      .then((response) => {
-        if (response.status !== 200) {
-        }
-        return response.data;
-      })
-      .then((places) => {
-        setPlaces(places);
-        setIsLoading(false);
-      });
+    async function getPlaces() {
+      try {
+        const data = await getAllPlaces();
+        setPlaces(data);
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoading(false);
+    }
+
+    getPlaces();
   }, []);
 
   if (isLoading === false && places.length === 0) {

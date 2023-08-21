@@ -7,7 +7,8 @@ import { CodeDecodeCategory } from '../../model/code-decode-models';
 import { useNavigate } from 'react-router-dom';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import CategoryMenu from '../../components/category/CategoryMenu';
-import axios from 'axios';
+import { getCategories } from '../../services/codestable-service';
+import { getAllPlaces } from '../../services/place-service';
 
 const LandingPage = () => {
   const [hasError, setHasError] = useState<boolean>(false);
@@ -17,23 +18,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Promise.all([
-      axios.get(
-        `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`
-      ),
-      axios.get(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`),
-    ])
-      .then(async ([categoriesResponse, placesResponse]) => {
-        if (
-          categoriesResponse.status !== 200 ||
-          placesResponse.status !== 200
-        ) {
-          //redirect to error page
-        }
-        const categories = await categoriesResponse.data;
-        const places = await placesResponse.data;
-        return [categories, places];
-      })
+    Promise.all([getCategories(), getAllPlaces()])
       .then(([categories, places]) => {
         setCategories(
           (categories as CodeDecodeCategory[])
