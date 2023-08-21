@@ -23,11 +23,14 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Signup Page';
     resetAlert();
-  }, [resetAlert]);
+  });
 
   const onSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    resetAlert();
+    
     // validation & handling
     if (password !== confirmPassword) {
       displayAlert(
@@ -37,6 +40,7 @@ const SignUp = () => {
       );
       return;
     }
+
     // if no error
     const newRegistrant = {
       username: username,
@@ -51,8 +55,8 @@ const SignUp = () => {
       await register(newRegistrant);
       navigate(ROUTES.LOGIN);
     } catch (err) {
-      displayAlert(ALERT_TYPE.ERROR, 'Registration Failed!', `${err}`);
       // Handle error
+      displayAlert(ALERT_TYPE.ERROR, 'Registration Failed!', `${err}`);
     }
   };
 

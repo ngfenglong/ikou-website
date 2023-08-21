@@ -17,14 +17,15 @@ const Login = () => {
 
   useEffect(() => {
     document.title = 'Login Page';
+    resetAlert();
   });
 
   const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    // Do validation
     e.preventDefault();
+    resetAlert();
+
     try {
       await login(username, password);
-      resetAlert();
       navigate(ROUTES.LANDING_PAGE);
     } catch (error) {
       // Handle error
