@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Logo } from '../../components/logo/Logo';
 import useAuth from '../../hooks/useAuth';
 import { RegisterFormInputDto } from '../../dto/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import * as ROUTES from './../../constants/routes';
+import useAlert from '../../hooks/useAlert';
+import Alert, { ALERT_TYPE } from '../../components/alert/Alert';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -14,12 +16,30 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [country, setCountry] = useState('Singapore');
 
+  const { alertType, alertHeader, alertDescription, displayAlert, resetAlert } =
+    useAlert();
+
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = 'Signup Page';
+    resetAlert();
+  });
+
   const onSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    resetAlert();
+    
     // validation & handling
+    if (password !== confirmPassword) {
+      displayAlert(
+        ALERT_TYPE.ERROR,
+        'Password Mismatch!',
+        'The password and confirmation password you entered do not match. Please re-enter your password and try again.'
+      );
+      return;
+    }
 
     // if no error
     const newRegistrant = {
@@ -36,6 +56,7 @@ const SignUp = () => {
       navigate(ROUTES.LOGIN);
     } catch (err) {
       // Handle error
+      displayAlert(ALERT_TYPE.ERROR, 'Registration Failed!', `${err}`);
     }
   };
 
@@ -51,7 +72,12 @@ const SignUp = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-4 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="mt-6">
-            <form className="space-y-6" action="#" method="POST" onSubmit={onSignup}>
+            <form
+              className="space-y-6"
+              action="#"
+              method="POST"
+              onSubmit={onSignup}
+            >
               <div>
                 <label
                   htmlFor="username"
@@ -218,6 +244,14 @@ const SignUp = () => {
                   Sign up
                 </button>
               </div>
+
+              {alertType && (
+                <Alert
+                  alertType={alertType}
+                  alertHeader={alertHeader ?? ''}
+                  alertDescription={alertDescription ?? ''}
+                />
+              )}
 
               <div className="text-sm">
                 Already have an account?&nbsp;

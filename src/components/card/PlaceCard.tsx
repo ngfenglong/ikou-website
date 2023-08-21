@@ -28,13 +28,13 @@ const PlaceCard = ({
               <h3 className="text-base font-semibold text-gray-900">
                 {name.length > 30 ? name.substring(0, 27) + '...' : name}
               </h3>
-              {reviews && reviews.length > 0 && (
+              {reviews && reviews.length > 0 && rating && rating > 0 && (
                 <div className="flex flex-row items-center">
                   <StarIcon
                     className={`h-4 w-4 flex-shrink-0 text-indigo-300`}
                     aria-hidden="true"
                   />
-                  <p className="ml-1 text-sm text-gray-500">{reviews.length}</p>
+                  <p className="ml-1 text-sm text-gray-500">{rating}</p>
                 </div>
               )}
             </div>

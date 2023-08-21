@@ -13,7 +13,7 @@ export interface Place {
   operating_hours: string;
   features: string[];
 
-  averageRatings: number;
+  average_rating: number;
   reviews: Review[];
 }
 

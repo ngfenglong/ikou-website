@@ -4,11 +4,11 @@ import RoundedBadge from '../../components/badges/RoundedBadge';
 import ReviewContainer from '../../components/reviews/ReviewContainer';
 import { Place } from '../../model/place';
 import { getPlaceById } from '../../services/place-service';
-import Container from '../../components/container/Container';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
+import { Link } from 'react-router-dom';
+import NotFoundContainer from '../../components/container/NotFoundContainer';
 
-const onAddReview = () => {
-};
+const onAddReview = () => {};
 
 const ViewPlaceDetailPage = () => {
   const { id } = useParams();
@@ -41,27 +41,23 @@ const ViewPlaceDetailPage = () => {
 
   if (hasError) {
     return (
-      <Container>
-        <main className="mx-auto flex w-full max-w-7xl flex-auto flex-col justify-center px-6 py-24 sm:py-64 lg:px-8">
-          <p className="text-base font-semibold leading-8 text-indigo-600">
-            404
-          </p>
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            Place not found
-          </h1>
-          <p className="mt-6 text-base leading-7 text-gray-600">
-            Sorry, we couldn't find the palce you're looking for.
-          </p>
-          <div className="mt-10">
-            <button
-              className="text-sm font-semibold leading-7 text-indigo-600"
-              onClick={onBackClick}
-            >
-              <span aria-hidden="true">&larr;</span> Back to home
-            </button>
-          </div>
-        </main>
-      </Container>
+      <NotFoundContainer>
+        <p className="text-base font-semibold leading-8 text-indigo-600">404</p>
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          Place not found
+        </h1>
+        <p className="mt-6 text-base leading-7 text-gray-600">
+          Sorry, we couldn't find the palce you're looking for.
+        </p>
+        <div className="mt-10">
+          <Link
+            to="/#"
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Go back home
+          </Link>
+        </div>
+      </NotFoundContainer>
     );
   }
 

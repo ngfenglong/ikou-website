@@ -1,7 +1,7 @@
 import { StarIcon } from '@heroicons/react/20/solid';
 import { Review } from '../../model/place';
 
-const ReviewSummary = ({ reviews }: ReviewSummaryPropsType) => {
+const ReviewSummary = ({ reviews  = [] }: ReviewSummaryPropsType) => {
   const averageRatings: number =
     reviews?.reduce((acc, curr) => {
       return acc + curr.rating;
@@ -13,7 +13,7 @@ const ReviewSummary = ({ reviews }: ReviewSummaryPropsType) => {
   }[] = [5, 4, 3, 2, 1].map((r) => {
     return {
       rating: r,
-      reviews: reviews.filter((review) => {
+      reviews: (reviews).filter((review) => {
         return review.rating >= r && review.rating < r + 1;
       }),
     };
@@ -67,7 +67,9 @@ const ReviewSummary = ({ reviews }: ReviewSummaryPropsType) => {
                       <div
                         className="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"
                         style={{
-                          width: `calc(${count.reviews.length} / ${reviews.length > 0 ? reviews.length : 1  } * 100%)`,
+                          width: `calc(${count.reviews.length} / ${
+                            reviews.length > 0 ? reviews.length : 1
+                          } * 100%)`,
                         }}
                       />
                     ) : null}
@@ -75,7 +77,12 @@ const ReviewSummary = ({ reviews }: ReviewSummaryPropsType) => {
                 </div>
               </dt>
               <dd className="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">
-                {Math.round((count.reviews.length / (reviews.length > 0 ? reviews.length : 1)) * 100)}%
+                {Math.round(
+                  (count.reviews.length /
+                    (reviews.length > 0 ? reviews.length : 1)) *
+                    100
+                )}
+                %
               </dd>
             </div>
           ))}

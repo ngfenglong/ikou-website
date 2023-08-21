@@ -6,22 +6,24 @@ import { Place } from '../../model/place';
 import MainHeading from '../../components/heading/Heading';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
+import { getAllPlaces } from '../../services/place-service';
 
 const ViewAllPlacesPage = () => {
   const [places, setPlaces] = useState<Place[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`)
-      .then((response) => {
-        if (response.status !== 200) {
-        }
-        return response.json();
-      })
-      .then((places) => {
-        setPlaces(places);
-        setIsLoading(false);
-      });
+    async function getPlaces() {
+      try {
+        const data = await getAllPlaces();
+        setPlaces(data);
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoading(false);
+    }
+
+    getPlaces();
   }, []);
 
   if (isLoading === false && places.length === 0) {
@@ -52,7 +54,7 @@ const ViewAllPlacesPage = () => {
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-screen-2xl "
             >
-              <div className="mx-auto grid max-w-screen-2xl gap-16 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              <div className="mx-auto grid max-w-screen-2xl gap-12 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? Array(12)
                       .fill(0)
@@ -65,7 +67,8 @@ const ViewAllPlacesPage = () => {
                         description={place.description.substring(0, 30) + '...'}
                         imageUrl={place.image_url}
                         reviews={place.reviews}
-                        area=''
+                        rating={place.average_rating}
+                        area=""
                       ></PlaceCard>
                     ))}
               </div>

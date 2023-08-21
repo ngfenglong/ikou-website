@@ -6,7 +6,7 @@ import ReviewSummary from './ReviewSummary';
 const ReviewContainer = ({ reviews }: PropsType) => {
   return (
     <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
-      <ReviewSummary reviews={reviews} />
+      <ReviewSummary reviews={reviews ?? []} />
 
       {/* Hide it if user has already made the review for this place 
             Else create a modal for review
@@ -20,7 +20,7 @@ const ReviewContainer = ({ reviews }: PropsType) => {
         </Link>
       </div>
 
-      <ReviewSection reviews={reviews} />
+      <ReviewSection reviews={reviews ?? []} />
     </div>
   );
 };

@@ -7,6 +7,8 @@ import { CodeDecodeCategory } from '../../model/code-decode-models';
 import { useNavigate } from 'react-router-dom';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import CategoryMenu from '../../components/category/CategoryMenu';
+import { getCategories } from '../../services/codestable-service';
+import { getAllPlaces } from '../../services/place-service';
 
 const LandingPage = () => {
   const [hasError, setHasError] = useState<boolean>(false);
@@ -16,23 +18,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Promise.all([
-      fetch(
-        `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`
-      ),
-      fetch(`${process.env.REACT_APP_IKOU_API_BASEURL}/places`),
-    ])
-      .then(async ([categoriesResponse, placesResponse]) => {
-        if (
-          categoriesResponse.status !== 200 ||
-          placesResponse.status !== 200
-        ) {
-          //redirect to error page
-        }
-        const categories = await categoriesResponse.json();
-        const places = await placesResponse.json();
-        return [categories, places];
-      })
+    Promise.all([getCategories(), getAllPlaces()])
       .then(([categories, places]) => {
         setCategories(
           (categories as CodeDecodeCategory[])
@@ -94,7 +80,7 @@ const LandingPage = () => {
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-screen-2xl "
             >
-              <div className="mx-auto grid max-w-screen-2xl gap-16 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              <div className="mx-auto grid max-w-screen-2xl gap-12 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? Array(12)
                       .fill(0)
@@ -108,6 +94,7 @@ const LandingPage = () => {
                         imageUrl={place.image_url}
                         reviews={place.reviews}
                         area={place.area}
+                        rating={place.average_rating}
                       ></PlaceCard>
                     ))}
               </div>
@@ -119,7 +106,7 @@ const LandingPage = () => {
               aria-labelledby="products-heading"
               className="mx-auto max-w-2xl lg:max-w-screen-2xl "
             >
-              <div className="mx-auto grid max-w-screen-2xl gap-16 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+              <div className="mx-auto grid max-w-screen-2xl gap-12 text-sm mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
                 {isLoading
                   ? new Array(12)
                       .fill(0)
