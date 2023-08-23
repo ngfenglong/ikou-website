@@ -1,10 +1,9 @@
 import axios from 'axios';
+import api from './middleware/api-config';
 
 export const getAllPlaces = async () => {
   try {
-    const response = await axios.get(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/places`
-    );
+    const response = await api.get('/places');
 
     if (response.status !== 200) {
       throw new Error(`Unexpected response code: ${response.status}`);
