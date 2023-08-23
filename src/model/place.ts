@@ -9,6 +9,7 @@ export interface Place {
   category: string;
   sub_category: string;
   area:string;
+  like: boolean;
 
   operating_hours: string;
   features: string[];
