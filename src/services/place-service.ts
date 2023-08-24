@@ -1,4 +1,3 @@
-import axios from 'axios';
 import api from './middleware/api-config';
 
 export const getAllPlaces = async () => {
@@ -17,7 +16,7 @@ export const getAllPlaces = async () => {
 
 export const getPlaceById = async (id: string) => {
   try {
-    const response = await axios.get(
+    const response = await api.get(
       `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlaceById/${id}`
     );
 
@@ -33,7 +32,7 @@ export const getPlaceById = async (id: string) => {
 
 export const getPlacesByCategory = async (category: string) => {
   try {
-    const response = await axios.get(
+    const response = await api.get(
       `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlacesByCategory/${category}`
     );
 
@@ -59,7 +58,7 @@ export const getPlacesKeyword = async (searchKeyword: string) => {
   };
 
   try {
-    const response = await axios.post(
+    const response = await api.post(
       `${process.env.REACT_APP_IKOU_API_BASEURL}/places/searchPlaceByKeyword`,
       body,
       options

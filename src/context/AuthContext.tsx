@@ -2,8 +2,8 @@ import { createContext, useEffect, useState } from 'react';
 import { AuthContextData, User } from '../model/auth';
 import { RegisterFormInputDto } from '../dto/auth';
 import jwtDecode from 'jwt-decode';
-import axios from 'axios';
 import { GENERIC_ERROR_MESSAGE } from '../constants/error-messages';
+import api from '../services/middleware/api-config';
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
@@ -19,7 +19,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
 
   const register = async (registerFormInput: RegisterFormInputDto) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/register`,
         JSON.stringify(registerFormInput),
         {
@@ -47,7 +47,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
       password,
     });
 
-    return axios
+    return api
       .post(
         `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/login`,
         body,
@@ -86,7 +86,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
       },
     };
     const body = JSON.stringify({ refresh_token: refreshToken });
-    axios
+    api
       .post(
         `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/logout`,
         body,
