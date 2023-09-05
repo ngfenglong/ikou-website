@@ -7,7 +7,7 @@ const PlaceCard = ({
   name,
   description = '',
   rating,
-  like,
+  liked,
   id,
   area,
   reviews,
@@ -40,7 +40,7 @@ const PlaceCard = ({
               <div className="text-slate-100 bg-slate-900 bg-opacity-60 rounded-full">
                 <span className="sr-only">Like</span>
                 <svg className="h-10 w-10 fill-current" viewBox="0 0 32 32">
-                  {like ? (
+                  {liked ? (
                     <path
                       d="M22.682 11.318A4.485 4.485 0 0019.5 10a4.377 4.377 0 00-3.5 1.707A4.383 4.383 0 0012.5 10a4.5 4.5 0 00-3.182 7.682L16 24l6.682-6.318a4.5 4.5 0 000-6.364z"
                       fill="#ff1a1a"
@@ -102,7 +102,7 @@ type PropsType = {
   name: string;
   description?: string;
   rating?: number;
-  like?: boolean;
+  liked?: boolean;
   area: string;
   reviews: Review[];
 };

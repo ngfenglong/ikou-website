@@ -67,6 +67,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response) {
       if (error.response) {
+        // For 502:Bad Gateway, 503: Service Unavilable, 504: Gateway Timeout
         const retryStatusCodes = [502, 503, 504];
 
         if (
