@@ -89,6 +89,7 @@ const ViewPlacesByCategoryPage = () => {
                         reviews={place.reviews}
                         area={place.area}
                         rating={place.average_rating}
+                        liked={place.liked}
                       ></PlaceCard>
                     ))}
               </div>

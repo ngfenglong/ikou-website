@@ -68,6 +68,7 @@ const ViewAllPlacesPage = () => {
                         imageUrl={place.image_url}
                         reviews={place.reviews}
                         rating={place.average_rating}
+                        liked={place.liked}
                         area=""
                       ></PlaceCard>
                     ))}
