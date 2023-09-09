@@ -1,4 +1,6 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios';
+import { HTTP_STATUS } from '../../constants/http-statuses';
+import { History } from '../../utils/navigate-helper';
 
 type FailedQueue = Array<{
   requestConfig: AxiosRequestConfig;
@@ -105,7 +107,6 @@ const handle401Error = (error: AxiosError) => {
   isRefreshing = true;
 
   const refreshToken = localStorage.getItem('refresh_token');
-
   return api
     .post('/auth/refresh-token', { refreshToken })
     .then(({ data }) => {
@@ -123,6 +124,15 @@ const handle401Error = (error: AxiosError) => {
     })
     .catch((err: AxiosError) => {
       processQueue(err);
+      if (err.response && err.response.status === HTTP_STATUS.BAD_REQUEST) {
+        const errMessage = generateInvalidRefreshErrMessage(err);
+
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+
+        alert(errMessage);
+        History.navigate!('/login');
+      }
       return Promise.reject(err);
     })
     .finally(() => {
@@ -130,5 +140,16 @@ const handle401Error = (error: AxiosError) => {
     });
 };
 
+const generateInvalidRefreshErrMessage = (err: AxiosError): string => {
+  let errMessage = 'An unexpected error occurred, please login again.';
+  if (err.response && (err.response.data as { message: string })?.message) {
+    errMessage = (err.response.data as { message: string })?.message;
+    errMessage = `${errMessage
+      .substring(0, 1)
+      .toUpperCase()}${errMessage.substring(1)}.`;
+  }
+
+  return errMessage;
+};
 
 export default api;
