@@ -1,6 +1,8 @@
+import { mapCodeDecodeCategoryDtoToModel } from '../model-mapper/code-decode-mapper';
+import { CodeDecodeCategory } from '../model/code-decode';
 import api from './middleware/api-config';
 
-export const getCategories = async () => {
+export const getCategories = async (): Promise<CodeDecodeCategory[]> => {
   try {
     const response = await api.get(
       `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`
@@ -10,7 +12,7 @@ export const getCategories = async () => {
       throw new Error(`Unexpected response code: ${response.status}`);
     }
 
-    return response.data;
+    return mapCodeDecodeCategoryDtoToModel(response.data);
   } catch (error) {
     throw error;
   }

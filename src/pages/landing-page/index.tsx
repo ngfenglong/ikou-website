@@ -3,7 +3,7 @@ import SubHeading from '../../components/heading/SubHeading';
 import PlaceCard from '../../components/card/PlaceCard';
 import { useEffect, useState } from 'react';
 import { Place } from '../../model/place';
-import { CodeDecodeCategory } from '../../model/code-decode-models';
+import { CodeDecodeOption } from '../../model/common';
 import { useNavigate } from 'react-router-dom';
 import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
 import CategoryMenu from '../../components/category/CategoryMenu';
@@ -21,7 +21,7 @@ const LandingPage = () => {
     Promise.all([getCategories(), getAllPlaces()])
       .then(([categories, places]) => {
         setCategories(
-          (categories as CodeDecodeCategory[])
+          (categories as CodeDecodeOption[])
             .map((category) => category.decode)
             .sort()
         );
