@@ -2,8 +2,32 @@ import { useNavigate } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import Container from '../../components/container/Container';
 import MainHeading from '../../components/heading/Heading';
+import { useEffect, useState } from 'react';
+import { getCategories } from '../../services/codestable-service';
+import { CodeDecodeOption } from '../../model/common';
+import {
+  CodeDecodeCategory,
+  CodeDecodeSubCategory,
+} from '../../model/code-decode';
 
 const AddPlace = () => {
+  const [placeName, setPlaceName] = useState('');
+  const [area, setArea] = useState('');
+  const [category, setCategory] = useState<number | undefined>();
+  const [subCategory, setSubCategory] = useState<number | undefined>();
+  const [description, setDescription] = useState('');
+  // const [picture, setPicture] = useState('');
+
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [categoryDropDownList, setCategoryDropDownList] = useState<
+    CodeDecodeCategory[]
+  >([]);
+  const [subCategoryDropDownList, setSubCategoryDropDownList] = useState<
+    CodeDecodeSubCategory[]
+  >([]);
+  const [areas, setAreas] = useState<string[]>([]);
+
   const navigate = useNavigate();
   const onSubmitClick = () => {
     navigate(ROUTES.LANDING_PAGE);
@@ -12,6 +36,33 @@ const AddPlace = () => {
   const onCancelClick = () => {
     navigate(ROUTES.LANDING_PAGE);
   };
+
+  useEffect(() => {
+    Promise.all([getCategories(), getCategories()])
+      .then(([categories, areas]) => {
+        setCategoryDropDownList(
+          categories.sort((c1, c2) => c1.decode.localeCompare(c2.decode))
+        );
+        setAreas(
+          (areas as CodeDecodeOption[]).map((area) => area.decode).sort()
+        );
+      })
+      .catch((err) => {
+        setHasError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    setSubCategory(undefined);
+
+    setSubCategoryDropDownList(
+      categoryDropDownList.find((list) => list.code === category)
+        ?.subCategories ?? []
+    );
+  }, [category, categoryDropDownList]);
 
   return (
     <div className="bg-gray-background space-y-8 mt-8">
@@ -33,40 +84,96 @@ const AddPlace = () => {
               <div className="space-y-6 sm:space-y-5">
                 <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                   <label
-                    htmlFor="first-name"
+                    htmlFor="placeName"
                     className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
                   >
-                    Location Name
+                    Place Name
                   </label>
                   <div className="mt-2 sm:col-span-2 sm:mt-0">
                     <input
                       type="text"
-                      name="first-name"
-                      id="first-name"
-                      autoComplete="given-name"
+                      name="placeName"
+                      id="placeName"
+                      autoComplete="placeName"
+                      value={placeName}
+                      onChange={(e) => setPlaceName(e.target.value)}
                       className="block py-2 px-3.5 w-full max-w-lg rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
-
                 <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                   <label
-                    htmlFor="country"
+                    htmlFor="area"
                     className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
                   >
-                    Location Type
+                    Area
                   </label>
                   <div className="mt-2 sm:col-span-2 sm:mt-0">
                     <select
-                      id="country"
-                      name="country"
-                      autoComplete="country-name"
+                      id="area"
+                      name="area"
+                      placeholder="Select"
+                      value={area}
+                      onChange={(e) => setArea(e.target.value)}
+                      autoComplete="area"
                       className="block py-2 px-3.5 w-full max-w-lg rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     >
-                      <option>Food</option>
-                      <option>Dating</option>
-                      <option>Shopping</option>
-                      <option>Tourist Attraction</option>
+                      {categoryDropDownList.map((category) => (
+                        <option value={category.code}>{category.decode}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                  <label
+                    htmlFor="category"
+                    className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+                  >
+                    Category
+                  </label>
+                  <div className="mt-2 sm:col-span-2 sm:mt-0">
+                    <select
+                      id="category"
+                      name="category"
+                      value={category || ''}
+                      onChange={(e) => setCategory(+e.target.value)}
+                      autoComplete="category"
+                      className="block py-2 px-3.5 w-full max-w-lg rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    >
+                      <option value="" disabled>
+                        Select a category...
+                      </option>
+                      {categoryDropDownList.map((category) => (
+                        <option value={category.code}>{category.decode}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                  <label
+                    htmlFor="subCategory"
+                    className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+                  >
+                    Sub-Category
+                  </label>
+                  <div className="mt-2 sm:col-span-2 sm:mt-0">
+                    <select
+                      id="subCategory"
+                      name="subCategory"
+                      placeholder="Select"
+                      value={subCategory || ''}
+                      onChange={(e) => setSubCategory(+e.target.value)}
+                      autoComplete="subCategory"
+                      className="block py-2 px-3.5 w-full max-w-lg rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    >
+                      <option value="" disabled>
+                        Select a sub-category...
+                      </option>
+                      {subCategoryDropDownList.map((subcategory) => (
+                        <option value={subcategory.code}>
+                          {subcategory.decode}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -82,6 +189,8 @@ const AddPlace = () => {
                     <textarea
                       id="description"
                       name="description"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                       rows={3}
                       className="block py-2 px-3.5 w-full max-w-lg rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       defaultValue={''}
@@ -89,7 +198,7 @@ const AddPlace = () => {
                   </div>
                 </div>
 
-                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                {/* <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                   <label
                     htmlFor="about"
                     className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
@@ -105,7 +214,7 @@ const AddPlace = () => {
                       defaultValue={''}
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                   <label
