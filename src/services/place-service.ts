@@ -1,3 +1,4 @@
+import { PlaceRequestDto } from '../dto/place-dto';
 import api from './middleware/api-config';
 
 export const getAllPlaces = async () => {
@@ -72,3 +73,27 @@ export const getPlacesKeyword = async (searchKeyword: string) => {
     throw error;
   }
 };
+
+
+export const addNewPlaceRequest = async (placeRequest : PlaceRequestDto) => {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await api.post(
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/places/addPlaceRequest`,
+      placeRequest,
+      options
+    );
+    if (response.status !== 200) {
+      throw new Error(`Unexpected response code: ${response.status}`);
+    }
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
