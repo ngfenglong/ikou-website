@@ -1,3 +1,4 @@
+import { HTTP_STATUS } from '../constants/http-statuses';
 import { PlaceRequestDto } from '../dto/place-dto';
 import api from './middleware/api-config';
 
@@ -74,8 +75,7 @@ export const getPlacesKeyword = async (searchKeyword: string) => {
   }
 };
 
-
-export const addNewPlaceRequest = async (placeRequest : PlaceRequestDto) => {
+export const addNewPlaceRequest = async (placeRequest: PlaceRequestDto) => {
   const options = {
     headers: {
       'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ export const addNewPlaceRequest = async (placeRequest : PlaceRequestDto) => {
       placeRequest,
       options
     );
-    if (response.status !== 200) {
+    if (response.status !== HTTP_STATUS.CREATED) {
       throw new Error(`Unexpected response code: ${response.status}`);
     }
 
@@ -96,4 +96,4 @@ export const addNewPlaceRequest = async (placeRequest : PlaceRequestDto) => {
   } catch (error) {
     throw error;
   }
-}
+};
