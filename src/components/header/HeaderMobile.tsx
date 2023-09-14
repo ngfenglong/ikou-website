@@ -4,8 +4,8 @@ import * as ROUTES from './../../constants/routes';
 import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAlert from '../../hooks/useAlert';
-import { ALERT_TYPE } from '../alert/Alert';
 import { LogoNoWording } from '../logo/Logo';
+import { ALERT_TYPE } from '../../constants/theme-config';
 
 const HeaderMobile = ({ open }: { open: boolean }) => {
   const { user, isAuthenticated, logout } = useAuth();

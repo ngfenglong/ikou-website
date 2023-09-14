@@ -22,12 +22,16 @@ import ViewPlacesPage from './pages/places/ViewAllPlaces';
 import { NavigateSetter, ScrollToTop } from './utils/navigate-helper';
 import ViewPlacesByCategoryPage from './pages/places/ViewPlacesByCategory';
 import ViewSearchPlaceResultPage from './pages/places/ViewSearchPlaceResult';
+import { NotificationProvider } from './context/NotificationContext';
+import NotificationDisplay from './components/notification/NotificationPortal';
 
 function App() {
   return (
     <AuthProvider>
       <AlertProvider>
+        <NotificationProvider>
           <BrowserRouter>
+            <NotificationDisplay />
             <NavigateSetter />
             <ScrollToTop />
             <Routes>
@@ -60,6 +64,7 @@ function App() {
               />
             </Routes>
           </BrowserRouter>
+        </NotificationProvider>
       </AlertProvider>
     </AuthProvider>
   );

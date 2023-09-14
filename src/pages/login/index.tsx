@@ -4,7 +4,8 @@ import { Logo } from '../../components/logo/Logo';
 import * as ROUTES from './../../constants/routes';
 import useAuth from '../../hooks/useAuth';
 import useAlert from '../../hooks/useAlert';
-import Alert, { ALERT_TYPE } from '../../components/alert/Alert';
+import { ALERT_TYPE } from '../../constants/theme-config';
+import Alert from '../../components/alert/Alert';
 
 const Login = () => {
   const [username, setUsername] = useState('');

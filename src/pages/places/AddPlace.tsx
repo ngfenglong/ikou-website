@@ -12,9 +12,12 @@ import {
 import { PlaceRequestDto } from '../../dto/place-dto';
 import { addNewPlaceRequest } from '../../services/place-service';
 import useAlert from '../../hooks/useAlert';
-import Alert, { ALERT_TYPE } from '../../components/alert/Alert';
+import useNotification from '../../hooks/useNotification';
+import { ALERT_TYPE } from '../../constants/theme-config';
+import Alert from '../../components/alert/Alert';
 
 const AddPlace = () => {
+  const navigate = useNavigate();
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -37,7 +40,9 @@ const AddPlace = () => {
   const { alertType, alertHeader, alertDescription, displayAlert, resetAlert } =
     useAlert();
 
-  const navigate = useNavigate();
+  const { triggerNotification } =
+    useNotification();
+
   const onSubmitClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     resetAlert();
@@ -52,6 +57,12 @@ const AddPlace = () => {
 
     try {
       await addNewPlaceRequest(newPlace);
+      // Show Alert
+      triggerNotification(
+        ALERT_TYPE.SUCCESS,
+        'Place Request Submitted!',
+        'Thank you for your suggestion! Your request to add a new place has been successfully submitted. '
+      );
       navigate(ROUTES.LANDING_PAGE);
     } catch (err) {
       // Handle error

@@ -1,5 +1,5 @@
-import { ALERT_TYPE } from '../components/alert/Alert';
 import { createContext, useState, useCallback } from 'react';
+import { ALERT_TYPE } from '../constants/theme-config';
 
 export interface AlertContextData {
   alertType: ALERT_TYPE | null;

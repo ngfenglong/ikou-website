@@ -5,7 +5,8 @@ import { RegisterFormInputDto } from '../../dto/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import * as ROUTES from './../../constants/routes';
 import useAlert from '../../hooks/useAlert';
-import Alert, { ALERT_TYPE } from '../../components/alert/Alert';
+import { ALERT_TYPE } from '../../constants/theme-config';
+import Alert from '../../components/alert/Alert';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
