@@ -15,6 +15,8 @@ import useAlert from '../../hooks/useAlert';
 import useNotification from '../../hooks/useNotification';
 import { ALERT_TYPE } from '../../constants/theme-config';
 import Alert from '../../components/alert/Alert';
+import useAuth from '../../hooks/useAuth';
+import ServerErrorBanner from '../../components/error-banner/ServerErrorBanner';
 
 const AddPlace = () => {
   const navigate = useNavigate();
@@ -37,11 +39,12 @@ const AddPlace = () => {
     []
   );
 
+  const { isAuthenticated } = useAuth();
+
   const { alertType, alertHeader, alertDescription, displayAlert, resetAlert } =
     useAlert();
 
-  const { triggerNotification } =
-    useNotification();
+  const { triggerNotification } = useNotification();
 
   const onSubmitClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -106,6 +109,24 @@ const AddPlace = () => {
     );
   }, [category, categoryDropDownList]);
 
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      triggerNotification(
+        ALERT_TYPE.WARNING,
+        'Login Required!',
+        "Please log in to proceed with adding a place request. If you don't have an account, consider signing up to enjoy all our features."
+      );
+    }
+  }, [isAuthenticated, triggerNotification, isLoading]);
+
+  if (isLoading) return null;
+  if (hasError) {
+    return <ServerErrorBanner />;
+  }
+  if (!isAuthenticated) {
+    setTimeout(() => navigate(ROUTES.LOGIN), 100);
+    return null;
+  }
   return (
     <div className="bg-gray-background space-y-8 mt-8">
       <Container>

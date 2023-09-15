@@ -9,8 +9,6 @@ const NotificationCard = ({
   notificationDescription,
 }: PropsType) => {
   const [show, setShow] = useState(true);
-  const { icon } = ALERT_TYPE_MAPPING[notificationType as ALERT_TYPE];
-
   return (
     <div
       aria-live="assertive"
@@ -31,7 +29,16 @@ const NotificationCard = ({
           <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
             <div className="p-4">
               <div className="flex items-start">
-                <div className="flex-shrink-0">{icon}</div>
+                <div className="flex-shrink-0">
+                  {notificationType === ALERT_TYPE_MAPPING.SUCCESS.type &&
+                    ALERT_TYPE_MAPPING.SUCCESS.icon}
+                  {notificationType === ALERT_TYPE_MAPPING.INFORMATION.type &&
+                    ALERT_TYPE_MAPPING.INFORMATION.icon}
+                  {notificationType === ALERT_TYPE_MAPPING.WARNING.type &&
+                    ALERT_TYPE_MAPPING.WARNING.icon}
+                  {notificationType === ALERT_TYPE_MAPPING.ERROR.type &&
+                    ALERT_TYPE_MAPPING.ERROR.icon}
+                </div>
                 <div className="ml-3 w-0 flex-1 pt-0.5">
                   <p className="text-sm font-medium text-gray-900">
                     {notificationHeader}

@@ -26,11 +26,12 @@ const NotificationPortal: React.FC<NotificationPortalProps> = ({
 };
 
 const NotificationDisplay = () => {
-  const { notificationHeader, notificationDescription } = useNotification();
+  const { notificationType, notificationHeader, notificationDescription } =
+    useNotification();
 
-  return notificationHeader && notificationDescription ? (
+  return notificationType && notificationHeader && notificationDescription ? (
     <NotificationPortal
-      notificationType={ALERT_TYPE.SUCCESS}
+      notificationType={notificationType}
       notificationHeader={notificationHeader}
       notificationDescription={notificationDescription}
     />
