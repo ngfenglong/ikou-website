@@ -18,6 +18,17 @@ const LandingPage = () => {
   const [recommendedCafes, setRecommededCafes] = useState<Place[]>([]);
   const navigate = useNavigate();
 
+  const onUpdateLikeStatus = (placeId: string) => {
+    const selectedPlace = recommendedCafes.find(
+      (place) => place.id === placeId
+    );
+
+    if (selectedPlace) {
+      selectedPlace.liked = !selectedPlace.liked;
+      setRecommededCafes((prev) => [...prev]);
+    }
+  };
+
   useEffect(() => {
     Promise.all([getCategories(), getAllPlaces()])
       .then(([categories, places]) => {
@@ -85,6 +96,7 @@ const LandingPage = () => {
                         area={place.area}
                         rating={place.average_rating}
                         liked={place.liked}
+                        updateLikeStatus={onUpdateLikeStatus}
                       ></PlaceCard>
                     ))}
               </div>
@@ -109,6 +121,7 @@ const LandingPage = () => {
                         description={`Description for place - ${num}`}
                         reviews={[]}
                         area=""
+                        updateLikeStatus={onUpdateLikeStatus}
                       ></PlaceCard>
                     ))}
               </div>

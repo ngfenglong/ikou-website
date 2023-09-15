@@ -1,6 +1,7 @@
 import { MapPinIcon, StarIcon } from '@heroicons/react/20/solid';
 import { Link, useNavigate } from 'react-router-dom';
 import { Review } from '../../model/place';
+import { toggleLike } from '../../services/place-service';
 
 const PlaceCard = ({
   imageUrl = '/images/no-image.jpg',
@@ -11,11 +12,19 @@ const PlaceCard = ({
   id,
   area,
   reviews,
+  updateLikeStatus,
 }: PropsType) => {
   const navigate = useNavigate();
 
-  const onLikeClick = (e: React.MouseEvent) => {
+  const onLikeClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    try {
+      await toggleLike(id);
+      updateLikeStatus(id);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -46,9 +55,7 @@ const PlaceCard = ({
                       fill="#ff1a1a"
                     />
                   ) : (
-                    <path
-                      d="M22.682 11.318A4.485 4.485 0 0019.5 10a4.377 4.377 0 00-3.5 1.707A4.383 4.383 0 0012.5 10a4.5 4.5 0 00-3.182 7.682L16 24l6.682-6.318a4.5 4.5 0 000-6.364zm-1.4 4.933L16 21.247l-5.285-5A2.5 2.5 0 0112.5 12c1.437 0 2.312.681 3.5 2.625C17.187 12.681 18.062 12 19.5 12a2.5 2.5 0 011.785 4.251h-.003z"
-                    />
+                    <path d="M22.682 11.318A4.485 4.485 0 0019.5 10a4.377 4.377 0 00-3.5 1.707A4.383 4.383 0 0012.5 10a4.5 4.5 0 00-3.182 7.682L16 24l6.682-6.318a4.5 4.5 0 000-6.364zm-1.4 4.933L16 21.247l-5.285-5A2.5 2.5 0 0112.5 12c1.437 0 2.312.681 3.5 2.625C17.187 12.681 18.062 12 19.5 12a2.5 2.5 0 011.785 4.251h-.003z" />
                   )}
                 </svg>
               </div>
@@ -105,6 +112,7 @@ type PropsType = {
   liked?: boolean;
   area: string;
   reviews: Review[];
+  updateLikeStatus: (id: string) => void;
 };
 
 export default PlaceCard;

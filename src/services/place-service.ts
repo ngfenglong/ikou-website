@@ -97,3 +97,18 @@ export const addNewPlaceRequest = async (placeRequest: PlaceRequestDto) => {
     throw error;
   }
 };
+
+export const toggleLike = async (placeID: string) => {
+  try {
+    const response = await api.get(
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/places/${placeID}/toggle-like`
+    );
+    if (response.status !== HTTP_STATUS.OK) {
+      throw new Error(`Unexpected response code: ${response.status}`);
+    }
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

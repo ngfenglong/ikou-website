@@ -17,6 +17,15 @@ const ViewSearchPlaceResultPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [keyword, setKeyword] = useState<string>('');
 
+  const onUpdateLikeStatus = (placeId: string) => {
+    const selectedPlace = places.find((place) => place.id === placeId);
+
+    if (selectedPlace) {
+      selectedPlace.liked = !selectedPlace.liked;
+      setPlaces((prev) => [...prev]);
+    }
+  };
+
   useEffect(() => {
     const searchKeyword = searchParams.get('keyword');
     if (searchKeyword !== null) {
@@ -87,6 +96,7 @@ const ViewSearchPlaceResultPage = () => {
                         area={place.area}
                         rating={place.average_rating}
                         liked={place.liked}
+                        updateLikeStatus={onUpdateLikeStatus}
                       ></PlaceCard>
                     ))}
               </div>

@@ -19,6 +19,16 @@ const ViewPlacesByCategoryPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [category, setCategory] = useState<string>('');
 
+  const onUpdateLikeStatus = (placeId: string) => {
+    const selectedPlace = places.find((place) => place.id === placeId);
+
+    if (selectedPlace) {
+      selectedPlace.liked = !selectedPlace.liked;
+      setPlaces((prev) => [...prev]);
+    }
+  };
+
+
   useEffect(() => {
     const pathStrArr = pathName.split('/');
 
@@ -90,6 +100,7 @@ const ViewPlacesByCategoryPage = () => {
                         area={place.area}
                         rating={place.average_rating}
                         liked={place.liked}
+                        updateLikeStatus={onUpdateLikeStatus}
                       ></PlaceCard>
                     ))}
               </div>

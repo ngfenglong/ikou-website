@@ -12,6 +12,15 @@ const ViewAllPlacesPage = () => {
   const [places, setPlaces] = useState<Place[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const onUpdateLikeStatus = (placeId: string) => {
+    const selectedPlace = places.find((place) => place.id === placeId);
+
+    if (selectedPlace) {
+      selectedPlace.liked = !selectedPlace.liked;
+      setPlaces((prev) => [...prev]);
+    }
+  };
+
   useEffect(() => {
     async function getPlaces() {
       try {
@@ -70,6 +79,7 @@ const ViewAllPlacesPage = () => {
                         rating={place.average_rating}
                         liked={place.liked}
                         area=""
+                        updateLikeStatus={onUpdateLikeStatus}
                       ></PlaceCard>
                     ))}
               </div>
