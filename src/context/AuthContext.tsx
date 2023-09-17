@@ -1,9 +1,9 @@
-import { createContext, useEffect, useState } from 'react';
-import { AuthContextData, User } from '../model/auth';
-import { RegisterFormInputDto } from '../dto/auth';
-import jwtDecode from 'jwt-decode';
-import { GENERIC_ERROR_MESSAGE } from '../constants/error-messages';
-import api from '../services/middleware/api-config';
+import { createContext, useEffect, useState } from "react";
+import { AuthContextData, User } from "../model/auth";
+import { RegisterFormInputDto } from "../dto/auth";
+import jwtDecode from "jwt-decode";
+import { GENERIC_ERROR_MESSAGE } from "../constants/error-messages";
+import api from "../services/middleware/api-config";
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
@@ -24,9 +24,9 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
         JSON.stringify(registerFormInput),
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       return response.data;
@@ -39,7 +39,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   const login = (username: string, password: string) => {
     const options = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const body = JSON.stringify({
@@ -51,7 +51,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
       .post(
         `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/login`,
         body,
-        options
+        options,
       )
       .then((response) => response.data)
       .then((data) => {
@@ -68,13 +68,13 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
         };
         setUser(loggedInUser);
         setIsAuthenticated(true);
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
       });
   };
 
   const logout = () => {
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refreshToken = localStorage.getItem("refresh_token");
     if (!refreshToken) {
       // throw error
       return;
@@ -82,7 +82,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
 
     const options = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const body = JSON.stringify({ refresh_token: refreshToken });
@@ -90,15 +90,15 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
       .post(
         `${process.env.REACT_APP_IKOU_API_BASEURL}/auth/logout`,
         body,
-        options
+        options,
       )
       .then((response) => response.data)
       .then((data) => {
         if (data.error) {
           throw Error(data.message);
         } else {
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refresh_token');
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
           setUser(null);
           setIsAuthenticated(false);
         }
@@ -107,7 +107,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem("access_token");
     if (token) {
       setIsAuthenticated(true);
       setUser({

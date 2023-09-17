@@ -1,29 +1,29 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import * as ROUTES from './constants/routes';
-import './styles/App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import * as ROUTES from "./constants/routes";
+import "./styles/App.css";
 
 // PrimeFaces css
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 // Pages
-import SignUp from './pages/signup';
-import LandingPage from './pages/landing-page';
-import Login from './pages/login';
-import PageNotFound from './pages/error-page/PageNotFound';
-import Layout from './pages/root/Layout';
-import ComingSoonPage from './pages/error-page/ComingSoon';
-import ViewPlaceDetailPage from './pages/places/ViewPlaceDetail';
-import AddPlace from './pages/places/AddPlace';
-import ForgetPassword from './pages/forget-password-page';
-import { AuthProvider } from './context/AuthContext';
-import { AlertProvider } from './context/AlertContext';
-import ViewPlacesPage from './pages/places/ViewAllPlaces';
-import { NavigateSetter, ScrollToTop } from './utils/navigate-helper';
-import ViewPlacesByCategoryPage from './pages/places/ViewPlacesByCategory';
-import ViewSearchPlaceResultPage from './pages/places/ViewSearchPlaceResult';
-import { NotificationProvider } from './context/NotificationContext';
-import NotificationDisplay from './components/notification/NotificationPortal';
+import SignUp from "./pages/signup";
+import LandingPage from "./pages/landing-page";
+import Login from "./pages/login";
+import PageNotFound from "./pages/error-page/PageNotFound";
+import Layout from "./pages/root/Layout";
+import ComingSoonPage from "./pages/error-page/ComingSoon";
+import ViewPlaceDetailPage from "./pages/places/ViewPlaceDetail";
+import AddPlace from "./pages/places/AddPlace";
+import ForgetPassword from "./pages/forget-password-page";
+import { AuthProvider } from "./context/AuthContext";
+import { AlertProvider } from "./context/AlertContext";
+import ViewPlacesPage from "./pages/places/ViewAllPlaces";
+import { NavigateSetter, ScrollToTop } from "./utils/navigate-helper";
+import ViewPlacesByCategoryPage from "./pages/places/ViewPlacesByCategory";
+import ViewSearchPlaceResultPage from "./pages/places/ViewSearchPlaceResult";
+import { NotificationProvider } from "./context/NotificationContext";
+import NotificationDisplay from "./components/notification/NotificationPortal";
 
 function App() {
   return (

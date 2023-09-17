@@ -8,11 +8,14 @@ const Alert = ({ alertType, alertHeader, alertDescription }: PropsType) => {
     <div className={`rounded-md p-2 ${backgroundStyling}`}>
       <div className="flex">
         <div className="flex-shrink-0">
-          {alertType === ALERT_TYPE_MAPPING.SUCCESS.type && ALERT_TYPE_MAPPING.SUCCESS.icon}
+          {alertType === ALERT_TYPE_MAPPING.SUCCESS.type &&
+            ALERT_TYPE_MAPPING.SUCCESS.icon}
           {alertType === ALERT_TYPE_MAPPING.INFORMATION.type &&
             ALERT_TYPE_MAPPING.INFORMATION.icon}
-          {alertType === ALERT_TYPE_MAPPING.WARNING.type && ALERT_TYPE_MAPPING.WARNING.icon}
-          {alertType === ALERT_TYPE_MAPPING.ERROR.type && ALERT_TYPE_MAPPING.ERROR.icon}
+          {alertType === ALERT_TYPE_MAPPING.WARNING.type &&
+            ALERT_TYPE_MAPPING.WARNING.icon}
+          {alertType === ALERT_TYPE_MAPPING.ERROR.type &&
+            ALERT_TYPE_MAPPING.ERROR.icon}
         </div>
         <div className="ml-3">
           <h3 className={`text-sm font-medium ${headerTextStyling}`}>

@@ -1,6 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
-import { BreadCrumbsRoute } from '../../model/breadcrumbs';
-import { ChevronRightIcon, HomeIcon } from '@heroicons/react/20/solid';
+import { Link, useLocation } from "react-router-dom";
+import { BreadCrumbsRoute } from "../../model/breadcrumbs";
+import { ChevronRightIcon, HomeIcon } from "@heroicons/react/20/solid";
 
 const BreadCrumbs = ({ pages }: PropsType) => {
   const location = useLocation();
@@ -23,7 +23,7 @@ const BreadCrumbs = ({ pages }: PropsType) => {
               aria-hidden="true"
             />
             {page.href.toLowerCase() === location.pathname.toLowerCase() ||
-            page.href === '' ? (
+            page.href === "" ? (
               <span className="ml-0.5 text-sm font-medium text-gray-700">
                 {page.name}
               </span>

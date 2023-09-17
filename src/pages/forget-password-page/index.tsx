@@ -1,4 +1,4 @@
-import { Logo } from '../../components/logo/Logo';
+import { Logo } from "../../components/logo/Logo";
 
 const ForgetPassword = () => {
   return (

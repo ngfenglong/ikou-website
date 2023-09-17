@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { Review } from '../../model/place';
-import ReviewSection from './ReviewSection';
-import ReviewSummary from './ReviewSummary';
+import { Link } from "react-router-dom";
+import { Review } from "../../model/place";
+import ReviewSection from "./ReviewSection";
+import ReviewSummary from "./ReviewSummary";
 
 const ReviewContainer = ({ reviews }: PropsType) => {
   return (

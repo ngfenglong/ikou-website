@@ -1,10 +1,10 @@
-import { HTTP_STATUS } from '../constants/http-statuses';
-import { PlaceRequestDto } from '../dto/place-dto';
-import api from './middleware/api-config';
+import { HTTP_STATUS } from "../constants/http-statuses";
+import { PlaceRequestDto } from "../dto/place-dto";
+import api from "./middleware/api-config";
 
 export const getAllPlaces = async () => {
   try {
-    const response = await api.get('/places');
+    const response = await api.get("/places");
 
     if (response.status !== 200) {
       throw new Error(`Unexpected response code: ${response.status}`);
@@ -19,7 +19,7 @@ export const getAllPlaces = async () => {
 export const getPlaceById = async (id: string) => {
   try {
     const response = await api.get(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlaceById/${id}`
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlaceById/${id}`,
     );
 
     if (response.status !== 200) {
@@ -35,7 +35,7 @@ export const getPlaceById = async (id: string) => {
 export const getPlacesByCategory = async (category: string) => {
   try {
     const response = await api.get(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlacesByCategory/${category}`
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/places/getPlacesByCategory/${category}`,
     );
 
     if (response.status !== 200) {
@@ -51,7 +51,7 @@ export const getPlacesByCategory = async (category: string) => {
 export const getPlacesKeyword = async (searchKeyword: string) => {
   const options = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
@@ -63,7 +63,7 @@ export const getPlacesKeyword = async (searchKeyword: string) => {
     const response = await api.post(
       `${process.env.REACT_APP_IKOU_API_BASEURL}/places/searchPlaceByKeyword`,
       body,
-      options
+      options,
     );
     if (response.status !== 200) {
       throw new Error(`Unexpected response code: ${response.status}`);
@@ -78,7 +78,7 @@ export const getPlacesKeyword = async (searchKeyword: string) => {
 export const addNewPlaceRequest = async (placeRequest: PlaceRequestDto) => {
   const options = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
@@ -86,7 +86,7 @@ export const addNewPlaceRequest = async (placeRequest: PlaceRequestDto) => {
     const response = await api.post(
       `${process.env.REACT_APP_IKOU_API_BASEURL}/places/addPlaceRequest`,
       placeRequest,
-      options
+      options,
     );
     if (response.status !== HTTP_STATUS.CREATED) {
       throw new Error(`Unexpected response code: ${response.status}`);
@@ -101,7 +101,7 @@ export const addNewPlaceRequest = async (placeRequest: PlaceRequestDto) => {
 export const toggleLike = async (placeID: string) => {
   try {
     const response = await api.get(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/places/${placeID}/toggle-like`
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/places/${placeID}/toggle-like`,
     );
     if (response.status !== HTTP_STATUS.OK) {
       throw new Error(`Unexpected response code: ${response.status}`);

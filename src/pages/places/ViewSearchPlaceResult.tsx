@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
-import PlaceCard from '../../components/card/PlaceCard';
-import Container from '../../components/container/Container';
-import SubHeading from '../../components/heading/SubHeading';
-import { Place } from '../../model/place';
-import MainHeading from '../../components/heading/Heading';
-import { Link, useSearchParams } from 'react-router-dom';
-import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
-import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
-import NotFoundContainer from '../../components/container/NotFoundContainer';
-import { getPlacesKeyword } from '../../services/place-service';
+import { useState, useEffect } from "react";
+import PlaceCard from "../../components/card/PlaceCard";
+import Container from "../../components/container/Container";
+import SubHeading from "../../components/heading/SubHeading";
+import { Place } from "../../model/place";
+import MainHeading from "../../components/heading/Heading";
+import { Link, useSearchParams } from "react-router-dom";
+import PlaceCardSkeleton from "../../components/skeleton/PlaceCardSkeleton";
+import BreadCrumbs from "../../components/breadcrumbs/Breadcrumbs";
+import NotFoundContainer from "../../components/container/NotFoundContainer";
+import { getPlacesKeyword } from "../../services/place-service";
 
 const ViewSearchPlaceResultPage = () => {
   const [searchParams] = useSearchParams();
 
   const [places, setPlaces] = useState<Place[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [keyword, setKeyword] = useState<string>('');
+  const [keyword, setKeyword] = useState<string>("");
 
   const onUpdateLikeStatus = (placeId: string) => {
     const selectedPlace = places.find((place) => place.id === placeId);
@@ -27,7 +27,7 @@ const ViewSearchPlaceResultPage = () => {
   };
 
   useEffect(() => {
-    const searchKeyword = searchParams.get('keyword');
+    const searchKeyword = searchParams.get("keyword");
     if (searchKeyword !== null) {
       setKeyword(searchKeyword);
       getPlacesKeyword(searchKeyword).then((data) => {
@@ -68,8 +68,8 @@ const ViewSearchPlaceResultPage = () => {
           <BreadCrumbs
             pages={[
               {
-                name: 'Search Results',
-                href: '',
+                name: "Search Results",
+                href: "",
               },
             ]}
           ></BreadCrumbs>
@@ -90,7 +90,7 @@ const ViewSearchPlaceResultPage = () => {
                         id={place.id}
                         key={place.id}
                         name={place.placeName}
-                        description={place.description.substring(0, 30) + '...'}
+                        description={place.description.substring(0, 30) + "..."}
                         imageUrl={place.image_url}
                         reviews={place.reviews}
                         area={place.area}

@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Logo } from '../../components/logo/Logo';
-import * as ROUTES from './../../constants/routes';
-import useAuth from '../../hooks/useAuth';
-import useAlert from '../../hooks/useAlert';
-import { ALERT_TYPE } from '../../constants/theme-config';
-import Alert from '../../components/alert/Alert';
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Logo } from "../../components/logo/Logo";
+import * as ROUTES from "./../../constants/routes";
+import useAuth from "../../hooks/useAuth";
+import useAlert from "../../hooks/useAlert";
+import { ALERT_TYPE } from "../../constants/theme-config";
+import Alert from "../../components/alert/Alert";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Login = () => {
     useAlert();
 
   useEffect(() => {
-    document.title = 'Login Page';
+    document.title = "Login Page";
     resetAlert();
   });
 
@@ -30,7 +30,7 @@ const Login = () => {
       navigate(ROUTES.LANDING_PAGE);
     } catch (error) {
       // Handle error
-      displayAlert(ALERT_TYPE.ERROR, 'Login Failed!', `${error}`);
+      displayAlert(ALERT_TYPE.ERROR, "Login Failed!", `${error}`);
     }
   };
 
@@ -197,8 +197,8 @@ const Login = () => {
               {alertType && (
                 <Alert
                   alertType={alertType}
-                  alertHeader={alertHeader ?? ''}
-                  alertDescription={alertDescription ?? ''}
+                  alertHeader={alertHeader ?? ""}
+                  alertDescription={alertDescription ?? ""}
                 />
               )}
 

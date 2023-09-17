@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUtensils,
   faPersonHiking,
@@ -17,7 +17,7 @@ import {
   faMusic,
   faCalendarAlt,
   faBook,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
 // Create a mapping
 const iconMap: { [key: string]: IconDefinition } = {

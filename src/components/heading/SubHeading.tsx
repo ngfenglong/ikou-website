@@ -11,7 +11,7 @@ const SubHeading = (props: PropsType) => {
 type PropsType = {
   children: React.ReactNode;
   id?: string;
-  callBackAction?: () => {};
+  callBackAction?: () => void;
 };
 
 export default SubHeading;

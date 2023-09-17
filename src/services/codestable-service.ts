@@ -1,11 +1,11 @@
-import { mapCodeDecodeCategoryDtoToModel } from '../model-mapper/code-decode-mapper';
-import { CodeDecodeArea, CodeDecodeCategory } from '../model/code-decode';
-import api from './middleware/api-config';
+import { mapCodeDecodeCategoryDtoToModel } from "../model-mapper/code-decode-mapper";
+import { CodeDecodeArea, CodeDecodeCategory } from "../model/code-decode";
+import api from "./middleware/api-config";
 
 export const getCategories = async (): Promise<CodeDecodeCategory[]> => {
   try {
     const response = await api.get(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeCategories`,
     );
 
     if (response.status !== 200) {
@@ -21,7 +21,7 @@ export const getCategories = async (): Promise<CodeDecodeCategory[]> => {
 export const getAreas = async (): Promise<CodeDecodeArea[]> => {
   try {
     const response = await api.get(
-      `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeAreas`
+      `${process.env.REACT_APP_IKOU_API_BASEURL}/common/codeDecodeAreas`,
     );
 
     if (response.status !== 200) {

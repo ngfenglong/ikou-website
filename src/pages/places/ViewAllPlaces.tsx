@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import PlaceCard from '../../components/card/PlaceCard';
-import Container from '../../components/container/Container';
-import SubHeading from '../../components/heading/SubHeading';
-import { Place } from '../../model/place';
-import MainHeading from '../../components/heading/Heading';
-import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
-import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
-import { getAllPlaces } from '../../services/place-service';
+import { useState, useEffect } from "react";
+import PlaceCard from "../../components/card/PlaceCard";
+import Container from "../../components/container/Container";
+import SubHeading from "../../components/heading/SubHeading";
+import { Place } from "../../model/place";
+import MainHeading from "../../components/heading/Heading";
+import PlaceCardSkeleton from "../../components/skeleton/PlaceCardSkeleton";
+import BreadCrumbs from "../../components/breadcrumbs/Breadcrumbs";
+import { getAllPlaces } from "../../services/place-service";
 
 const ViewAllPlacesPage = () => {
   const [places, setPlaces] = useState<Place[]>([]);
@@ -51,8 +51,8 @@ const ViewAllPlacesPage = () => {
           <BreadCrumbs
             pages={[
               {
-                name: 'All Places',
-                href: '',
+                name: "All Places",
+                href: "",
               },
             ]}
           ></BreadCrumbs>
@@ -73,7 +73,7 @@ const ViewAllPlacesPage = () => {
                         id={place.id}
                         key={place.id}
                         name={place.placeName}
-                        description={place.description.substring(0, 30) + '...'}
+                        description={place.description.substring(0, 30) + "..."}
                         imageUrl={place.image_url}
                         reviews={place.reviews}
                         rating={place.average_rating}

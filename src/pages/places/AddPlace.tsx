@@ -1,34 +1,34 @@
-import { useNavigate } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
-import Container from '../../components/container/Container';
-import MainHeading from '../../components/heading/Heading';
-import { useEffect, useState } from 'react';
-import { getAreas, getCategories } from '../../services/codestable-service';
+import { useNavigate } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
+import Container from "../../components/container/Container";
+import MainHeading from "../../components/heading/Heading";
+import { useEffect, useState } from "react";
+import { getAreas, getCategories } from "../../services/codestable-service";
 import {
   CodeDecodeArea,
   CodeDecodeCategory,
   CodeDecodeSubCategory,
-} from '../../model/code-decode';
-import { PlaceRequestDto } from '../../dto/place-dto';
-import { addNewPlaceRequest } from '../../services/place-service';
-import useAlert from '../../hooks/useAlert';
-import useNotification from '../../hooks/useNotification';
-import { ALERT_TYPE } from '../../constants/theme-config';
-import Alert from '../../components/alert/Alert';
-import useAuth from '../../hooks/useAuth';
-import ServerErrorBanner from '../../components/error-banner/ServerErrorBanner';
+} from "../../model/code-decode";
+import { PlaceRequestDto } from "../../dto/place-dto";
+import { addNewPlaceRequest } from "../../services/place-service";
+import useAlert from "../../hooks/useAlert";
+import useNotification from "../../hooks/useNotification";
+import { ALERT_TYPE } from "../../constants/theme-config";
+import Alert from "../../components/alert/Alert";
+import useAuth from "../../hooks/useAuth";
+import ServerErrorBanner from "../../components/error-banner/ServerErrorBanner";
 
 const AddPlace = () => {
   const navigate = useNavigate();
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [placeName, setPlaceName] = useState('');
-  const [address, setAddress] = useState('');
+  const [placeName, setPlaceName] = useState("");
+  const [address, setAddress] = useState("");
   const [area, setArea] = useState<number | undefined>();
   const [category, setCategory] = useState<number | undefined>();
   const [subCategory, setSubCategory] = useState<number | undefined>();
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const [categoryDropDownList, setCategoryDropDownList] = useState<
     CodeDecodeCategory[]
   >([]);
@@ -36,7 +36,7 @@ const AddPlace = () => {
     CodeDecodeSubCategory[]
   >([]);
   const [areasDropDownList, setAreasDropDownList] = useState<CodeDecodeArea[]>(
-    []
+    [],
   );
 
   const { isAuthenticated } = useAuth();
@@ -63,16 +63,16 @@ const AddPlace = () => {
       // Show Alert
       triggerNotification(
         ALERT_TYPE.SUCCESS,
-        'Place Request Submitted!',
-        'Thank you for your suggestion! Your request to add a new place has been successfully submitted. '
+        "Place Request Submitted!",
+        "Thank you for your suggestion! Your request to add a new place has been successfully submitted. ",
       );
       navigate(ROUTES.LANDING_PAGE);
     } catch (err) {
       // Handle error
       displayAlert(
         ALERT_TYPE.ERROR,
-        'Sorry, there was an issue submitting your request. Please try again later.',
-        `${err}`
+        "Sorry, there was an issue submitting your request. Please try again later.",
+        `${err}`,
       );
     }
   };
@@ -86,13 +86,14 @@ const AddPlace = () => {
     Promise.all([getCategories(), getAreas()])
       .then(([categories, areas]) => {
         setCategoryDropDownList(
-          categories.sort((c1, c2) => c1.decode.localeCompare(c2.decode))
+          categories.sort((c1, c2) => c1.decode.localeCompare(c2.decode)),
         );
         setAreasDropDownList(
-          areas.sort((a1, a2) => a1.decode.localeCompare(a2.decode))
+          areas.sort((a1, a2) => a1.decode.localeCompare(a2.decode)),
         );
       })
       .catch((err) => {
+        console.log(err);
         setHasError(true);
       })
       .finally(() => {
@@ -105,7 +106,7 @@ const AddPlace = () => {
 
     setSubCategoryDropDownList(
       categoryDropDownList.find((list) => list.code === category)
-        ?.subCategories ?? []
+        ?.subCategories ?? [],
     );
   }, [category, categoryDropDownList]);
 
@@ -113,8 +114,8 @@ const AddPlace = () => {
     if (!isAuthenticated && !isLoading) {
       triggerNotification(
         ALERT_TYPE.WARNING,
-        'Login Required!',
-        "Please log in to proceed with adding a place request. If you don't have an account, consider signing up to enjoy all our features."
+        "Login Required!",
+        "Please log in to proceed with adding a place request. If you don't have an account, consider signing up to enjoy all our features.",
       );
     }
   }, [isAuthenticated, triggerNotification, isLoading]);
@@ -200,7 +201,7 @@ const AddPlace = () => {
                       id="area"
                       name="area"
                       placeholder="Select"
-                      value={area || ''}
+                      value={area || ""}
                       onChange={(e) => setArea(+e.target.value)}
                       autoComplete="area"
                       required
@@ -228,7 +229,7 @@ const AddPlace = () => {
                     <select
                       id="category"
                       name="category"
-                      value={category || ''}
+                      value={category || ""}
                       onChange={(e) => setCategory(+e.target.value)}
                       autoComplete="category"
                       required
@@ -257,7 +258,7 @@ const AddPlace = () => {
                       id="subCategory"
                       name="subCategory"
                       placeholder="Select"
-                      value={subCategory || ''}
+                      value={subCategory || ""}
                       onChange={(e) => setSubCategory(+e.target.value)}
                       autoComplete="subCategory"
                       required
@@ -348,8 +349,8 @@ const AddPlace = () => {
             {alertType && (
               <Alert
                 alertType={alertType}
-                alertHeader={alertHeader ?? ''}
-                alertDescription={alertDescription ?? ''}
+                alertHeader={alertHeader ?? ""}
+                alertDescription={alertDescription ?? ""}
               />
             )}
             <div className="flex justify-end gap-x-3">

@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { LogoNoWording } from '../logo/Logo';
-import Navigation from './Navigation';
-import * as ROUTES from '../../constants/routes';
+import { Link } from "react-router-dom";
+import { LogoNoWording } from "../logo/Logo";
+import Navigation from "./Navigation";
+import * as ROUTES from "../../constants/routes";
 
 const HeaderLeft = () => {
   return (

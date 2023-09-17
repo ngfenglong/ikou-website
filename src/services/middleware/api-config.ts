@@ -1,6 +1,6 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios';
-import { HTTP_STATUS } from '../../constants/http-statuses';
-import { History } from '../../utils/navigate-helper';
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig } from "axios";
+import { HTTP_STATUS } from "../../constants/http-statuses";
+import { History } from "../../utils/navigate-helper";
 
 type FailedQueue = Array<{
   requestConfig: AxiosRequestConfig;
@@ -12,17 +12,17 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
 }
 
-const baseURL: string = process.env.REACT_APP_IKOU_API_BASEURL || '';
+const baseURL: string = process.env.REACT_APP_IKOU_API_BASEURL || "";
 
-const getToken = () => localStorage.getItem('access_token');
-const setToken = (token: string) => localStorage.setItem('access_token', token);
+const getToken = () => localStorage.getItem("access_token");
+const setToken = (token: string) => localStorage.setItem("access_token", token);
 
 // 1. Create a new Axios instance
 const api: AxiosInstance = axios.create({
   baseURL,
   timeout: 10000, // Set a timeout limit
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -31,13 +31,13 @@ api.interceptors.request.use(
   (config) => {
     const token = getToken();
     if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
     Promise.reject(error);
-  }
+  },
 );
 
 // // 3. Response Interceptor
@@ -51,9 +51,9 @@ const processQueue = (error: any, token?: string) => {
       prom.reject(error);
     } else {
       if (prom.requestConfig.headers) {
-        prom.requestConfig.headers['Authorization'] = 'Bearer ' + token;
+        prom.requestConfig.headers["Authorization"] = "Bearer " + token;
       } else {
-        prom.requestConfig.headers = { Authorization: 'Bearer ' + token };
+        prom.requestConfig.headers = { Authorization: "Bearer " + token };
       }
       api(prom.requestConfig).then(prom.resolve).catch(prom.reject);
     }
@@ -85,7 +85,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 const handle401Error = (error: AxiosError) => {
@@ -93,7 +93,7 @@ const handle401Error = (error: AxiosError) => {
 
   if (!originalRequest) {
     // Handle or log the error appropriately
-    console.error('Axios config is undefined', error);
+    console.error("Axios config is undefined", error);
     return Promise.reject(error);
   }
 
@@ -106,18 +106,18 @@ const handle401Error = (error: AxiosError) => {
   originalRequest._retry = true;
   isRefreshing = true;
 
-  const refreshToken = localStorage.getItem('refresh_token');
+  const refreshToken = localStorage.getItem("refresh_token");
   return api
-    .post('/auth/refresh-token', { refreshToken })
+    .post("/auth/refresh-token", { refreshToken })
     .then(({ data }) => {
       setToken(data.access_token);
-      api.defaults.headers['Authorization'] = 'Bearer ' + data.access_token;
+      api.defaults.headers["Authorization"] = "Bearer " + data.access_token;
       if (originalRequest.headers)
-        originalRequest.headers['Authorization'] =
-          'Bearer ' + data.access_token;
+        originalRequest.headers["Authorization"] =
+          "Bearer " + data.access_token;
       else
         originalRequest.headers = {
-          Authorization: 'Bearer ' + data.access_token,
+          Authorization: "Bearer " + data.access_token,
         };
       processQueue(null);
       return api(originalRequest);
@@ -127,11 +127,11 @@ const handle401Error = (error: AxiosError) => {
       if (err.response && err.response.status === HTTP_STATUS.BAD_REQUEST) {
         const errMessage = generateInvalidRefreshErrMessage(err);
 
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
 
         alert(errMessage);
-        History.navigate!('/login');
+        History.navigate!("/login");
       }
       return Promise.reject(err);
     })
@@ -141,7 +141,7 @@ const handle401Error = (error: AxiosError) => {
 };
 
 const generateInvalidRefreshErrMessage = (err: AxiosError): string => {
-  let errMessage = 'An unexpected error occurred, please login again.';
+  let errMessage = "An unexpected error occurred, please login again.";
   if (err.response && (err.response.data as { message: string })?.message) {
     errMessage = (err.response.data as { message: string })?.message;
     errMessage = `${errMessage

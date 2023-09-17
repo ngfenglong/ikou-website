@@ -6,11 +6,11 @@ const LeftArrowIcon: React.FC<Props> = (props) => {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      stroke-width="2"
+      strokeWidth="2"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
       />
     </svg>
@@ -19,7 +19,7 @@ const LeftArrowIcon: React.FC<Props> = (props) => {
 
 type Props = {
   className?: string;
-  onClick?: () => void
+  onClick?: () => void;
 };
 
 export default LeftArrowIcon;

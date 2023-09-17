@@ -1,7 +1,7 @@
-import { Fragment, useState } from 'react';
-import { Transition } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/20/solid';
-import { ALERT_TYPE, ALERT_TYPE_MAPPING } from '../../constants/theme-config';
+import { Fragment, useState } from "react";
+import { Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/20/solid";
+import { ALERT_TYPE, ALERT_TYPE_MAPPING } from "../../constants/theme-config";
 
 const NotificationCard = ({
   notificationType,

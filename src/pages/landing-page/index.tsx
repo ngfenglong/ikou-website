@@ -1,15 +1,15 @@
-import Container from '../../components/container/Container';
-import SubHeading from '../../components/heading/SubHeading';
-import PlaceCard from '../../components/card/PlaceCard';
-import { useEffect, useState } from 'react';
-import { Place } from '../../model/place';
-import { CodeDecodeOption } from '../../model/common';
-import { useNavigate } from 'react-router-dom';
-import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
-import CategoryMenu from '../../components/category/CategoryMenu';
-import { getCategories } from '../../services/codestable-service';
-import { getAllPlaces } from '../../services/place-service';
-import ServerErrorBanner from '../../components/error-banner/ServerErrorBanner';
+import Container from "../../components/container/Container";
+import SubHeading from "../../components/heading/SubHeading";
+import PlaceCard from "../../components/card/PlaceCard";
+import { useEffect, useState } from "react";
+import { Place } from "../../model/place";
+import { CodeDecodeOption } from "../../model/common";
+import { useNavigate } from "react-router-dom";
+import PlaceCardSkeleton from "../../components/skeleton/PlaceCardSkeleton";
+import CategoryMenu from "../../components/category/CategoryMenu";
+import { getCategories } from "../../services/codestable-service";
+import { getAllPlaces } from "../../services/place-service";
+import ServerErrorBanner from "../../components/error-banner/ServerErrorBanner";
 
 const LandingPage = () => {
   const [hasError, setHasError] = useState<boolean>(false);
@@ -20,7 +20,7 @@ const LandingPage = () => {
 
   const onUpdateLikeStatus = (placeId: string) => {
     const selectedPlace = recommendedCafes.find(
-      (place) => place.id === placeId
+      (place) => place.id === placeId,
     );
 
     if (selectedPlace) {
@@ -35,11 +35,12 @@ const LandingPage = () => {
         setCategories(
           (categories as CodeDecodeOption[])
             .map((category) => category.decode)
-            .sort()
+            .sort(),
         );
         setRecommededCafes(places);
       })
       .catch((err) => {
+        console.log(err);
         setHasError(true);
       })
       .finally(() => {
@@ -115,8 +116,8 @@ const LandingPage = () => {
                       .map((_, i) => <PlaceCardSkeleton key={i} />)
                   : [1, 2, 3, 4, 5, 6].map((num) => (
                       <PlaceCard
-                        id={num + ''}
-                        key={num + ''}
+                        id={num + ""}
+                        key={num + ""}
                         name={`Place Name - ${num}`}
                         description={`Description for place - ${num}`}
                         reviews={[]}

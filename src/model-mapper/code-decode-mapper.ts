@@ -1,8 +1,8 @@
-import { CodeDecodeCategoryDto } from '../dto/code-decode-dto';
-import { CodeDecodeCategory } from '../model/code-decode';
+import { CodeDecodeCategoryDto } from "../dto/code-decode-dto";
+import { CodeDecodeCategory } from "../model/code-decode";
 
 export const mapCodeDecodeCategoryDtoToModel = (
-  codeDecodeCateogriesDto: CodeDecodeCategoryDto[]
+  codeDecodeCateogriesDto: CodeDecodeCategoryDto[],
 ): CodeDecodeCategory[] => {
   if (!codeDecodeCateogriesDto) return [];
 
@@ -18,7 +18,7 @@ export const mapCodeDecodeCategoryDtoToModel = (
             code: subCategoryDto.code,
             decode: subCategoryDto.decode,
           })) ?? [],
-      } as CodeDecodeCategory)
+      }) as CodeDecodeCategory,
   );
   return result;
 };

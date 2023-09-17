@@ -1,12 +1,12 @@
-import { MapPinIcon, StarIcon } from '@heroicons/react/20/solid';
-import { Link, useNavigate } from 'react-router-dom';
-import { Review } from '../../model/place';
-import { toggleLike } from '../../services/place-service';
+import { MapPinIcon, StarIcon } from "@heroicons/react/20/solid";
+import { Link, useNavigate } from "react-router-dom";
+import { Review } from "../../model/place";
+import { toggleLike } from "../../services/place-service";
 
 const PlaceCard = ({
-  imageUrl = '/images/no-image.jpg',
+  imageUrl = "/images/no-image.jpg",
   name,
-  description = '',
+  description = "",
   rating,
   liked,
   id,
@@ -64,7 +64,7 @@ const PlaceCard = ({
           <div>
             <div className="flex flex-row justify-between">
               <h3 className="text-base font-semibold text-gray-900">
-                {name.length > 30 ? name.substring(0, 27) + '...' : name}
+                {name.length > 30 ? name.substring(0, 27) + "..." : name}
               </h3>
               {reviews && reviews.length > 0 && rating && rating > 0 && (
                 <div className="flex flex-row items-center">
@@ -78,7 +78,7 @@ const PlaceCard = ({
             </div>
             <p className="mt-1 text-sm text-gray-500">
               {description.length > 30
-                ? description?.substring(0, 30) + '...'
+                ? description?.substring(0, 30) + "..."
                 : description}
             </p>
             <div className="mt-2 flex flex-row items-center">

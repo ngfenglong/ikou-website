@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import RoundedBadge from '../../components/badges/RoundedBadge';
-import ReviewContainer from '../../components/reviews/ReviewContainer';
-import { Place } from '../../model/place';
-import { getPlaceById } from '../../services/place-service';
-import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import { Link } from 'react-router-dom';
-import NotFoundContainer from '../../components/container/NotFoundContainer';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import RoundedBadge from "../../components/badges/RoundedBadge";
+import ReviewContainer from "../../components/reviews/ReviewContainer";
+import { Place } from "../../model/place";
+import { getPlaceById } from "../../services/place-service";
+import { ArrowLeftIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
+import NotFoundContainer from "../../components/container/NotFoundContainer";
 
 const onAddReview = () => {};
 
 const ViewPlaceDetailPage = () => {
   const { id } = useParams();
   const [place, setPlace] = useState<Place | null>(null);
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
-  const [hasError, setHasError] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ const ViewPlaceDetailPage = () => {
           setIsLoading(false);
         })
         .catch((err) => {
+          console.log(err);
           setHasError(true);
           setIsLoading(false);
         });
@@ -47,7 +48,7 @@ const ViewPlaceDetailPage = () => {
           Place not found
         </h1>
         <p className="mt-6 text-base leading-7 text-gray-600">
-          Sorry, we couldn't find the palce you're looking for.
+          Sorry, we couldn&apos;t find the palce you&apos;re looking for.
         </p>
         <div className="mt-10">
           <Link

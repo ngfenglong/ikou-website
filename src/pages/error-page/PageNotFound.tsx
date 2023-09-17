@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import NotFoundContainer from '../../components/container/NotFoundContainer';
+import { Link } from "react-router-dom";
+import NotFoundContainer from "../../components/container/NotFoundContainer";
 
 const PageNotFound = () => {
   return (

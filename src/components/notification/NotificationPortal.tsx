@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import NotificationCard from './NotificationCard';
-import { ALERT_TYPE } from '../../constants/theme-config';
-import useNotification from '../../hooks/useNotification';
+import React from "react";
+import ReactDOM from "react-dom";
+import NotificationCard from "./NotificationCard";
+import { ALERT_TYPE } from "../../constants/theme-config";
+import useNotification from "../../hooks/useNotification";
 
 interface NotificationPortalProps {
   notificationType: ALERT_TYPE;
@@ -21,7 +21,7 @@ const NotificationPortal: React.FC<NotificationPortalProps> = ({
       notificationHeader={notificationHeader}
       notificationDescription={notificationDescription}
     />,
-    document.getElementById('notification-root') as Element
+    document.getElementById("notification-root") as Element,
   );
 };
 

@@ -1,31 +1,31 @@
-import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
-import * as ROUTES from './../../constants/routes';
-import useAuth from '../../hooks/useAuth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Menu, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import * as ROUTES from "./../../constants/routes";
+import useAuth from "../../hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 
 const loggedInMenu: MenuItemType[] = [
   {
-    menuItemName: 'Add New Place',
+    menuItemName: "Add New Place",
     redirectUrl: ROUTES.ADD_PLACES,
   },
   {
-    menuItemName: 'Your Profile',
+    menuItemName: "Your Profile",
     redirectUrl: ROUTES.PROFILE,
   },
   {
-    menuItemName: 'Setting',
+    menuItemName: "Setting",
     redirectUrl: ROUTES.SETTING,
   },
 ];
 
 const loggedOutMenu: MenuItemType[] = [
   {
-    menuItemName: 'Sign up',
+    menuItemName: "Sign up",
     redirectUrl: ROUTES.SIGN_UP,
   },
   {
-    menuItemName: 'Log in',
+    menuItemName: "Log in",
     redirectUrl: ROUTES.LOGIN,
   },
 ];
@@ -69,7 +69,7 @@ const ProfileMenu = () => {
                 <Link
                   to={menuItem.redirectUrl}
                   className={`block px-4 py-2 text-sm text-gray-700 ${
-                    active ? 'bg-gray-100' : ''
+                    active ? "bg-gray-100" : ""
                   }`}
                 >
                   {menuItem.menuItemName}
@@ -82,7 +82,7 @@ const ProfileMenu = () => {
               <button
                 onClick={onLogout}
                 className={`block w-full text-left px-4 py-2 text-sm text-gray-700 ${
-                  active ? 'bg-gray-100' : ''
+                  active ? "bg-gray-100" : ""
                 } focus:outline-none`}
               >
                 Logout
@@ -120,7 +120,7 @@ const ProfileMenu = () => {
                 <Link
                   to={menuItem.redirectUrl}
                   className={`block px-4 py-2 text-sm text-gray-700 ${
-                    active ? 'bg-gray-100' : ''
+                    active ? "bg-gray-100" : ""
                   }`}
                 >
                   {menuItem.menuItemName}

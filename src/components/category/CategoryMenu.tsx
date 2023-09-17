@@ -1,4 +1,4 @@
-import CategoryButton from '../button/CategoryButton';
+import CategoryButton from "../button/CategoryButton";
 
 const CategoryMenu = (props: {
   categoriesList: string[];

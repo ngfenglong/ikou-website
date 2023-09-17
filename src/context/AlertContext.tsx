@@ -1,5 +1,5 @@
-import { createContext, useState, useCallback } from 'react';
-import { ALERT_TYPE } from '../constants/theme-config';
+import { createContext, useState, useCallback } from "react";
+import { ALERT_TYPE } from "../constants/theme-config";
 
 export interface AlertContextData {
   alertType: ALERT_TYPE | null;
@@ -8,7 +8,7 @@ export interface AlertContextData {
   displayAlert: (
     alertType: ALERT_TYPE,
     alertHeader: string,
-    alertDescription: string
+    alertDescription: string,
   ) => void;
   resetAlert: () => void;
 }
@@ -32,7 +32,7 @@ export const AlertProvider = ({ children }: { children: React.ReactNode }) => {
       setAlertHeader(alertHeader);
       setAlertDescription(alertDescription);
     },
-    []
+    [],
   );
 
   const resetAlert = useCallback(() => {

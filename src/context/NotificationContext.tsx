@@ -1,5 +1,5 @@
-import { createContext, useState, useCallback } from 'react';
-import { ALERT_TYPE } from '../constants/theme-config';
+import { createContext, useState, useCallback } from "react";
+import { ALERT_TYPE } from "../constants/theme-config";
 
 export interface NotificationContextData {
   notificationType: ALERT_TYPE | null;
@@ -8,7 +8,7 @@ export interface NotificationContextData {
   triggerNotification: (
     notificationType: ALERT_TYPE,
     header: string,
-    description: string
+    description: string,
   ) => void;
   resetNotification: () => void;
 }
@@ -27,10 +27,10 @@ export const NotificationProvider = ({
   children: React.ReactNode;
 }) => {
   const [notificationType, setNotificationType] = useState<ALERT_TYPE | null>(
-    null
+    null,
   );
   const [notificationHeader, setNotificationHeader] = useState<string | null>(
-    null
+    null,
   );
   const [notificationDescription, setNotificationDescription] = useState<
     string | null
@@ -51,7 +51,7 @@ export const NotificationProvider = ({
         resetNotification();
       }, 3000); // hides the notification after 3 seconds
     },
-    [resetNotification]
+    [resetNotification],
   );
 
   const value = {

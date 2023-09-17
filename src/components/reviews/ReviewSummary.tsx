@@ -1,7 +1,7 @@
-import { StarIcon } from '@heroicons/react/20/solid';
-import { Review } from '../../model/place';
+import { StarIcon } from "@heroicons/react/20/solid";
+import { Review } from "../../model/place";
 
-const ReviewSummary = ({ reviews  = [] }: ReviewSummaryPropsType) => {
+const ReviewSummary = ({ reviews = [] }: ReviewSummaryPropsType) => {
   const averageRatings: number =
     reviews?.reduce((acc, curr) => {
       return acc + curr.rating;
@@ -13,7 +13,7 @@ const ReviewSummary = ({ reviews  = [] }: ReviewSummaryPropsType) => {
   }[] = [5, 4, 3, 2, 1].map((r) => {
     return {
       rating: r,
-      reviews: (reviews).filter((review) => {
+      reviews: reviews.filter((review) => {
         return review.rating >= r && review.rating < r + 1;
       }),
     };
@@ -32,7 +32,7 @@ const ReviewSummary = ({ reviews  = [] }: ReviewSummaryPropsType) => {
               <StarIcon
                 key={rating}
                 className={`h-5 w-5 flex-shrink-0 ${
-                  averageRatings > rating ? 'text-yellow-400' : 'text-gray-300'
+                  averageRatings > rating ? "text-yellow-400" : "text-gray-300"
                 }`}
                 aria-hidden="true"
               />
@@ -56,7 +56,7 @@ const ReviewSummary = ({ reviews  = [] }: ReviewSummaryPropsType) => {
                 >
                   <StarIcon
                     className={`h-5 w-5 flex-shrink-0 ${
-                      count.rating > 0 ? 'text-yellow-400' : 'text-gray-300'
+                      count.rating > 0 ? "text-yellow-400" : "text-gray-300"
                     }`}
                     aria-hidden="true"
                   />
@@ -80,7 +80,7 @@ const ReviewSummary = ({ reviews  = [] }: ReviewSummaryPropsType) => {
                 {Math.round(
                   (count.reviews.length /
                     (reviews.length > 0 ? reviews.length : 1)) *
-                    100
+                    100,
                 )}
                 %
               </dd>
