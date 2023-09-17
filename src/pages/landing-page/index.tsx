@@ -1,14 +1,15 @@
-import Container from '../../components/container/Container';
-import SubHeading from '../../components/heading/SubHeading';
-import PlaceCard from '../../components/card/PlaceCard';
-import { useEffect, useState } from 'react';
-import { Place } from '../../model/place';
-import { CodeDecodeCategory } from '../../model/code-decode-models';
-import { useNavigate } from 'react-router-dom';
-import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
-import CategoryMenu from '../../components/category/CategoryMenu';
-import { getCategories } from '../../services/codestable-service';
-import { getAllPlaces } from '../../services/place-service';
+import Container from "../../components/container/Container";
+import SubHeading from "../../components/heading/SubHeading";
+import PlaceCard from "../../components/card/PlaceCard";
+import { useEffect, useState } from "react";
+import { Place } from "../../model/place";
+import { CodeDecodeOption } from "../../model/common";
+import { useNavigate } from "react-router-dom";
+import PlaceCardSkeleton from "../../components/skeleton/PlaceCardSkeleton";
+import CategoryMenu from "../../components/category/CategoryMenu";
+import { getCategories } from "../../services/codestable-service";
+import { getAllPlaces } from "../../services/place-service";
+import ServerErrorBanner from "../../components/error-banner/ServerErrorBanner";
 
 const LandingPage = () => {
   const [hasError, setHasError] = useState<boolean>(false);
@@ -17,17 +18,29 @@ const LandingPage = () => {
   const [recommendedCafes, setRecommededCafes] = useState<Place[]>([]);
   const navigate = useNavigate();
 
+  const onUpdateLikeStatus = (placeId: string) => {
+    const selectedPlace = recommendedCafes.find(
+      (place) => place.id === placeId,
+    );
+
+    if (selectedPlace) {
+      selectedPlace.liked = !selectedPlace.liked;
+      setRecommededCafes((prev) => [...prev]);
+    }
+  };
+
   useEffect(() => {
     Promise.all([getCategories(), getAllPlaces()])
       .then(([categories, places]) => {
         setCategories(
-          (categories as CodeDecodeCategory[])
+          (categories as CodeDecodeOption[])
             .map((category) => category.decode)
-            .sort()
+            .sort(),
         );
         setRecommededCafes(places);
       })
       .catch((err) => {
+        console.log(err);
         setHasError(true);
       })
       .finally(() => {
@@ -40,19 +53,7 @@ const LandingPage = () => {
   };
 
   if (hasError) {
-    return (
-      <Container>
-        <div className="text-center">
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            Oops!
-          </h1>
-          <p className="mt-6 text-base leading-7 text-gray-600">
-            There seems to be a problem with our server. We're working hard to
-            fix it. In the meantime, please try again later.
-          </p>
-        </div>
-      </Container>
-    );
+    return <ServerErrorBanner />;
   }
   return (
     <div className="bg-gray-background space-y-8 mt-1">
@@ -95,6 +96,8 @@ const LandingPage = () => {
                         reviews={place.reviews}
                         area={place.area}
                         rating={place.average_rating}
+                        liked={place.liked}
+                        updateLikeStatus={onUpdateLikeStatus}
                       ></PlaceCard>
                     ))}
               </div>
@@ -113,12 +116,13 @@ const LandingPage = () => {
                       .map((_, i) => <PlaceCardSkeleton key={i} />)
                   : [1, 2, 3, 4, 5, 6].map((num) => (
                       <PlaceCard
-                        id={num + ''}
-                        key={num + ''}
+                        id={num + ""}
+                        key={num + ""}
                         name={`Place Name - ${num}`}
                         description={`Description for place - ${num}`}
                         reviews={[]}
                         area=""
+                        updateLikeStatus={onUpdateLikeStatus}
                       ></PlaceCard>
                     ))}
               </div>

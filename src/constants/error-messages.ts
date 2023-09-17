@@ -1,2 +1,2 @@
 export const GENERIC_ERROR_MESSAGE =
-  'Something went wrong. Please try again later';
+  "Something went wrong. Please try again later";

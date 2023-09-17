@@ -8,7 +8,8 @@ export interface Place {
   image_url: string;
   category: string;
   sub_category: string;
-  area:string;
+  area: string;
+  liked: boolean;
 
   operating_hours: string;
   features: string[];

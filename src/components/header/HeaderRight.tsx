@@ -1,7 +1,7 @@
-import ProfileMenu from './ProfileMenu';
-import useAuth from '../../hooks/useAuth';
-import { Link } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
+import ProfileMenu from "./ProfileMenu";
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
 
 const HeaderRight = () => {
   const { user, isAuthenticated } = useAuth();
@@ -28,7 +28,6 @@ const HeaderRight = () => {
   }
   return (
     <div className="hidden lg:flex lg:items-center">
-
       {/* Profile dropdown */}
       <ProfileMenu />
     </div>

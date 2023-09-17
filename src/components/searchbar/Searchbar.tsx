@@ -1,15 +1,15 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { SEARCH } from '../../constants/routes';
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { SEARCH } from "../../constants/routes";
 
 const SearchBar = () => {
-  const [keyword, setKeyword] = useState<string>('');
+  const [keyword, setKeyword] = useState<string>("");
   const navigate = useNavigate();
   const onSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(!!keyword){
-      navigate(`${SEARCH}?keyword=${keyword}`)
+    if (!!keyword) {
+      navigate(`${SEARCH}?keyword=${keyword}`);
     }
   };
 

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import Container from '../container/Container';
+import { Link } from "react-router-dom";
+import Container from "../container/Container";
 
 const Footer = () => {
   return (

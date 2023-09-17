@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Place } from '../../model/place';
-import Container from '../../components/container/Container';
-import MainHeading from '../../components/heading/Heading';
-import BreadCrumbs from '../../components/breadcrumbs/Breadcrumbs';
-import SubHeading from '../../components/heading/SubHeading';
-import PlaceCardSkeleton from '../../components/skeleton/PlaceCardSkeleton';
-import PlaceCard from '../../components/card/PlaceCard';
-import NotFoundContainer from '../../components/container/NotFoundContainer';
-import * as ROUTES from '../../constants/routes';
-import { getPlacesByCategory } from '../../services/place-service';
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Place } from "../../model/place";
+import Container from "../../components/container/Container";
+import MainHeading from "../../components/heading/Heading";
+import BreadCrumbs from "../../components/breadcrumbs/Breadcrumbs";
+import SubHeading from "../../components/heading/SubHeading";
+import PlaceCardSkeleton from "../../components/skeleton/PlaceCardSkeleton";
+import PlaceCard from "../../components/card/PlaceCard";
+import NotFoundContainer from "../../components/container/NotFoundContainer";
+import * as ROUTES from "../../constants/routes";
+import { getPlacesByCategory } from "../../services/place-service";
 
 const ViewPlacesByCategoryPage = () => {
   const location = useLocation();
@@ -17,12 +17,21 @@ const ViewPlacesByCategoryPage = () => {
 
   const [places, setPlaces] = useState<Place[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [category, setCategory] = useState<string>('');
+  const [category, setCategory] = useState<string>("");
+
+  const onUpdateLikeStatus = (placeId: string) => {
+    const selectedPlace = places.find((place) => place.id === placeId);
+
+    if (selectedPlace) {
+      selectedPlace.liked = !selectedPlace.liked;
+      setPlaces((prev) => [...prev]);
+    }
+  };
 
   useEffect(() => {
-    const pathStrArr = pathName.split('/');
+    const pathStrArr = pathName.split("/");
 
-    if (pathStrArr[1].toLowerCase() === 'category' && !!pathStrArr[2]) {
+    if (pathStrArr[1].toLowerCase() === "category" && !!pathStrArr[2]) {
       setCategory(pathStrArr[2]);
       getPlacesByCategory(pathStrArr[2]).then((places: Place[]) => {
         setPlaces(places ?? []);
@@ -38,7 +47,7 @@ const ViewPlacesByCategoryPage = () => {
           No Places Found
         </h1>
         <p className="mt-6 text-base leading-7 text-gray-600">
-          We currently don't have any places listed under this category.
+          We currently don&apos;t have any places listed under this category.
           <br />
           Help us build our list! Suggest a spot, and after review by our admin,
           it might be added here.
@@ -84,11 +93,13 @@ const ViewPlacesByCategoryPage = () => {
                         id={place.id}
                         key={place.id}
                         name={place.placeName}
-                        description={place.description.substring(0, 30) + '...'}
+                        description={place.description.substring(0, 30) + "..."}
                         imageUrl={place.image_url}
                         reviews={place.reviews}
                         area={place.area}
                         rating={place.average_rating}
+                        liked={place.liked}
+                        updateLikeStatus={onUpdateLikeStatus}
                       ></PlaceCard>
                     ))}
               </div>

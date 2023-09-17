@@ -1,8 +1,8 @@
-import { Disclosure } from '@headlessui/react';
-import SearchBar from '../searchbar/Searchbar';
-import HeaderLeft from './HeaderLeft';
-import HeaderRight from './HeaderRight';
-import HeaderMobile from './HeaderMobile';
+import { Disclosure } from "@headlessui/react";
+import SearchBar from "../searchbar/Searchbar";
+import HeaderLeft from "./HeaderLeft";
+import HeaderRight from "./HeaderRight";
+import HeaderMobile from "./HeaderMobile";
 
 const Header = () => {
   return (

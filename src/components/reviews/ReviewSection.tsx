@@ -1,7 +1,7 @@
-import { StarIcon } from '@heroicons/react/20/solid';
-import { Review } from '../../model/place';
-import { formattedDateToString } from '../../utils/date-helper';
-import SubHeading from '../heading/SubHeading';
+import { StarIcon } from "@heroicons/react/20/solid";
+import { Review } from "../../model/place";
+import { formattedDateToString } from "../../utils/date-helper";
+import SubHeading from "../heading/SubHeading";
 
 const IndividualReview = ({ review, id }: ReviewPropsType) => {
   return (
@@ -13,7 +13,7 @@ const IndividualReview = ({ review, id }: ReviewPropsType) => {
           className="h-10 w-10 rounded-full bg-gray-100"
         />
       </div>
-      <div className={`py-8 ${id === 0 ? '' : 'border-t border-gray-200'}`}>
+      <div className={`py-8 ${id === 0 ? "" : "border-t border-gray-200"}`}>
         <h3 className="font-medium text-gray-900">{review.reviewer_name}</h3>
 
         <p>{formattedDateToString(new Date(review.updated_at))}</p>
@@ -23,7 +23,7 @@ const IndividualReview = ({ review, id }: ReviewPropsType) => {
             <StarIcon
               key={rating}
               className={`'h-5 w-5 flex-shrink-0' ${
-                review.rating > rating ? 'text-yellow-400' : 'text-gray-300'
+                review.rating > rating ? "text-yellow-400" : "text-gray-300"
               }`}
               aria-hidden="true"
             />

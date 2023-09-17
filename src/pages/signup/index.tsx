@@ -1,20 +1,21 @@
-import { useState, useEffect } from 'react';
-import { Logo } from '../../components/logo/Logo';
-import useAuth from '../../hooks/useAuth';
-import { RegisterFormInputDto } from '../../dto/auth';
-import { Link, useNavigate } from 'react-router-dom';
-import * as ROUTES from './../../constants/routes';
-import useAlert from '../../hooks/useAlert';
-import Alert, { ALERT_TYPE } from '../../components/alert/Alert';
+import { useState, useEffect } from "react";
+import { Logo } from "../../components/logo/Logo";
+import useAuth from "../../hooks/useAuth";
+import { RegisterFormInputDto } from "../../dto/auth";
+import { Link, useNavigate } from "react-router-dom";
+import * as ROUTES from "./../../constants/routes";
+import useAlert from "../../hooks/useAlert";
+import { ALERT_TYPE } from "../../constants/theme-config";
+import Alert from "../../components/alert/Alert";
 
 const SignUp = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [country, setCountry] = useState('Singapore');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [country, setCountry] = useState("Singapore");
 
   const { alertType, alertHeader, alertDescription, displayAlert, resetAlert } =
     useAlert();
@@ -23,20 +24,20 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Signup Page';
+    document.title = "Signup Page";
     resetAlert();
   });
 
   const onSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     resetAlert();
-    
+
     // validation & handling
     if (password !== confirmPassword) {
       displayAlert(
         ALERT_TYPE.ERROR,
-        'Password Mismatch!',
-        'The password and confirmation password you entered do not match. Please re-enter your password and try again.'
+        "Password Mismatch!",
+        "The password and confirmation password you entered do not match. Please re-enter your password and try again.",
       );
       return;
     }
@@ -56,7 +57,7 @@ const SignUp = () => {
       navigate(ROUTES.LOGIN);
     } catch (err) {
       // Handle error
-      displayAlert(ALERT_TYPE.ERROR, 'Registration Failed!', `${err}`);
+      displayAlert(ALERT_TYPE.ERROR, "Registration Failed!", `${err}`);
     }
   };
 
@@ -248,8 +249,8 @@ const SignUp = () => {
               {alertType && (
                 <Alert
                   alertType={alertType}
-                  alertHeader={alertHeader ?? ''}
-                  alertDescription={alertDescription ?? ''}
+                  alertHeader={alertHeader ?? ""}
+                  alertDescription={alertDescription ?? ""}
                 />
               )}
 

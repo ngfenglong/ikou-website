@@ -11,7 +11,7 @@ const MainHeading = (props: PropsType) => {
 type PropsType = {
   children: React.ReactNode;
   id?: string;
-  callbackAction?: () => {};
+  callbackAction?: () => void;
 };
 
 export default MainHeading;

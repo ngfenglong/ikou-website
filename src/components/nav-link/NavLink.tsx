@@ -1,4 +1,4 @@
-import { NavLink as BaseNavLink } from 'react-router-dom';
+import { NavLink as BaseNavLink } from "react-router-dom";
 
 const NavLink: ({ href, children }: PropsType) => JSX.Element = ({
   href,

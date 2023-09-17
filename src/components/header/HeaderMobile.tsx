@@ -1,11 +1,11 @@
-import { Disclosure } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import * as ROUTES from './../../constants/routes';
-import useAuth from '../../hooks/useAuth';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import useAlert from '../../hooks/useAlert';
-import { ALERT_TYPE } from '../alert/Alert';
-import { LogoNoWording } from '../logo/Logo';
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import * as ROUTES from "./../../constants/routes";
+import useAuth from "../../hooks/useAuth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAlert from "../../hooks/useAlert";
+import { LogoNoWording } from "../logo/Logo";
+import { ALERT_TYPE } from "../../constants/theme-config";
 
 const HeaderMobile = ({ open }: { open: boolean }) => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -17,7 +17,7 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
       logout();
       navigate(ROUTES.LOGIN);
     } catch (err) {
-      displayAlert(ALERT_TYPE.ERROR, 'Logout Fail', 'Login Fail');
+      displayAlert(ALERT_TYPE.ERROR, "Logout Fail", "Login Fail");
     }
   };
 
@@ -50,8 +50,8 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
             href={ROUTES.LANDING_PAGE}
             className={`block border-l-4 py-2 pl-3 pr-4 text-base font-medium${
               location.pathname === ROUTES.LANDING_PAGE
-                ? ' border-indigo-500 bg-indigo-50 text-indigo-700 '
-                : ' border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 '
+                ? " border-indigo-500 bg-indigo-50 text-indigo-700 "
+                : " border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 "
             }`}
           >
             Explore
@@ -61,8 +61,8 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
             href={ROUTES.TRIPS}
             className={`block border-l-4  py-2 pl-3 pr-4 text-base font-medium ${
               location.pathname === ROUTES.TRIPS
-                ? ' border-indigo-500 bg-indigo-50 text-indigo-700 '
-                : ' border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 '
+                ? " border-indigo-500 bg-indigo-50 text-indigo-700 "
+                : " border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 "
             }`}
           >
             Trips
@@ -72,8 +72,8 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
             href={ROUTES.ACTIVITIES}
             className={`block border-l-4 py-2 pl-3 pr-4 text-base font-medium ${
               location.pathname === ROUTES.ACTIVITIES
-                ? ' border-indigo-500 bg-indigo-50 text-indigo-700 '
-                : ' border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 '
+                ? " border-indigo-500 bg-indigo-50 text-indigo-700 "
+                : " border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 "
             }`}
           >
             Activities
@@ -83,8 +83,8 @@ const HeaderMobile = ({ open }: { open: boolean }) => {
             href={ROUTES.PLACES}
             className={`block border-l-4 py-2 pl-3 pr-4 text-base font-medium ${
               location.pathname === ROUTES.PLACES
-                ? ' border-indigo-500 bg-indigo-50 text-indigo-700 '
-                : ' border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 '
+                ? " border-indigo-500 bg-indigo-50 text-indigo-700 "
+                : " border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 "
             }`}
           >
             Places

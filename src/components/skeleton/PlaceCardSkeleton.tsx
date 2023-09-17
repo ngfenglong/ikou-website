@@ -1,7 +1,6 @@
 const PlaceCardSkeleton = () => {
   return (
     <div className="animate-pulse shadow rounded-md h-96 w-full mx-auto">
-      
       <div className="h-72 w-72 bg-gray-300 rounded" />
 
       <div className="mt-4">
