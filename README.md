@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# Ikou Frontend 🗺️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ikou is a community-driven travel app, designed to make trip organizing with friends and peers a breeze, providing recommendations and allowing users to explore and refer back to places, activities, and trips created by others in the community.
 
-## Available Scripts
+> 🚨 This is an ongoing project and subject to significant changes. Detailed documentation will be provided as the project matures.
 
-In the project directory, you can run:
+## Table of Contents
+- [Technology Stack](#technology-stack)
+- [Getting Started](#getting-started)
+- [Features](#features)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Contribution](#contribution)
+- [Contact](#contact)
 
-### `npm start`
+## Technology Stack 🛠️
+- React (TypeScript)
+- [TailwindCSS](https://tailwindcss.com/)
+- Axios
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started 🚀
+1. Clone the repository.
+   ```sh
+   git clone https://github.com/ngfenglong/ikou-website.git
+2. Install the dependencies
+   ```sh
+   npm install
+4. Create a .env.local in the root of your project and add the API base URL:
+   ```sh
+   REACT_APP_IKOU_API_BASEURL=<Your API Base URL>
+5. Run the project
+   ```sh
+   npm start
+   
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Features 🌟
+- **CRUD Functions:** Manage Trips, Activities, and Places.
+- **User Authentication:** Browse without an account or register to contribute.
+- **Community Contributions:** Recommend new places and give reviews and ratings.
+- **Advanced Trip Planning:** Collaborate and plan trips with peers through trip chat functions. _(Coming Soon)_
 
-### `npm test`
+## Usage 🛠️
+This application is created to offer users an easier experience in organizing outings or trips, allowing users to:
+- Discover and get recommendations for places and activities
+- Like and refer back to their favorite places, activities, and trips _(Coming Soon)_
+- Contribute to the community by recommending new places and activities
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+_For more interaction details, refer to [Ikou Backend Repository](https://github.com/ngfenglong/ikou-backend).
 
-### `npm run build`
+## Project Structure 🌳
+```plaintext
+├── public # Static files
+├── src # Source files
+│ ├── components # Reusable components
+│ ├── constants # Constants across the app
+│ ├── context # Context API files
+│ ├── dto # DTOs (Data Transfer Objects)
+│ ├── hooks # Custom hooks
+│ ├── icons # Icon components
+│ ├── model # Models or entities
+│ ├── model-mapper # Model mapper for transforming entities
+│ ├── pages # Page components
+│ ├── services # Services for external API calls
+│ ├── styles # Stylesheets or Style components
+│ ├── utils # Utility functions
+│ └── App.tsx # Main component
+├── package.json # List of dependencies and scripts
+├── postcss.config.js # PostCSS configuration file
+└── tailwind.config.js # Tailwind CSS configuration file
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contribution 🤝
+This project is currently in its infancy. Contributions, ideas, and bug reports are very welcome!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contact 📬
+For any inquiries or clarifications related to this project, please contact [zell_dev@hotmail.com](mailto:zell_dev@hotmail.com).
