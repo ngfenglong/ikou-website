@@ -1,6 +1,6 @@
 # Ikou Frontend 🗺️
 
-Ikou is a community-driven travel app, designed to make trip organizing with friends and peers a breeze, providing recommendations and allowing users to explore and refer back to places, activities, and trips created by others in the community.
+[Ikou](https://ikou-web.netlify.app/) is a community-driven travel app, designed to make trip organizing with friends and peers a breeze, providing recommendations and allowing users to explore and refer back to places, activities, and trips created by others in the community.
 
 > 🚨 This is an ongoing project and subject to significant changes. Detailed documentation will be provided as the project matures.
 
