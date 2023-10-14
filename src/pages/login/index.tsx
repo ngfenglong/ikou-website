@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Logo } from "../../components/logo/Logo";
-import * as ROUTES from "./../../constants/routes";
-import useAuth from "../../hooks/useAuth";
-import useAlert from "../../hooks/useAlert";
-import { ALERT_TYPE } from "../../constants/theme-config";
-import Alert from "../../components/alert/Alert";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Logo } from '../../components/logo/Logo';
+import * as ROUTES from './../../constants/routes';
+import useAuth from '../../hooks/useAuth';
+import useAlert from '../../hooks/useAlert';
+import { ALERT_TYPE } from '../../constants/theme-config';
+import Alert from '../../components/alert/Alert';
+import WarningBanner from '../../components/warning-banner/WarningBanner';
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('DemoUser');
+  const [password, setPassword] = useState('demoPass123');
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Login = () => {
     useAlert();
 
   useEffect(() => {
-    document.title = "Login Page";
+    document.title = 'Login Page';
     resetAlert();
   });
 
@@ -30,7 +31,7 @@ const Login = () => {
       navigate(ROUTES.LANDING_PAGE);
     } catch (error) {
       // Handle error
-      displayAlert(ALERT_TYPE.ERROR, "Login Failed!", `${error}`);
+      displayAlert(ALERT_TYPE.ERROR, 'Login Failed!', `${error}`);
     }
   };
 
@@ -38,12 +39,21 @@ const Login = () => {
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Logo className="mx-auto h-20 w-auto" />
+
         <h2 className="mt-8 text-center text-3xl font-bold tracking-tight text-gray-900">
           Sign in to IKOU
         </h2>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      {/* Warning Messages */}
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
+        <WarningBanner
+          title="🔍 Demo Access Available!"
+          message="Use our provided credentials to explore Ikou. As we're actively developing, avoid personal info for accounts."
+        ></WarningBanner>
+      </div>
+
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-slate py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="mt-6 grid grid-cols-3 gap-3">
             <div>
@@ -197,8 +207,8 @@ const Login = () => {
               {alertType && (
                 <Alert
                   alertType={alertType}
-                  alertHeader={alertHeader ?? ""}
-                  alertDescription={alertDescription ?? ""}
+                  alertHeader={alertHeader ?? ''}
+                  alertDescription={alertDescription ?? ''}
                 />
               )}
 
