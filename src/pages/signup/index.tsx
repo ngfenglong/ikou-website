@@ -1,21 +1,22 @@
-import { useState, useEffect } from "react";
-import { Logo } from "../../components/logo/Logo";
-import useAuth from "../../hooks/useAuth";
-import { RegisterFormInputDto } from "../../dto/auth";
-import { Link, useNavigate } from "react-router-dom";
-import * as ROUTES from "./../../constants/routes";
-import useAlert from "../../hooks/useAlert";
-import { ALERT_TYPE } from "../../constants/theme-config";
-import Alert from "../../components/alert/Alert";
+import { useState, useEffect } from 'react';
+import { Logo } from '../../components/logo/Logo';
+import useAuth from '../../hooks/useAuth';
+import { RegisterFormInputDto } from '../../dto/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import * as ROUTES from './../../constants/routes';
+import useAlert from '../../hooks/useAlert';
+import { ALERT_TYPE } from '../../constants/theme-config';
+import Alert from '../../components/alert/Alert';
+import WarningBanner from '../../components/warning-banner/WarningBanner';
 
 const SignUp = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [country, setCountry] = useState("Singapore");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [country, setCountry] = useState('Singapore');
 
   const { alertType, alertHeader, alertDescription, displayAlert, resetAlert } =
     useAlert();
@@ -24,7 +25,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = "Signup Page";
+    document.title = 'Signup Page';
     resetAlert();
   });
 
@@ -36,8 +37,8 @@ const SignUp = () => {
     if (password !== confirmPassword) {
       displayAlert(
         ALERT_TYPE.ERROR,
-        "Password Mismatch!",
-        "The password and confirmation password you entered do not match. Please re-enter your password and try again.",
+        'Password Mismatch!',
+        'The password and confirmation password you entered do not match. Please re-enter your password and try again.'
       );
       return;
     }
@@ -57,7 +58,7 @@ const SignUp = () => {
       navigate(ROUTES.LOGIN);
     } catch (err) {
       // Handle error
-      displayAlert(ALERT_TYPE.ERROR, "Registration Failed!", `${err}`);
+      displayAlert(ALERT_TYPE.ERROR, 'Registration Failed!', `${err}`);
     }
   };
 
@@ -70,7 +71,16 @@ const SignUp = () => {
         </h2>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      {/* Warning Messages */}
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
+        <WarningBanner
+          title="⚠️ Ikou is in active development!"
+          message="Data or accounts may occasionally be reset. Please refrain from
+          using personal or sensitive information.\nThank you for your understanding."
+        ></WarningBanner>
+      </div>
+
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-4 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="mt-6">
             <form
@@ -249,8 +259,8 @@ const SignUp = () => {
               {alertType && (
                 <Alert
                   alertType={alertType}
-                  alertHeader={alertHeader ?? ""}
-                  alertDescription={alertDescription ?? ""}
+                  alertHeader={alertHeader ?? ''}
+                  alertDescription={alertDescription ?? ''}
                 />
               )}
 
