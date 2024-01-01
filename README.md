@@ -49,24 +49,24 @@ _For more interaction details, refer to [Ikou Backend Repository](https://github
 
 ## Project Structure 🌳
 ```plaintext
-├── public # Static files
-├── src # Source files
-│ ├── components # Reusable components
-│ ├── constants # Constants across the app
-│ ├── context # Context API files
-│ ├── dto # DTOs (Data Transfer Objects)
-│ ├── hooks # Custom hooks
-│ ├── icons # Icon components
-│ ├── model # Models or entities
-│ ├── model-mapper # Model mapper for transforming entities
-│ ├── pages # Page components
-│ ├── services # Services for external API calls
-│ ├── styles # Stylesheets or Style components
-│ ├── utils # Utility functions
-│ └── App.tsx # Main component
-├── package.json # List of dependencies and scripts
-├── postcss.config.js # PostCSS configuration file
-└── tailwind.config.js # Tailwind CSS configuration file
+├── public 
+├── src 
+│ ├── components
+│ ├── constants 
+│ ├── context 
+│ ├── dto 
+│ ├── hooks 
+│ ├── icons 
+│ ├── model 
+│ ├── model-mapper 
+│ ├── pages 
+│ ├── services 
+│ ├── styles 
+│ ├── utils 
+│ └── App.tsx 
+├── package.json 
+├── postcss.config.js 
+└── tailwind.config.js 
 ```
 
 ## Contribution 🤝
