@@ -1,0 +1,15 @@
+# Store every text file with LF in the repository and check it out as LF,
+# on every platform. Without this, an editor that saves CRLF rewrites each
+# line and the file shows up as entirely changed.
+* text=auto eol=lf
+
+# Binary assets: leave the bytes untouched.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.eot  binary
