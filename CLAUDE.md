@@ -17,10 +17,16 @@ These are the project owner's standing instructions. They override default habit
 - **Names carry the explanation.** Components, variables, and methods get meaningful, self-explanatory names. A good name removes the need for the comment.
 - **Document design corrections.** When a technical design changes or is corrected mid-task, record it in a doc so it can be referred back to. Keep the entry concise — the decision and the why, not a narrative.
 
+### External access
+
+- **Stay inside the project.** The only site to open is the local dev server, `http://localhost:3000`, and paths under it. Any other website or endpoint — staging, production, a third-party site, an external API — is asked about first and opened only once permission is given.
+- **The app's own requests are not a separate site.** Resources a page pulls in while rendering (the Ikou API, place images hot-linked from external hosts) are part of the app and load normally. This rule governs where the browser is pointed, not what a page fetches.
+
 ### Commits and PRs
 
 - **One objective per commit.** Each commit delivers exactly one main task, kept granular so a reviewer can vet it quickly.
 - **Every delivered task includes a verification result** in the commit message: concise, plain-language, written for a human reader (what was checked, what the outcome was) — not raw tool output.
+- **Check the staged list before every commit.** Read what is actually about to be committed — `git status` and `git diff --cached --stat` — and confirm no secrets, credentials, tokens, `.env` files, local-only config, or build and test artifacts are in it. Anything that should never be tracked gets a `.gitignore` entry rather than a careful commit, and nothing is pushed before that check passes.
 - **One branch per PR**, created off `master` with a meaningful branch name describing the work.
 - **Verify before raising.** Read back through the implementation to confirm it does what it claims, and that the commit stands alone as working code.
 
