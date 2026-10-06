@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--headless",
+        "--isolated",
+        "--browser",
+        "chromium",
+        "--viewport-size",
+        "1280x720",
+        "--output-dir",
+        ".ui-check/output",
+        "--output-max-size",
+        "52428800",
+        "--secrets",
+        ".ui-check/accounts.env"
+      ],
+      "env": {}
+    }
+  }
+}

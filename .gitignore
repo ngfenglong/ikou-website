@@ -47,3 +47,6 @@ dist
 
 
 research-text.txt
+
+# Claude Code ui-check artifacts, reports and credentials
+.ui-check/
