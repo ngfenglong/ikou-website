@@ -1,6 +1,7 @@
 ---
 name: ui-check
 description: Validate rendered UI in a real browser by spawning a Playwright-MCP subagent that judges the page against the criteria given in the prompt and returns a pass/fail report. Use when asked to UI check, visually verify, validate the UI, check responsive layout or breakpoints, confirm a page or component renders correctly, check a page for console errors, or verify a flow still works after a change.
+disable-model-invocation: true
 ---
 
 # UI check
